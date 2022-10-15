@@ -7,7 +7,9 @@ namespace Database\Seeders;
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Profile;
+use App\Models\Role;
 use App\Models\User;
+use Database\Factories\RoleUserFactory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,5 +31,6 @@ class DatabaseSeeder extends Seeder
         Profile::factory(1)->create();
         Category::factory(5)->create();
         Post::factory(2)->create();
+        Role::factory(3)->create();
     }
 }
