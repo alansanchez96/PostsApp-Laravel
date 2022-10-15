@@ -10,6 +10,11 @@ class Profile extends Model
 {
     use HasFactory;
 
+    /**
+     * Relacion Uno a Uno to User::class
+     *
+     * @return void
+     */
     public function user()
     {
         return $this->belongsTo(User::class);

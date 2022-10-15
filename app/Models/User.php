@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\Post;
+use App\Models\Video;
 use App\Models\Profile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -44,15 +45,33 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    // Relacion Uno a Uno
+    /**
+     * Relacion Uno a Uno to Profile::class
+     *
+     * @return void
+     */
     public function profile()
     {
         return $this->hasOne(Profile::class);
     }
 
-    // Relacion Uno a Muchos
+    /**
+     * Relacion Uno a Muchos to Post::class
+     *
+     * @return void
+     */
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Relacion Uno a Muchos to Video::class
+     *
+     * @return void
+     */
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
     }
 }

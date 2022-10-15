@@ -11,12 +11,21 @@ class Post extends Model
 {
     use HasFactory;
 
-    // Relacion Uno a Muchos (inversa)
+    /**
+     * Relacion Uno a Muchos Inversa to User::class
+     *
+     * @return void
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * Relacion Uno a Muchos Inversa to Category::class
+     *
+     * @return void
+     */
     public function categories()
     {
         return $this->belongsTo(Category::class);

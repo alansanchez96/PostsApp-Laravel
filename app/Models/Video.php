@@ -2,21 +2,21 @@
 
 namespace App\Models;
 
-use App\Models\Post;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class Video extends Model
 {
     use HasFactory;
 
     /**
-     * Relacion Uno a Muchos to Post::class
+     * Relacion Uno a Muchos Inversa to User::class
      *
      * @return void
      */
-    public function posts()
+    public function users()
     {
-        return $this->hasMany(Post::class);
+        return $this->belongsTo(User::class);
     }
 }
