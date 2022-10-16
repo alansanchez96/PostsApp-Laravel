@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -18,5 +19,15 @@ class Video extends Model
     public function users()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Relacion Uno a Muchos Polimorfica to Comment::class
+     *
+     * @return void
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

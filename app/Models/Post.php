@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\Image;
+use App\Models\Comment;
 use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -33,12 +34,22 @@ class Post extends Model
     }
 
     /**
-     * Relacion Uno a Uno Polimorfica
+     * Relacion Uno a Uno Polimorfica to Image::class
      *
      * @return void
      */
     public function image()
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+
+    /**
+     * Relacion Uno a Muchos Polimorfica to Comment::class
+     *
+     * @return void
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

@@ -95,4 +95,14 @@ class User extends Authenticatable
     {
         return $this->morphOne(Image::class, 'imageable');
     }
+
+    /**
+     * Relacion Uno a Muchos to Comment::class
+     *
+     * @return void
+     */
+    public function comment()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
