@@ -17,7 +17,10 @@ return new class extends Migration
             $table->id();
 
             $table->string('title', 60);
-            $table->text('body');
+            $table->string('slug');
+            $table->text('extract');
+            $table->longText('body');
+            $table->enum('status', [1, 2])->default(1);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();
 
