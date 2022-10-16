@@ -10,6 +10,7 @@ use App\Models\Image;
 use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Role;
+use App\Models\Tag;
 use App\Models\User;
 use Database\Factories\RoleUserFactory;
 use Illuminate\Database\Seeder;
@@ -36,5 +37,6 @@ class DatabaseSeeder extends Seeder
         Role::factory(3)->create();
         Image::factory(1)->create();
         Comment::factory(2)->create();
+        Tag::factory(2)->create();
     }
 }
