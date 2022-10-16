@@ -11,6 +11,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class CategoryFactory extends Factory
 {
+
+    /**
+     * El nombre del Factory correspondiente al Model
+     *
+     * @var string
+     */
     protected $model = Category::class;
 
     /**

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +12,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class ProfileFactory extends Factory
 {
     /**
+     * El nombre del Factory correspondiente al Model
+     *
+     * @var string
+     */
+    protected $model = Profile::class;
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -17,10 +26,10 @@ class ProfileFactory extends Factory
     public function definition()
     {
         return [
-            'title' => 'Desarrollador',
-            'biography' => 'Esta es la biografia de relleno',
-            'website' => 'portfolio-alansan.epizy.com',
-            'user_id' => 1
+            'title' => $this->faker->unique()->word(),
+            'biography' => $this->faker->unique()->sentence(),
+            'website' => $this->faker->url(),
+            'user_id' => User::all()->random()->id
         ];
     }
 }
