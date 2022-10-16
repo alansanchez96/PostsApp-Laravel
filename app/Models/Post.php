@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Tag;
 use App\Models\User;
 use App\Models\Image;
 use App\Models\Comment;
@@ -51,5 +52,15 @@ class Post extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Relacion Muchos a Muchos Polimorfica to Tag:class
+     *
+     * @return void
+     */
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
     }
 }
