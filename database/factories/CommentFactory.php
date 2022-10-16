@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\Video;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,10 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'comment' => $this->faker->sentence(),
+            'commentable_id' => 1,
+            'commentable_type' => $this->faker->randomElement([Post::class, Video::class]),
+            'user_id' => 1
         ];
     }
 }

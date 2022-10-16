@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Category;
+use App\Models\Comment;
 use App\Models\Image;
 use App\Models\Post;
 use App\Models\Profile;
@@ -34,5 +35,6 @@ class DatabaseSeeder extends Seeder
         Post::factory(2)->create();
         Role::factory(3)->create();
         Image::factory(1)->create();
+        Comment::factory(2)->create();
     }
 }
