@@ -6,15 +6,12 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Comment;
-use App\Models\Image;
-use App\Models\Post;
 use App\Models\Profile;
 use App\Models\Role;
 use App\Models\Tag;
-use App\Models\User;
 use Database\Factories\RoleUserFactory;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
+use Database\Seeders\PostSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,17 +22,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->create([
-            'name' => 'Alan Sanchez',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('admin')
-        ]);
-
+        $this->call(UserSeeder::class);
         Profile::factory(1)->create();
         Category::factory(5)->create();
-        Post::factory(2)->create();
+        $this->call(PostSeeder::class);
         Role::factory(3)->create();
-        Image::factory(1)->create();
         Comment::factory(2)->create();
         Tag::factory(2)->create();
     }

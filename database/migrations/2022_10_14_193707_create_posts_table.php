@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title', 60);
+            $table->string('title');
             $table->string('slug');
             $table->text('extract');
             $table->longText('body');

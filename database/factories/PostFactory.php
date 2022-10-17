@@ -27,7 +27,7 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->sentence();
+        $title = $this->faker->sentence(10);
         return [
             'title' => $title,
             'slug' => Str::slug($title),

@@ -26,9 +26,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
-            'url' => $this->faker->url(),
-            'imageable_id' => 1,
-            'imageable_type' => User::class
+            'url' => 'posts/' . $this->faker->image('public/storage/posts', 640, 480, null, false)
         ];
     }
 }
