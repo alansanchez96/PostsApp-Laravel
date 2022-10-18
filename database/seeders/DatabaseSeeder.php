@@ -3,7 +3,17 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Tag;
+use App\Models\Role;
+use App\Models\Image;
+use App\Models\Comment;
+use App\Models\Profile;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Database\Seeders\PostSeeder;
+use Database\Factories\RoleUserFactory;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,11 +24,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        Storage::deleteDirectory('posts');
+        Storage::makeDirectory('posts');
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(UserSeeder::class);
+        Profile::factory(1)->create();
+        Category::factory(5)->create();
+        Tag::factory(8)->create();
+        $this->call(PostSeeder::class);
+        Role::factory(3)->create();
+        Comment::factory(2)->create();
     }
 }
