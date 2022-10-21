@@ -4,22 +4,24 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Laravel</title>
 
-    <!-- Fonts -->
-    <link href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    <style>
-        body {
-            font-family: 'Nunito', sans-serif;
-        }
-    </style>
+
 </head>
 
-<body>
+<body class="font-sans antialiased bg-gray-300">
     @livewire('navigation')
+
+    <div class="min-h-screen">
+
+        <main>
+            {{ $slot }}
+        </main>
+    </div>
 </body>
 
 </html>
