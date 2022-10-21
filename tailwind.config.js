@@ -6,7 +6,9 @@ module.exports = {
     "./resources/**/*.vue",
   ],
   theme: {
-    extend: {},
+    fontFamily: {
+      'sans': ['"Corbel"', 'JetBrains Mono', 'sans-serif']
+    }
   },
   plugins: [],
 }
