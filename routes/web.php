@@ -25,4 +25,5 @@ Route::get('/home', function () {
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'login');
+    Route::post('/logout', 'logout');
 });
