@@ -23,7 +23,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return 'You are logged';
+        return redirect('home');
     }
 } {
 }
