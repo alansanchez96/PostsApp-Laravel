@@ -10,11 +10,22 @@ use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
+    /**
+     * Devuelve la vista
+     *
+     * @return void
+     */
     public function index()
     {
         return view('auth.login');
     }
 
+    /**
+     * Metodo para Autentificar al Usuario
+     *
+     * @param AuthRequest $request
+     * @return void
+     */
     public function login(AuthRequest $request)
     {
         if (
@@ -33,6 +44,12 @@ class AuthController extends Controller
         return redirect('home')->with('status', 'You are logged in');
     }
 
+    /**
+     * Metodo para Destruir la sesión del usuario
+     *
+     * @param Request $request
+     * @return void
+     */
     public function logout(Request $request)
     {
         Auth::logout();
