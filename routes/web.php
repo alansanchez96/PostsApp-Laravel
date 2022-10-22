@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,8 +23,17 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+/**
+ * Rutas para la Autenticación
+ * 
+ */
 Route::controller(AuthController::class)->group(function () {
     Route::get('/login', 'index')->name('login')->middleware('guest');
     Route::post('/login', 'login');
     Route::post('/logout', 'logout');
+});
+
+Route::controller(RegisterController::class)->group(function(){
+    Route::get('/register', 'index')->name('register')->middleware('guest');
+    Route::get('/register', 'register');
 });
