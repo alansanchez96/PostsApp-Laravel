@@ -1,3 +1,5 @@
 <x-layouts.layout>
-    Hola mundo
+    <x-layouts.alert>
+        
+    </x-layouts.alert>
 </x-layouts.layout>
