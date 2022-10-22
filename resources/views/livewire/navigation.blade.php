@@ -73,8 +73,11 @@
                         {{-- ModalOptionsProfile --}}
                         <div x-show="btnProfile" x-on:click.away="btnProfile=false"
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <a href="#" class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Your Profile</a>
-                            <a href="#" class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Settings</a>
+                            <a href="#"
+                                class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Your
+                                Profile</a>
+                            <a href="#"
+                                class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Settings</a>
                             <form action="/logout" method="post">
                                 @csrf
                                 <a class="cursor-pointer hover:text-gray-900 hover:bg-gray-300 block px-4 py-2 text-sm text-gray-700"
@@ -87,7 +90,7 @@
             @else
                 <a href="{{ route('login') }}"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Login</a>
-                <a href="#"
+                <a href="{{ route('register') }}"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Register</a>
             @endauth
 
@@ -99,8 +102,7 @@
     <div class="sm:hidden" x-show="mobileMenu" x-on:click.away="mobileMenu=false">
         <div class="space-y-1 px-2 pt-2 pb-3">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="#"
-                class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+            <a href="#" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
 
             <a href="#"
                 class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>

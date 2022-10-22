@@ -33,7 +33,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('/logout', 'logout');
 });
 
-Route::controller(RegisterController::class)->group(function(){
+Route::controller(RegisterController::class)->group(function () {
     Route::get('/register', 'index')->name('register')->middleware('guest');
-    Route::get('/register', 'register');
+    Route::post('/register', 'register');
 });

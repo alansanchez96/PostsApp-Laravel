@@ -28,15 +28,23 @@
                     <input type="checkbox" name="remember" id="remember" class="w-4 h-4">
                     <label for="remember" class="text-sm text-gray-800">Remember me</label>
                 </div>
-                <div>
-                    <a href="#" class="text-sm text-gray-800 hover:text-gray-900">Forgot?</a>
-                </div>
             </div>
 
             <div class="w-3/4 mt-4">
                 <button type="submit" class="py-4 bg-gray-800 w-full rounded text-blue-50 font-bold hover:bg-gray-900">
                     LOGIN
                 </button>
+            </div>
+
+            <div class="w-3/4 flex flex-row justify-between mt-5">
+                <div>
+                    <a href="{{ route('register') }}" class="text-sm text-gray-800 hover:text-gray-900">You don't have
+                        an account yet? Sing Up</a>
+                </div>
+                <div>
+                    <a href="#" class="text-sm text-gray-800 hover:text-gray-900">Did you forget your
+                        password?</a>
+                </div>
             </div>
         </form>
     </div>
