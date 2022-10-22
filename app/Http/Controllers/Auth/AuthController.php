@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\Auth\AuthRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -13,17 +14,22 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-    public function login(Request $request)
+    public function login(AuthRequest $request)
     {
-        $credencials = $request->only('email', 'password');
-
-        if (!Auth::attempt($credencials)) {
-            return 'Log Failed';
+        if (
+            !Auth::attempt(
+                $request->only('email', 'password'),
+                $request->filled('remember')
+            )
+        ) {
+            throw ValidationException::withMessages([
+                'email' => __('auth.failed')
+            ]);
         }
 
         $request->session()->regenerate();
 
-        return redirect('home');
+        return redirect('home')->with('status', 'You are logged in');
     }
 } {
 }
