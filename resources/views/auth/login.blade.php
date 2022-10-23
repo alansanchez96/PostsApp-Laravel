@@ -7,7 +7,7 @@
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <p class="text-center font-bold text-red-700 mb-5">{{ $error }}</p>
+                    <p class="text-center font-bold text-red-700 first:mt-5 last:mb-10">{{ $error }}</p>
                 @endforeach
             @endif
 
@@ -42,8 +42,8 @@
                         an account yet? Sing Up</a>
                 </div>
                 <div>
-                    <a href="#" class="text-sm text-gray-800 hover:text-gray-900">Did you forget your
-                        password?</a>
+                    <a href="{{ route('forgot-password') }}" class="text-sm text-gray-800 hover:text-gray-900">Did you
+                        forget your password?</a>
                 </div>
             </div>
         </form>
