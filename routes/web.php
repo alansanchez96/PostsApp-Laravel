@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Auth\PasswordResetController;
-use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Auth\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,11 @@ Route::controller(RegisterController::class)->group(function () {
     Route::post('/register', 'register');
 });
 
-Route::controller(PasswordResetController::class)->group(function(){
-    Route::get('/forgot-password', 'index')->name('forgot-password')->middleware('guest');
+Route::controller(PasswordResetController::class)->group(function () {
+    Route::get('/forgot-password', 'index')->name('password.forgot')->middleware('guest');
     Route::post('/forgot-password', 'reset');
+});
+
+Route::controller(NewPasswordController::class)->group(function () {
+    Route::get('/reset-password/{token}', 'index')->name('password.reset')->middleware('guest');
 });

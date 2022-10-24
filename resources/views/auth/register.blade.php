@@ -42,7 +42,7 @@
                         an account? Sign In</a>
                 </div>
                 <div>
-                    <a href="{{ route('forgot-password') }}" class="text-sm text-gray-800 hover:text-gray-900">Did you
+                    <a href="{{ route('password.forgot') }}" class="text-sm text-gray-800 hover:text-gray-900">Did you
                         forget your password?</a>
                 </div>
             </div>
