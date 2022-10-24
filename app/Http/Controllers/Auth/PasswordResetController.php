@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
+use App\Http\Requests\Auth\PasswordResetRequest;
 
 class PasswordResetController extends Controller
 {
@@ -12,8 +14,8 @@ class PasswordResetController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function reset(Request $request)
+    public function reset(PasswordResetRequest $request)
     {
-        return 'Se enviaron instrucciones a tu email' . $request->email;
+        $request->validated();
     }
 }
