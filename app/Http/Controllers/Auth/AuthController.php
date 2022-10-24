@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -41,7 +42,7 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect('home')->with('status', 'You are logged in');
+        return redirect()->intended(RouteServiceProvider::HOME);
     }
 
     /**

@@ -6,8 +6,10 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
+use App\Providers\RouteServiceProvider;
 use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
@@ -22,13 +24,15 @@ class RegisterController extends Controller
         $request->validated();
 
         $user = User::create([
-            'name' => Str::lower($request->name),
-            'email' => $request->email,
+            'name' => $request->name,
+            'email' => Str::lower($request->email),
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($user));
 
-        return redirect('login');
+        Auth::login($user);
+
+        return redirect(RouteServiceProvider::HOME);
     }
 }
