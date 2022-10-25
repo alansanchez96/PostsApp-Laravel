@@ -23,7 +23,7 @@ Route::middleware('guest')->group(function () {
 
     Route::controller(PasswordResetController::class)->group(function () {
         Route::get('/forgot-password', 'index')->name('password.forgot');
-        Route::post('/forgot-password', 'reset');
+        Route::post('/forgot-password', 'send');
     });
 
     Route::controller(NewPasswordController::class)->group(function () {

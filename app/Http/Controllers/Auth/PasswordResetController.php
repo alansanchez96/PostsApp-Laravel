@@ -15,7 +15,7 @@ class PasswordResetController extends Controller
         return view('auth.forgot-password');
     }
 
-    public function reset(PasswordResetRequest $request)
+    public function send(PasswordResetRequest $request)
     {
         $request->validated();
 
