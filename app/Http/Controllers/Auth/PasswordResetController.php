@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
@@ -19,7 +20,7 @@ class PasswordResetController extends Controller
         $request->validated();
 
         $status = Password::sendResetLink(
-            $request->only('email')
+            $request->only(Str::lower('email'))
         );
 
         return $status == Password::RESET_LINK_SENT

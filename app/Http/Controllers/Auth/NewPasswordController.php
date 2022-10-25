@@ -22,7 +22,12 @@ class NewPasswordController extends Controller
         $request->validated();
 
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
+            $request->only(
+                Str::lower('email'),
+                'password',
+                'password_confirmation',
+                'token'
+            ),
             function ($user) use ($request) {
                 $user->forceFill([
                     'password' => Hash::make($request->password),

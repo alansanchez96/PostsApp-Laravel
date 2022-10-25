@@ -15,16 +15,21 @@
             <div class="w-3/4 mb-6">
                 <p class="text-center text-gray-600 w-full">Introduce la nueva contraseña para tu cuenta</p>
             </div>
+            <div class="w-3/4 mb-6">
+                <input type="email" name="email"
+                    class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 disabled:bg-zinc-400 disabled:text-gray-800 focus:outline-none border-gray-800"
+                    placeholder="Enter your email" value="{{ old('email', $request->email) }}" required>
+            </div>
             <input type="hidden" name="token" value="{{ $request->route('token') }}">
             <div class="w-3/4 mb-6">
                 <input type="password" name="password"
                     class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"
-                    placeholder="Your New Password" autofocus required>
+                    placeholder="Enter your new password" autofocus required>
             </div>
             <div class="w-3/4 mb-6">
                 <input type="password" name="password_confirmation"
                     class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"
-                    placeholder="Confirm Password" required>
+                    placeholder="Confirm password" required>
             </div>
 
             <div class="w-3/4 mt-4">
