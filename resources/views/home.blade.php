@@ -1,5 +1,3 @@
 <x-layouts.layout>
-    <x-layouts.alert>
-        
-    </x-layouts.alert>
+    HOME
 </x-layouts.layout>

@@ -42,7 +42,9 @@ class AuthController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        return redirect()
+            ->intended(RouteServiceProvider::HOME)
+            ->with('status', 'You are logged in');
     }
 
     /**

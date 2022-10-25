@@ -1,3 +1,5 @@
 <x-layouts.layout>
-    Dashboard
+    <x-layouts.alert>
+        Dashboard
+    </x-layouts.alert>
 </x-layouts.layout>
