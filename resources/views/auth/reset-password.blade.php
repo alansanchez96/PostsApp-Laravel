@@ -12,7 +12,6 @@
                 @endforeach
             @endif
 
-
             <div class="w-3/4 mb-6">
                 <p class="text-center text-gray-600 w-full">Introduce la nueva contraseña para tu cuenta</p>
             </div>

@@ -11,6 +11,12 @@
                 @endforeach
             @endif
 
+            @if (session('status'))
+                <p class="text-center font-bold text-green-600 last:mb-10">
+                    {{ session('status') }}
+                </p>
+            @endif
+
             <div class="w-3/4 mb-6">
                 <input type="email" name="email"
                     class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"

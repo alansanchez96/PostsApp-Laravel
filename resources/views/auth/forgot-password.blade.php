@@ -8,8 +8,14 @@
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <p class="text-center font-bold text-red-700 last:mb-10">
-                        {{ $error }}</p>
+                        {{ $error }}
+                    </p>
                 @endforeach
+            @endif
+            @if (session('status'))
+                <p class="text-center font-bold text-green-600 last:mb-10">
+                    {{ session('status') }}
+                </p>
             @endif
 
 
