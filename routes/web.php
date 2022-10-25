@@ -33,39 +33,6 @@ Route::get('/dashboard', function () {
 })->name('dashboard')->middleware(['auth', 'verified']);
 
 /**
- * Guest
- * 
+ * Include routes authenticable
  */
-Route::controller(AuthController::class)->group(function () {
-    Route::get('/login', 'index')->name('login')->middleware('guest');
-    Route::post('/login', 'login')->middleware('guest');
-    Route::post('/logout', 'logout')->middleware('auth');
-});
-
-Route::controller(RegisterController::class)->group(function () {
-    Route::get('/register', 'index')->name('register')->middleware('guest');
-    Route::post('/register', 'register')->middleware('guest');
-});
-
-Route::controller(PasswordResetController::class)->group(function () {
-    Route::get('/forgot-password', 'index')->name('password.forgot')->middleware('guest');
-    Route::post('/forgot-password', 'reset')->middleware('guest');
-});
-
-Route::controller(NewPasswordController::class)->group(function () {
-    Route::get('/reset-password/{token}', 'index')->name('password.reset')->middleware('guest');
-    Route::post('/reset-password', 'reset')->name('password.update')->middleware('guest');
-});
-
-/**
- * Auth
- */
-
-Route::get('/verify-email', [EmailVerificationController::class, '__invoke'])
-    ->name('verification.notice')->middleware('auth');
-
-Route::post('/email/verification-notification', [EmailVerificationNotificationController::class, 'send'])
-    ->name('verification.send')->middleware(['auth', 'throttle:6,1']);
-
-Route::get('/verify-email/{id}/{hash}', [VerifyEmailController::class, '__invoke'])
-    ->name('verification.verify')->middleware(['auth', 'signed', 'throttle:6,1']);
+require __DIR__ . '/auth.php';
