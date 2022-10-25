@@ -14,11 +14,22 @@ use App\Http\Requests\Auth\RegisterRequest;
 
 class RegisterController extends Controller
 {
+    /**
+     * Muestra la vista del Formulario de Registro
+     *
+     * @return void
+     */
     public function index()
     {
         return view('auth.register');
     }
 
+    /**
+     * Manipula el envio de registro de un nuevo usuario
+     *
+     * @param RegisterRequest $request
+     * @return void
+     */
     public function register(RegisterRequest $request)
     {
         $request->validated();

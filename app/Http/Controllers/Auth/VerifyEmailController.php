@@ -10,6 +10,12 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerifyEmailController extends Controller
 {
+    /**
+     * Marca la direccion de correo electronico como verificada
+     *
+     * @param EmailVerificationRequest $request
+     * @return void
+     */
     public function __invoke(EmailVerificationRequest $request)
     {
         if ($request->user()->hasVerifiedEmail()) {

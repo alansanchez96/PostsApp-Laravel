@@ -8,6 +8,12 @@ use App\Providers\RouteServiceProvider;
 
 class EmailVerificationNotificationController extends Controller
 {
+    /**
+     * Envia una nueva verificacion de Email
+     *
+     * @param Request $request
+     * @return void
+     */
     public function send(Request $request)
     {
         if ($request->user()->hasVerifiedEmail()) {

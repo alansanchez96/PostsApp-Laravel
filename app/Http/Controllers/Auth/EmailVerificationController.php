@@ -8,6 +8,12 @@ use App\Providers\RouteServiceProvider;
 
 class EmailVerificationController extends Controller
 {
+    /**
+     * Muestra el aviso de verificación de Email
+     *
+     * @param Request $request
+     * @return void
+     */
     public function __invoke(Request $request)
     {
         return $request->user()->hasVerifiedEmail()
