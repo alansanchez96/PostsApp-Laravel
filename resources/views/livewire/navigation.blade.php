@@ -78,7 +78,7 @@
                             <a href="{{ route('user.profile') }}"
                                 class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Your
                                 Profile</a>
-                            <a href="#"
+                            <a href="{{ route('user.settings') }}"
                                 class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Settings</a>
                             <form action="/logout" method="post">
                                 @csrf

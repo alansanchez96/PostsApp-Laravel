@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,5 +43,10 @@ Route::controller(UserController::class)->group(
     function () {
         Route::get('/user/profile', 'profile')->name('user.profile')->middleware(['auth', 'verified']);
         Route::put('/user/profile', 'updateProfile')->name('user.update')->middleware(['auth', 'verified']);
+    }
+);
+Route::controller(UserSettingsController::class)->group(
+    function () {
+        Route::get('/user/settings', 'settings')->name('user.settings')->middleware(['auth', 'verified']);
     }
 );
