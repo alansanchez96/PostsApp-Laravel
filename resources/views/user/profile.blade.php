@@ -2,9 +2,10 @@
     <x-layouts.alert>
     </x-layouts.alert>
     <div class="flex justify-center items-center w-screen">
-        <form method="post" class="w-full md:w-1/2 flex flex-col items-center" enctype="multipart/form-data">
+        <form method="post" class="w-full md:w-1/2 flex flex-col items-center" action="{{ route('user.update') }}"
+            enctype="multipart/form-data">
             @csrf
-
+            @method('put')
             <h1 class="text-center text-2xl font-bold text-gray-600 my-10">EDITAR PERFIL</h1>
 
             @if ($errors->any())

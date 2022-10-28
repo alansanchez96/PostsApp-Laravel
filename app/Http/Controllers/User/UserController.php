@@ -12,4 +12,9 @@ class UserController extends Controller
     {
         return view('user.profile', compact('user'));
     }
+
+    public function updateProfile()
+    {
+        return 'Actualizando...';
+    }
 }

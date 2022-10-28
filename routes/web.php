@@ -41,5 +41,6 @@ require __DIR__ . '/auth.php';
 Route::controller(UserController::class)->group(
     function () {
         Route::get('/user/profile', 'profile')->name('user.profile')->middleware(['auth', 'verified']);
+        Route::put('/user/profile', 'updateProfile')->name('user.update')->middleware(['auth', 'verified']);
     }
 );
