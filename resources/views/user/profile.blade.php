@@ -1,6 +1,4 @@
 <x-layouts.layout>
-    <x-layouts.alert>
-    </x-layouts.alert>
     <div class="flex justify-center items-center w-screen">
         <form method="post" class="w-full md:w-1/2 flex flex-col items-center" action="{{ route('user.update') }}"
             enctype="multipart/form-data">
@@ -34,7 +32,7 @@
             </div>
             <div class="w-3/4 mb-6">
                 <label for="file" class="text-gray-600">Profile Picture</label>
-                <input type="file" name="email" id="file"
+                <input type="file" name="photo" id="file"
                     class="w-full py-2 mt-2 px-4 bg-gray-200 rounded border-r-2 border-l-2 hover:border-gray-900 focus:outline-none border-gray-800"
                     accept="image/jpeg, image/png">
             </div>
