@@ -21,19 +21,19 @@
                 <label for="password_current" class="text-gray-600">Contraseña actual</label>
                 <input type="password" name="password_current" id="password_current"
                     class="w-full py-2 px-4 mt-2 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"
-                    placeholder="Your current password..." required>
+                    placeholder="Your current password...">
             </div>
             <div class="w-3/4 mb-6">
                 <label for="password" class="text-gray-600">Nueva contraseña</label>
                 <input type="password" name="password" id="password"
                     class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"
-                    placeholder="Your new password..." required>
+                    placeholder="Your new password...">
             </div>
             <div class="w-3/4 mb-6">
                 <label for="password_confirmation" class="text-gray-600">Confirmar contraseña</label>
                 <input type="password" name="password_confirmation" id="password_confirmation"
                     class="w-full py-2 px-4 bg-gray-300 rounded border hover:border-gray-900 focus:outline-none border-gray-800"
-                    placeholder="Confirm password..." required>
+                    placeholder="Confirm password...">
             </div>
 
             <div class="w-3/4 mt-4">

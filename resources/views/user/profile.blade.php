@@ -1,6 +1,6 @@
 <x-layouts.layout>
     <div class="flex justify-center items-center w-screen">
-        <form method="post" class="w-full md:w-1/2 flex flex-col items-center" action="{{ route('user.update') }}"
+        <form method="post" class="w-full md:w-1/2 flex flex-col items-center" action="{{ route('user.updateProfile') }}"
             enctype="multipart/form-data">
             @csrf
             @method('put')

@@ -42,11 +42,12 @@ require __DIR__ . '/auth.php';
 Route::controller(UserController::class)->group(
     function () {
         Route::get('/user/profile', 'profile')->name('user.profile')->middleware(['auth', 'verified']);
-        Route::put('/user/profile', 'updateProfile')->name('user.update')->middleware(['auth', 'verified']);
+        Route::put('/user/profile', 'updateProfile')->name('user.updateProfile')->middleware(['auth', 'verified']);
     }
 );
 Route::controller(UserSettingsController::class)->group(
     function () {
         Route::get('/user/settings', 'settings')->name('user.settings')->middleware(['auth', 'verified']);
+        Route::put('/user/settings', 'updateSettings')->name('user.updateSettings')->middleware(['auth', 'verified']);
     }
 );
