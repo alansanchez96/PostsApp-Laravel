@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +30,16 @@ Route::get('/home', function () {
 })->name('home');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('user.dashboard');
 })->name('dashboard')->middleware(['auth', 'verified']);
 
 /**
  * Include routes authenticable
  */
 require __DIR__ . '/auth.php';
+
+Route::controller(UserController::class)->group(
+    function () {
+        Route::get('/user/profile', 'profile')->name('user.profile')->middleware(['auth', 'verified']);
+    }
+);
