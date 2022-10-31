@@ -12,7 +12,7 @@
             @endif
 
             @if (session('status'))
-                <p class="text-center font-bold text-green-600 last:mb-10">
+                <p class="text-center font-bold text-red-700 last:mb-10">
                     {{ session('status') }}
                 </p>
             @endif

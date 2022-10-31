@@ -3,6 +3,7 @@
 namespace App\Http\Requests\User;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -30,7 +31,7 @@ class SettingsRequest extends FormRequest
     {
         return [
             'password_current' => 'required|string|min:3',
-            'password' => 'required|string|min:3',
+            'password' => 'required|string|min:3|confirmed',
             'password_confirmation' => 'required|string|min:3',
         ];
     }
@@ -45,7 +46,7 @@ class SettingsRequest extends FormRequest
                 $this->password === $this->password_confirmation &&
                 $this->password_current !== $user->password &&
                 $this->password_current !== $this->password
-                ) {
+            ) {
                 return true;
             }
         } else {

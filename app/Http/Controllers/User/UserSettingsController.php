@@ -6,7 +6,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\SettingsRequest;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserSettingsController extends Controller
 {
@@ -20,9 +22,14 @@ class UserSettingsController extends Controller
         $user = User::find(Auth::user()->id);
         $response = $request->validatePasswords($user);
         if ($response) {
-            return 'cambiando..';
+            $user->update([
+                'password' => Hash::make($request->password)
+            ]);
+            return redirect()
+                ->intended(RouteServiceProvider::HOME)
+                ->with('status', 'La contraseña fue cambiada');
         } else {
-            return 'algo salio mal..';
+            return back()->with('status', 'La contraseña actual no es correcta');
         }
     }
 }
