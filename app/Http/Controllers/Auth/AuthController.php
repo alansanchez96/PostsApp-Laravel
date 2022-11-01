@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Contracts\AuthInterface;
+use App\Http\Controllers\Auth\Contracts\IAuth;
 use App\Http\Controllers\Auth\Services\Authenticator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -10,9 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Routing\Redirector;
-use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller implements AuthInterface
+class AuthController extends Controller implements IAuth
 {
     /**
      * Devuelve la vista

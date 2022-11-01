@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\Contracts\IRegister;
+use App\Http\Controllers\Auth\Services\CreateUser;
 use App\Models\User;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\Auth\RegisterRequest;
+use Illuminate\Routing\Redirector;
 
-class RegisterController extends Controller
+class RegisterController extends Controller implements IRegister
 {
     /**
      * Muestra la vista del Formulario de Registro
@@ -25,25 +27,22 @@ class RegisterController extends Controller
     }
 
     /**
-     * Manipula el envio de registro de un nuevo usuario
+     * Crea un nuevo usuario dentro de la base de datos
      *
      * @param RegisterRequest $request
+     * @param Redirector $redirector
      * @return void
      */
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request, Redirector $redirector)
     {
         $request->validated();
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => Str::lower($request->email),
-            'password' => Hash::make($request->password),
-        ]);
+        $user = CreateUser::newUser($request);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return $redirector->intended(RouteServiceProvider::HOME);
     }
 }
