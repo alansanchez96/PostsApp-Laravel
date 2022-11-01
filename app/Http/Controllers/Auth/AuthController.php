@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\Contracts\AuthInterface;
+use App\Http\Controllers\Auth\Services\Authenticator;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Routing\Redirector;
 use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
+class AuthController extends Controller implements AuthInterface
 {
     /**
      * Devuelve la vista
@@ -22,33 +25,24 @@ class AuthController extends Controller
     }
 
     /**
-     * Metodo para Autentificar al Usuario
+     * Método para Autentificar al Usuario
      *
      * @param AuthRequest $request
      * @return void
      */
-    public function login(AuthRequest $request)
+    public function login(AuthRequest $request, Redirector $redirector)
     {
-        if (
-            !Auth::attempt(
-                $request->only('email', 'password'),
-                $request->filled('remember')
-            )
-        ) {
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed')
-            ]);
-        }
+        Authenticator::loginOrFail($request);
 
         $request->session()->regenerate();
 
-        return redirect()
+        return $redirector
             ->intended(RouteServiceProvider::HOME)
             ->with('status', 'You are logged in');
     }
 
     /**
-     * Metodo para Destruir la sesión del usuario
+     * Método para Destruir la sesión del usuario
      *
      * @param Request $request
      * @return void
