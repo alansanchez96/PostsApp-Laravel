@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\Auth\PasswordResetRequest;
@@ -21,19 +20,17 @@ class PasswordResetController extends Controller
     }
 
     /**
-     * Manipula el envio de restablecimiento al correo electronico
+     * Manipula el envió de restablecimiento al correo electrónico
      *
      * @param PasswordResetRequest $request
-     * @return void
+     * @return mixed
      */
-    public function send(PasswordResetRequest $request)
+    public function send(PasswordResetRequest $request): mixed
     {
-        $request->validated();
-
         $status = Password::sendResetLink(
             $request->only(Str::lower('email'))
         );
-        
+
         return $status == Password::RESET_LINK_SENT
             ? back()->with('status', __($status))
             : back()->withInput($request->only('email'))
