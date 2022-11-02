@@ -12,9 +12,9 @@ class EmailVerificationController extends Controller
      * Muestra el aviso de verificación de Email
      *
      * @param Request $request
-     * @return void
+     * @return mixed
      */
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): mixed
     {
         return $request->user()->hasVerifiedEmail()
             ? redirect()->intended(RouteServiceProvider::HOME)
