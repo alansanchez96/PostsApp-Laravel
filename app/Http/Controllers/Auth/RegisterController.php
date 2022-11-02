@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Auth\Contracts\IRegister;
-use App\Http\Controllers\Auth\Services\CreateUser;
+use App\Http\Controllers\Auth\Services\NewUser;
 use App\Models\User;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -35,11 +35,7 @@ class RegisterController extends Controller implements IRegister
      */
     public function register(RegisterRequest $request, Redirector $redirector)
     {
-        $request->validated();
-
-        $user = CreateUser::newUser($request);
-
-        event(new Registered($user));
+        $user = NewUser::createAndNotify($request);
 
         Auth::login($user);
 

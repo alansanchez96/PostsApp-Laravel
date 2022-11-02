@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth\Services;
 
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
+use App\Http\Requests\Auth\RegisterRequest;
 
-class CreateUser
+class NewUser
 {
     /**
      * Crear un usuario en la base de datos
@@ -15,12 +16,16 @@ class CreateUser
      * @param RegisterRequest $request
      * @return User
      */
-    public static function newUser(RegisterRequest $request): User
+    public static function createAndNotify(RegisterRequest $request): User
     {
-        return User::create([
+        $user = User::create([
             'name' => $request->name,
             'email' => Str::lower($request->email),
             'password' => Hash::make($request->password),
         ]);
+
+        event(new Registered($user));
+
+        return $user;
     }
 }
