@@ -8,7 +8,13 @@ use Illuminate\Validation\ValidationException;
 
 class Authenticator
 {
-    public static function loginOrFail(AuthRequest $request)
+    /**
+     * Intenta Logear al usuario con las credenciales otorgadas o fallará
+     *
+     * @param AuthRequest $request
+     * @return void
+     */
+    public static function loginOrFail(AuthRequest $request): void
     {
         if (
             !Auth::attempt(

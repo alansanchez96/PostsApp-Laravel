@@ -27,9 +27,9 @@ class AuthController extends Controller implements IAuth
      * Método para Autentificar al Usuario
      *
      * @param AuthRequest $request
-     * @return void
+     * @return mixed
      */
-    public function login(AuthRequest $request, Redirector $redirector)
+    public function login(AuthRequest $request, Redirector $redirector): mixed
     {
         Authenticator::loginOrFail($request);
 
@@ -44,9 +44,9 @@ class AuthController extends Controller implements IAuth
      * Método para Destruir la sesión del usuario
      *
      * @param Request $request
-     * @return void
+     * @return mixed
      */
-    public function logout(Request $request)
+    public function logout(Request $request): mixed
     {
         Auth::logout();
         $request->session()->invalidate();
