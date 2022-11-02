@@ -6,11 +6,11 @@ use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\UserInfoRequest;
 use App\Http\Controllers\User\Contracts\IUserInfo;
-use App\Http\Controllers\User\Concerns\UserInfoAdapter;
+use App\Http\Controllers\User\Concerns\UserAdapter;
 
 class UserInfoController extends Controller implements IUserInfo
 {
-    use UserInfoAdapter;
+    Use UserAdapter;
 
     /**
      * Retorna la vista y parámetros

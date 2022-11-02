@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\User\Concerns;
 
-use App\Http\Requests\User\UserInfoRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\UserInfoRequest;
 
-trait UserInfoAdapter
+trait UserAdapter
 {
     /**
      * Recibe al usuario autenticado y actualiza sus datos
