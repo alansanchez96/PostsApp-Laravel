@@ -14,9 +14,9 @@ trait VerifyEmail
      *
      * @param EmailVerificationRequest $request
      * @param string|null $verified
-     * @return RedirectResponse
+     * @return void
      */
-    public function verifiedOrFail(EmailVerificationRequest $request, string $verified = null): RedirectResponse
+    public function verifiedOrFail(EmailVerificationRequest $request, string $verified = null)
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(RouteServiceProvider::HOME . $verified);
