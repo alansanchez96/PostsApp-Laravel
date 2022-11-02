@@ -2,20 +2,17 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Contracts\IRegister;
-use App\Http\Controllers\Auth\Services\NewUser;
-use App\Models\User;
-use Illuminate\Support\Str;
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
 use App\Http\Requests\Auth\RegisterRequest;
-use Illuminate\Routing\Redirector;
+use App\Http\Controllers\Auth\Concerns\NewUser;
+use App\Http\Controllers\Auth\Contracts\IRegister;
 
 class RegisterController extends Controller implements IRegister
 {
+    use NewUser;
     /**
      * Muestra la vista del Formulario de Registro
      *
@@ -35,7 +32,7 @@ class RegisterController extends Controller implements IRegister
      */
     public function register(RegisterRequest $request, Redirector $redirector)
     {
-        $user = NewUser::createAndNotify($request);
+        $user = $this->createAndNotify($request);
 
         Auth::login($user);
 

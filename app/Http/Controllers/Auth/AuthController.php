@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Contracts\IAuth;
-use App\Http\Controllers\Auth\Services\Authenticator;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Routing\Redirector;
+use App\Http\Controllers\Auth\Contracts\IAuth;
+use App\Http\Controllers\Auth\Concerns\Authenticator;
 
 class AuthController extends Controller implements IAuth
 {
+    use Authenticator;
+
     /**
      * Devuelve la vista
      *
@@ -31,7 +33,7 @@ class AuthController extends Controller implements IAuth
      */
     public function login(AuthRequest $request, Redirector $redirector): mixed
     {
-        Authenticator::loginOrFail($request);
+        $this->loginOrFail($request);
 
         $request->session()->regenerate();
 

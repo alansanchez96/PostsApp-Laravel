@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Auth\Services;
+namespace App\Http\Controllers\Auth\Concerns;
 
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
 use Illuminate\Validation\ValidationException;
 
-class Authenticator
+trait Authenticator
 {
     /**
      * Intenta Logear al usuario con las credenciales otorgadas o fallará
@@ -14,7 +14,7 @@ class Authenticator
      * @param AuthRequest $request
      * @return void
      */
-    public static function loginOrFail(AuthRequest $request): void
+    public function loginOrFail(AuthRequest $request): void
     {
         if (
             !Auth::attempt(

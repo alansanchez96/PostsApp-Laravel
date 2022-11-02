@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Services\VerifyEmail;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\Auth\Concerns\VerifyEmail;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 class VerifyEmailController extends Controller
 {
+    use VerifyEmail;
     /**
      * Verifica la dirección de correo electrónico
      *
@@ -17,8 +18,8 @@ class VerifyEmailController extends Controller
      */
     public function __invoke(EmailVerificationRequest $request): mixed
     {
-        VerifyEmail::verifiedOrFail($request, '?verified=1');
-        VerifyEmail::markVerified($request);
+        $this->verifiedOrFail($request, '?verified=1');
+        $this->markVerified($request);
 
         return redirect()->intended(RouteServiceProvider::HOME . '?verified=1');
     }
