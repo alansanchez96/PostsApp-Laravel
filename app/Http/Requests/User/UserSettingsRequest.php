@@ -3,14 +3,10 @@
 namespace App\Http\Requests\User;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Http\FormRequest;
 
-class SettingsRequest extends FormRequest
+class UserSettingsRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

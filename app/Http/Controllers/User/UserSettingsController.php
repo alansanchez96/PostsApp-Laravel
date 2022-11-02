@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\SettingsRequest;
+use App\Http\Requests\User\UserSettingsRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -17,7 +16,7 @@ class UserSettingsController extends Controller
         return view('user.settings');
     }
 
-    public function updateSettings(SettingsRequest $request)
+    public function update(UserSettingsRequest $request)
     {
         $user = User::find(Auth::user()->id);
         $response = $request->validatePasswords($user);
