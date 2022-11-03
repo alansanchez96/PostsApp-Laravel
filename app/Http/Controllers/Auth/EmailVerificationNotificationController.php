@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Services\VerifyEmail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\Concerns\VerifyEmail;
 
 class EmailVerificationNotificationController extends Controller
 {
@@ -16,7 +16,7 @@ class EmailVerificationNotificationController extends Controller
      */
     public function send(Request $request): mixed
     {
-        VerifyEmail::verifiedOrFail($request);
+        $this->verifiedOrFail($request);
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');
