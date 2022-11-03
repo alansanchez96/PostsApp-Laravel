@@ -10,7 +10,7 @@ use App\Http\Controllers\User\Concerns\UserAdapter;
 
 class UserInfoController extends Controller implements IUserInfo
 {
-    Use UserAdapter;
+    use UserAdapter;
 
     /**
      * Retorna la vista y parámetros

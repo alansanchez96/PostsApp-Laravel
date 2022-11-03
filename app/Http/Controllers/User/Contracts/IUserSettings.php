@@ -3,17 +3,17 @@
 namespace App\Http\Controllers\User\Contracts;
 
 use App\Models\User;
-use App\Http\Requests\User\UserInfoRequest;
+use App\Http\Requests\User\UserSettingsRequest;
 
-interface IUserInfo
+interface IUserSettings
 {
     /**
-     * Retorna la vista y parámetros
+     * Retorna la vista del documento
      *
      * @param User $user
      * @return void
      */
-    public function profile(User $user);
+    public function settings();
 
     /**
      * Actualiza la información y configuraciones del usuario autenticado
@@ -21,5 +21,5 @@ interface IUserInfo
      * @param UserInfoRequest $request
      * @return mixed
      */
-    public function update(UserInfoRequest $request): mixed;
+    public function update(UserSettingsRequest $request): mixed;
 }

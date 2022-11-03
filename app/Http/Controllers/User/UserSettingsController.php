@@ -2,33 +2,38 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\User\UserSettingsRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\User\UserSettingsRequest;
+use App\Http\Controllers\User\Concerns\UserAdapter;
+use App\Http\Controllers\User\Contracts\IUserSettings;
 
-class UserSettingsController extends Controller
+class UserSettingsController extends Controller implements IUserSettings
 {
+    use UserAdapter;
+
+    /**
+     * Devuelve la vista del documento
+     *
+     * @return void
+     */
     public function settings()
     {
         return view('user.settings');
     }
 
-    public function update(UserSettingsRequest $request)
+    /**
+     * Actualiza la contraseña del usuario autenticado
+     *
+     * @param UserSettingsRequest $request
+     * @return mixed
+     */
+    public function update(UserSettingsRequest $request): mixed
     {
-        $user = User::find(Auth::user()->id);
-        $response = $request->validatePasswords($user);
-        if ($response) {
-            $user->update([
-                'password' => Hash::make($request->password)
-            ]);
-            return redirect()
-                ->intended(RouteServiceProvider::HOME)
-                ->with('status', 'La contraseña fue cambiada');
-        } else {
-            return back()->with('status', 'La contraseña actual no es correcta');
-        }
+        $update = $this->updateSettingsUser($request);
+
+        return $update === true
+            ? redirect()->intended(RouteServiceProvider::HOME)->with('status', 'La contraseña fue cambiada')
+            : back()->with('status', 'La contraseña actual no es correcta');
     }
 }
