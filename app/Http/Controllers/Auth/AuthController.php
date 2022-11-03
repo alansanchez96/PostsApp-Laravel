@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\Auth\AuthRequest;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\Auth\Contracts\IAuth;
+use App\Http\Controllers\Auth\Concerns\Authenticator;
 
-class AuthController extends Controller
+class AuthController extends Controller implements IAuth
 {
+    use Authenticator;
+
     /**
      * Devuelve la vista
      *
@@ -22,38 +26,29 @@ class AuthController extends Controller
     }
 
     /**
-     * Metodo para Autentificar al Usuario
+     * Método para Autentificar al Usuario
      *
      * @param AuthRequest $request
-     * @return void
+     * @return mixed
      */
-    public function login(AuthRequest $request)
+    public function login(AuthRequest $request, Redirector $redirector): mixed
     {
-        if (
-            !Auth::attempt(
-                $request->only('email', 'password'),
-                $request->filled('remember')
-            )
-        ) {
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed')
-            ]);
-        }
+        $this->loginOrFail($request);
 
         $request->session()->regenerate();
 
-        return redirect()
+        return $redirector
             ->intended(RouteServiceProvider::HOME)
             ->with('status', 'You are logged in');
     }
 
     /**
-     * Metodo para Destruir la sesión del usuario
+     * Método para Destruir la sesión del usuario
      *
      * @param Request $request
-     * @return void
+     * @return mixed
      */
-    public function logout(Request $request)
+    public function logout(Request $request): mixed
     {
         Auth::logout();
         $request->session()->invalidate();

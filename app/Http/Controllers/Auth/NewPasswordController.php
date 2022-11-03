@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Support\Str;
+use App\Http\Controllers\Auth\Services\ResetPassword;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\Auth\NewPasswordRequest;
 
 class NewPasswordController extends Controller
@@ -27,32 +24,12 @@ class NewPasswordController extends Controller
      * Manipula el request de la nueva contraseña
      *
      * @param NewPasswordRequest $request
-     * @return void
+     * @return mixed
      */
-    public function reset(NewPasswordRequest $request)
+    public function reset(NewPasswordRequest $request): mixed
     {
-        $request->validated();
+        $resetPassword = new ResetPassword($request->password);
 
-        $status = Password::reset(
-            $request->only(
-                Str::lower('email'),
-                'password',
-                'password_confirmation',
-                'token'
-            ),
-            function ($user) use ($request) {
-                $user->forceFill([
-                    'password' => Hash::make($request->password),
-                    'remember_token' => Str::random(60),
-                ])->save();
-
-                event(new PasswordReset($user));
-            }
-        );
-
-        return $status == Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withInput($request->only('email'))
-            ->withErrors(['email' => __($status)]);
+        return $resetPassword->redirectAndSaveNewPassword($request);
     }
 }

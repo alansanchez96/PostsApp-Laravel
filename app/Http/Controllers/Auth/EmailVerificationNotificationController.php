@@ -4,22 +4,19 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
+use App\Http\Controllers\Auth\Concerns\VerifyEmail;
 
 class EmailVerificationNotificationController extends Controller
 {
     /**
-     * Envia una nueva verificacion de Email
+     * Envía una nueva verificación de Email
      *
      * @param Request $request
-     * @return void
+     * @return mixed
      */
-    public function send(Request $request)
+    public function send(Request $request): mixed
     {
-        if ($request->user()->hasVerifiedEmail()) {
-            return redirect()->intended(RouteServiceProvider::HOME);
-        }
-
+        $this->verifiedOrFail($request);
         $request->user()->sendEmailVerificationNotification();
 
         return back()->with('status', 'verification-link-sent');
