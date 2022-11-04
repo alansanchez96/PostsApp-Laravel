@@ -1,9 +1,10 @@
 <?php
 
+namespace Src\Tags\Domain\EloquentRepository;
 
-use Src\Posts\Domain\PostEntity;
-use Src\Videos\Domain\VideoEntity;
 use Illuminate\Database\Eloquent\Model;
+use Src\Posts\Domain\EloquentRepository\PostEntity;
+use Src\Videos\Domain\EloquentRepository\VideoEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class TagEntity extends Model
@@ -11,7 +12,14 @@ class TagEntity extends Model
     use HasFactory;
 
     /**
-     * Relacion Muchos a Muchos Polimorfica Inversa to Post::class
+     * Nombre de la tabla entidad
+     *
+     * @var string
+     */
+    protected $table = 'tags';
+
+    /**
+     * Relacion Muchos a Muchos Polimorfica Inversa to PostEntity::class
      *
      * @return void
      */
@@ -21,7 +29,7 @@ class TagEntity extends Model
     }
 
     /**
-     * Relacion Muchos a Muchos Polimorfica Inversa to Video::class
+     * Relacion Muchos a Muchos Polimorfica Inversa to VideoEntity::class
      *
      * @return void
      */

@@ -1,14 +1,23 @@
 <?php
 
-namespace Src\Videos\Domain;
+namespace Src\Videos\Domain\EloquentRepository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Src\Tags\Domain\EloquentRepository\TagEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Src\Comments\Domain\EloquentRepository\CommentEntity;
 
 class VideoEntity extends Model
 {
     use HasFactory;
+
+    /**
+     * Nombre de la tabla entidad
+     *
+     * @var string
+     */
+    protected $table = 'videos';
 
     /**
      * Relacion Uno a Muchos Inversa to User::class
@@ -21,7 +30,7 @@ class VideoEntity extends Model
     }
 
     /**
-     * Relacion Uno a Muchos Polimorfica to Comment::class
+     * Relacion Uno a Muchos Polimorfica to CommentEntity::class
      *
      * @return void
      */
@@ -31,7 +40,7 @@ class VideoEntity extends Model
     }
 
     /**
-     * Relacion Muchos a Muchos Polimorfica to Tag:class
+     * Relacion Muchos a Muchos Polimorfica to TagEntity::class
      *
      * @return void
      */

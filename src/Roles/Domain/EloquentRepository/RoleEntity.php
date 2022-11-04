@@ -1,13 +1,22 @@
 <?php
-namespace Src\Roles\Domain;
+
+namespace Src\Roles\Domain\EloquentRepository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Src\Permissions\Domain\EloquentRepository\PermissionEntity;
 
 class RoleEntity extends Model
 {
     use HasFactory;
+
+    /**
+     * Nombre de la tabla entidad
+     *
+     * @var string
+     */
+    protected $table = 'roles';
 
     /**
      * Relacion Muchos a Muchos to User::class
@@ -20,7 +29,7 @@ class RoleEntity extends Model
     }
 
     /**
-     * Relacion Mucho a Muchos to Permission::class
+     * Relacion Mucho a Muchos to PermissionEntity::class
      *
      * @return void
      */

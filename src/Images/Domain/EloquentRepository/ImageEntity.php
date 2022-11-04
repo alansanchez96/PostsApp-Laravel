@@ -1,13 +1,20 @@
 <?php
 
-namespace Src\Images\Domain;
+namespace Src\Images\Domain\EloquentRepository;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ImageEntity extends Model
 {
     use HasFactory;
+
+    /**
+     * Nombre de la tabla entidad
+     *
+     * @var string
+     */
+    protected $table = 'images';
 
     /**
      * Agregacion Masiva

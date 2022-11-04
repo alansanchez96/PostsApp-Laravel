@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Comments\Domain;
+namespace Src\Comments\Domain\EloquentRepository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -9,6 +9,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class CommentEntity extends Model
 {
     use HasFactory;
+
+    protected $table = 'comments';
 
     /**
      * Relacion Uno a Muchos Inversa to User::class
