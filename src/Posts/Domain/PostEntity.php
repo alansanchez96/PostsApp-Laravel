@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Models;
+namespace Src\Posts\Domain;
 
-use App\Models\Tag;
-use App\Models\User;
-use App\Models\Image;
-use App\Models\Comment;
-use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Post extends Model
+class PostEntity extends Model
 {
     use HasFactory;
 

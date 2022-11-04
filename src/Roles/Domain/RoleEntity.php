@@ -1,13 +1,11 @@
 <?php
-
-namespace App\Models;
+namespace Src\Roles\Domain;
 
 use App\Models\User;
-use App\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Role extends Model
+class RoleEntity extends Model
 {
     use HasFactory;
 
@@ -28,6 +26,6 @@ class Role extends Model
      */
     public function permissions()
     {
-        return $this->belongsToMany(Permission::class);
+        return $this->belongsToMany(PermissionEntity::class);
     }
 }

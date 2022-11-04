@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace Src\Categories\Domain;
 
-use App\Models\Post;
+use Src\Posts\Domain\PostEntity;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model
+class CategoryEntity extends Model
 {
     use HasFactory;
 
@@ -17,6 +17,6 @@ class Category extends Model
      */
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(PostEntity::class);
     }
 }

@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace Src\Videos\Domain;
 
-use App\Models\Tag;
 use App\Models\User;
-use App\Models\Comment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Video extends Model
+class VideoEntity extends Model
 {
     use HasFactory;
 
@@ -29,7 +27,7 @@ class Video extends Model
      */
     public function comments()
     {
-        return $this->morphMany(Comment::class, 'commentable');
+        return $this->morphMany(CommentEntity::class, 'commentable');
     }
 
     /**
@@ -39,6 +37,6 @@ class Video extends Model
      */
     public function tags()
     {
-        return $this->morphToMany(Tag::class, 'taggable');
+        return $this->morphToMany(TagEntity::class, 'taggable');
     }
 }

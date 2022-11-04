@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Src\Posts\Domain\PostEntity;
+use Src\Videos\Domain\VideoEntity;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Tag extends Model
+class TagEntity extends Model
 {
     use HasFactory;
 
@@ -16,7 +17,7 @@ class Tag extends Model
      */
     public function posts()
     {
-        return $this->morphedByMany(Post::class, 'taggable');
+        return $this->morphedByMany(PostEntity::class, 'taggable');
     }
 
     /**
@@ -26,6 +27,6 @@ class Tag extends Model
      */
     public function videos()
     {
-        return $this->morphedByMany(Video::class, 'taggable');
+        return $this->morphedByMany(VideoEntity::class, 'taggable');
     }
 }
