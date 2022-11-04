@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\UserInfoController;
 use App\Http\Controllers\User\UserSettingsController;
@@ -33,3 +34,9 @@ require __DIR__ . '/auth.php';
 
 // Route Users
 require __DIR__ . '/user.php';
+
+Route::controller(PostController::class)->group(
+    function () {
+        Route::get('/index', 'index')->name('post.index');
+    }
+);

@@ -1,6 +1,6 @@
 <x-layouts.layout>
-    <div class="flex justify-center h-screen w-screen items-center">
-        <form method="post" class="w-full md:w-1/2 flex flex-col items-center">
+    <div class="flex justify-center h-screen items-center mx-auto">
+        <form method="post" class="w-3/4 md:w-7/12 flex flex-col items-center">
             @csrf
 
             <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">REGISTER</h1>
