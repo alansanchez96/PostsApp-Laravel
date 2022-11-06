@@ -2,20 +2,22 @@
 
 namespace Database\Factories;
 
-use App\Models\Role;
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Src\Categories\Domain\EloquentRepository\CategoryEntity;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
-class RoleFactory extends Factory
+class CategoryEntityFactory extends Factory
 {
+
     /**
      * El nombre del Factory correspondiente al Model
      *
      * @var string
      */
-    protected $model = Role::class;
+    protected $model = CategoryEntity::class;
 
     /**
      * Define the model's default state.
@@ -24,8 +26,10 @@ class RoleFactory extends Factory
      */
     public function definition()
     {
+        $name = $this->faker->word();
         return [
-            'name' => strtoupper($this->faker->unique()->word())
+            'name' => $name,
+            'slug' => Str::slug($name)
         ];
     }
 }

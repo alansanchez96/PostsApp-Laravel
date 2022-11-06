@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace Src\Comments\Domain\EloquentRepository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\CommentEntityFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Comment extends Model
+class CommentEntity extends Model
 {
     use HasFactory;
+
+    protected $table = 'comments';
 
     /**
      * Relacion Uno a Muchos Inversa to User::class
@@ -28,5 +31,10 @@ class Comment extends Model
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    protected static function newFactory()
+    {
+        return CommentEntityFactory::new();
     }
 }

@@ -2,15 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Models\Post;
-use App\Models\Image;
-use App\Models\Video;
-use App\Models\Profile;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Src\Posts\Domain\EloquentRepository\PostEntity;
+use Src\Roles\Domain\EloquentRepository\RoleEntity;
+use Src\Images\Domain\EloquentRepository\ImageEntity;
+use Src\Videos\Domain\EloquentRepository\VideoEntity;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Src\Comments\Domain\EloquentRepository\CommentEntity;
+use Src\Profiles\Domain\EloquentRepository\ProfileEntity;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -48,43 +50,43 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     /**
-     * Relacion Uno a Uno to Profile::class
+     * Relacion Uno a Uno to ProfileEntity::class
      *
      * @return void
      */
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        return $this->hasOne(ProfileEntity::class);
     }
 
     /**
-     * Relacion Uno a Muchos to Post::class
+     * Relacion Uno a Muchos to PostEntity::class
      *
      * @return void
      */
     public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(PostEntity::class);
     }
 
     /**
-     * Relacion Uno a Muchos to Video::class
+     * Relacion Uno a Muchos to VideoEntity::class
      *
      * @return void
      */
     public function videos()
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(VideoEntity::class);
     }
 
     /**
-     * Relacion Muchos a Muchos to Role::class
+     * Relacion Muchos a Muchos to RoleEntity::class
      *
      * @return void
      */
     public function roles()
     {
-        return $this->belongsToMany(Role::class);
+        return $this->belongsToMany(RoleEntity::class);
     }
 
     /**
@@ -94,16 +96,16 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function image()
     {
-        return $this->morphOne(Image::class, 'imageable');
+        return $this->morphOne(ImageEntity::class, 'imageable');
     }
 
     /**
-     * Relacion Uno a Muchos to Comment::class
+     * Relacion Uno a Muchos to CommentEntity::class
      *
      * @return void
      */
     public function comment()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(CommentEntity::class);
     }
 }
