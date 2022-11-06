@@ -102,15 +102,12 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="{{ route('home') }}"
                 class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+            @foreach ($categories as $category)
+                <a href="#"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    {{ $category->name }}
+                </a>
+            @endforeach
         </div>
     </div>
 </nav>

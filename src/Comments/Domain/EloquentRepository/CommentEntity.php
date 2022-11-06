@@ -4,6 +4,7 @@ namespace Src\Comments\Domain\EloquentRepository;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\CommentEntityFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class CommentEntity extends Model
@@ -30,5 +31,10 @@ class CommentEntity extends Model
     public function commentable()
     {
         return $this->morphTo();
+    }
+
+    protected static function newFactory()
+    {
+        return CommentEntityFactory::new();
     }
 }

@@ -15,15 +15,13 @@ return new class extends Migration
     {
         Schema::create('taggables', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('tag_id');
             $table->unsignedBigInteger('taggable_id');
             $table->string('taggable_type');
-            $table->unsignedBigInteger('tag_id');
 
             $table->foreign('tag_id')
                 ->references('id')
-                ->on('tags')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
+                ->on('tags');
 
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace Src\Profiles\Domain\EloquentRepository;
 
 use App\Models\User;
+use Database\Factories\ProfileEntityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -25,5 +26,10 @@ class ProfileEntity extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    protected static function newFactory()
+    {
+        return ProfileEntityFactory::new(); 
     }
 }

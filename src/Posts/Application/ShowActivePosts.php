@@ -4,7 +4,7 @@ namespace Src\Posts\Application;
 
 use Src\Posts\Domain\EloquentRepository\PostEntity;
 
-class ShowPosts
+class ShowActivePosts
 {
     private $entity;
 
@@ -15,6 +15,6 @@ class ShowPosts
 
     public function execute()
     {
-        return $this->entity::all();
+        return $this->entity->where('status', 2)->get();
     }
 }

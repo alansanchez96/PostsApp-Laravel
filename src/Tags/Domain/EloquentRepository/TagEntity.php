@@ -2,6 +2,7 @@
 
 namespace Src\Tags\Domain\EloquentRepository;
 
+use Database\Factories\TagEntityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Src\Posts\Domain\EloquentRepository\PostEntity;
 use Src\Videos\Domain\EloquentRepository\VideoEntity;
@@ -17,6 +18,8 @@ class TagEntity extends Model
      * @var string
      */
     protected $table = 'tags';
+
+    protected $guarded = [];
 
     /**
      * Relacion Muchos a Muchos Polimorfica Inversa to PostEntity::class
@@ -36,5 +39,10 @@ class TagEntity extends Model
     public function videos()
     {
         return $this->morphedByMany(VideoEntity::class, 'taggable');
+    }
+
+    protected static function newFactory()
+    {
+        return TagEntityFactory::new();
     }
 }

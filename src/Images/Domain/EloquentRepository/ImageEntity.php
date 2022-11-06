@@ -3,6 +3,7 @@
 namespace Src\Images\Domain\EloquentRepository;
 
 use Illuminate\Database\Eloquent\Model;
+use Database\Factories\ImageEntityFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ImageEntity extends Model
@@ -31,5 +32,10 @@ class ImageEntity extends Model
     public function imageable()
     {
         return $this->morphTo();
+    }
+
+    protected static function newFactory()
+    {
+        return ImageEntityFactory::new();
     }
 }

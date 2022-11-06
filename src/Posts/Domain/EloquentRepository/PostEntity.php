@@ -2,6 +2,7 @@
 
 namespace Src\Posts\Domain\EloquentRepository;
 
+use Database\Factories\PostEntityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Src\Categories\Domain\EloquentRepository\CategoryEntity;
@@ -67,6 +68,11 @@ class PostEntity extends Model
      */
     public function tags()
     {
-        return $this->morphToMany(TagEntity::class, 'taggable');
+        return $this->morphToMany(TagEntity::class, 'taggable', null, 'taggable_id', 'tag_id');
+    }
+
+    protected static function newFactory()
+    {
+        return PostEntityFactory::new();
     }
 }

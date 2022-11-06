@@ -3,6 +3,7 @@
 namespace Src\Roles\Domain\EloquentRepository;
 
 use App\Models\User;
+use Database\Factories\RoleEntityFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Src\Permissions\Domain\EloquentRepository\PermissionEntity;
@@ -36,5 +37,10 @@ class RoleEntity extends Model
     public function permissions()
     {
         return $this->belongsToMany(PermissionEntity::class);
+    }
+
+    protected static function newFactory()
+    {
+        return RoleEntityFactory::new();
     }
 }
