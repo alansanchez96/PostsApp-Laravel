@@ -2,13 +2,13 @@
 
 namespace Src\Posts\Application;
 
-use Src\Posts\Domain\EloquentRepository\PostEntity;
+use Src\Posts\Infrastructure\Eloquent\PostModel;
 
 class ShowPosts
 {
     private $entity;
 
-    public function __construct(PostEntity $entity)
+    public function __construct(PostModel $entity)
     {
         $this->entity = $entity;
     }

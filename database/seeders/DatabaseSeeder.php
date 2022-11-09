@@ -8,11 +8,11 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\Storage;
-use Src\Tags\Domain\EloquentRepository\TagEntity;
-use Src\Roles\Domain\EloquentRepository\RoleEntity;
-use Src\Comments\Domain\EloquentRepository\CommentEntity;
-use Src\Profiles\Domain\EloquentRepository\ProfileEntity;
-use Src\Categories\Domain\EloquentRepository\CategoryEntity;
+use Src\Tags\Infrastructure\Eloquent\TagModel;
+use Src\Roles\Infrastructure\Eloquent\RoleModel;
+use Src\Comments\Infrastructure\Eloquent\CommentModel;
+use Src\Profiles\Infrastructure\Eloquent\ProfileModel;
+use Src\Categories\Infrastructure\Eloquent\CategoryModel;
 
 class DatabaseSeeder extends Seeder
 {
@@ -29,11 +29,11 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('users');
 
         $this->call(UserSeeder::class);
-        ProfileEntity::factory(1)->create();
-        CategoryEntity::factory(5)->create();
-        TagEntity::factory(8)->create();
+        ProfileModel::factory(1)->create();
+        CategoryModel::factory(5)->create();
+        TagModel::factory(8)->create();
         $this->call(PostSeeder::class);
-        RoleEntity::factory(3)->create();
-        CommentEntity::factory(2)->create();
+        RoleModel::factory(3)->create();
+        CommentModel::factory(2)->create();
     }
 }

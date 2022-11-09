@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Src\Posts\Infrastructure\Eloquent\PostModel;
+use Src\Images\Infrastructure\Eloquent\ImageModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Src\Posts\Domain\EloquentRepository\PostEntity;
-use Src\Images\Domain\EloquentRepository\ImageEntity;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class PostSeeder extends Seeder
@@ -17,12 +17,12 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        $posts = PostEntity::factory(25)->create();
+        $posts = PostModel::factory(25)->create();
         foreach ($posts as $post) {
-            ImageEntity::factory(1)->create([
+            ImageModel::factory(1)->create([
                 'url' => 'posts/' . fake()->image('public/storage/posts', 640, 480, null, false),
                 'imageable_id' => $post->id,
-                'imageable_type' => PostEntity::class
+                'imageable_type' => PostModel::class
             ]);
             $post->tags()->attach([
                 rand(1, 4),
