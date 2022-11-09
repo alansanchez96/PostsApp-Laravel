@@ -4,7 +4,7 @@ namespace Src\Categories\Application;
 
 use Src\Categories\Domain\Contracts\CategoryRepositoryContract;
 
-class GetAllCategoriesUserCase
+class GetAllCategoriesUseCase
 {
     private $repository;
 
