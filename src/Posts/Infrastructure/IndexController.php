@@ -16,12 +16,7 @@ class IndexController extends Controller
     }
     public function __invoke()
     {
-        $posts = $this->controller->execute();
-        /* $showActivePosts = new ShowActivePosts(new PostModel);
-
-        $posts = $showActivePosts->execute(); */
-
-        /* $posts = PostModel::where('status', 1)->latest('id')->paginate(2); */
+        $posts = $this->controller->execute('id', 3);
 
         return view('post.index', compact('posts'));
     }

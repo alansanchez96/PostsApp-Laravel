@@ -9,13 +9,13 @@ class GetActivePostsUserCase
 {
     private $repository;
 
-    public function __construct(PostRepository $repository)
+    public function __construct(PostRepositoryContract $repository)
     {
         $this->repository = $repository;
     }
 
-    public function execute()
+    public function execute($column, $pages)
     {
-        return $this->repository->getActivePosts();
+        return $this->repository->getActivePosts($column, $pages);
     }
 }

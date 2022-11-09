@@ -6,15 +6,15 @@ use Src\Posts\Application\GetActivePostsUserCase;
 
 class GetActivePosts
 {
-    private $getAllPosts;
+    private $getActivePosts;
 
-    public function __construct(GetActivePostsUserCase $getAllPosts)
+    public function __construct(GetActivePostsUserCase $getActivePosts)
     {
-        $this->getAllPosts = $getAllPosts;
+        $this->getActivePosts = $getActivePosts;
     }
 
-    public function execute()
+    public function execute($column, $pages)
     {
-        return $this->getAllPosts->execute();
+        return $this->getActivePosts->execute($column, $pages);
     }
 }
