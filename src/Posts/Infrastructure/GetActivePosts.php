@@ -2,13 +2,13 @@
 
 namespace Src\Posts\Infrastructure;
 
-use Src\Posts\Application\GetActivePostsUserCase;
+use Src\Posts\Application\GetActivePostsUseCase;
 
 class GetActivePosts
 {
     private $getActivePosts;
 
-    public function __construct(GetActivePostsUserCase $getActivePosts)
+    public function __construct(GetActivePostsUseCase $getActivePosts)
     {
         $this->getActivePosts = $getActivePosts;
     }

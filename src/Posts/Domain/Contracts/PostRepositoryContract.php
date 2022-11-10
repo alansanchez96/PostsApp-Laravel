@@ -7,4 +7,6 @@ interface PostRepositoryContract
     public function getAllPosts();
 
     public function getActivePosts($column, $pages);
+
+    public function getPost($post);
 }

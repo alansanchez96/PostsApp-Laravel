@@ -23,4 +23,9 @@ class PostRepository implements PostRepositoryContract
     {
         return $this->model->where('status', 2)->latest($column)->paginate($pages);
     }
+
+    public function getPost($post)
+    {
+        return $post;
+    }
 }

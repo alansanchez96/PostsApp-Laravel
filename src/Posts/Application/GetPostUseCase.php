@@ -3,9 +3,8 @@
 namespace Src\Posts\Application;
 
 use Src\Posts\Domain\Contracts\PostRepositoryContract;
-use Src\Posts\Infrastructure\Eloquent\Repositories\PostRepository;
 
-class GetActivePostsUserCase
+class GetPostUseCase
 {
     private $repository;
 
@@ -14,8 +13,8 @@ class GetActivePostsUserCase
         $this->repository = $repository;
     }
 
-    public function execute($column, $pages)
+    public function execute($post)
     {
-        return $this->repository->getActivePosts($column, $pages);
+        return $this->repository->getPost($post);
     }
 }

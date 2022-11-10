@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Src\Posts\Infrastructure\IndexController;
+use App\Http\Controllers\Post\ShowController;
+use App\Http\Controllers\Post\IndexController;
 
 Route::get('/', function () {
     return view('home');
@@ -22,8 +23,5 @@ require __DIR__ . '/auth.php';
 // Route Users
 require __DIR__ . '/user.php';
 
-Route::controller(IndexController::class)->group(
-    function () {
-        Route::get('/index', '__invoke')->name('post.index');
-    }
-);
+Route::get('/index', [IndexController::class, '__invoke'])->name('post.index');
+Route::get('/posts/{title}', [ShowController::class, '__invoke'])->name('post.show');
