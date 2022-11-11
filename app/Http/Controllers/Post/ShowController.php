@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Post;
 
 use App\Http\Controllers\Controller;
 use Src\Posts\Infrastructure\GetPost;
+use Src\Posts\Infrastructure\GetRelatedPosts;
 
 class ShowController extends Controller
 {
@@ -18,6 +19,8 @@ class ShowController extends Controller
     {
         $post = $this->controller->getPost($post);
 
-        return $post;
+        $relatedPosts = (new GetRelatedPosts)->execute($post);
+
+        return view('post.show', compact('post', 'relatedPosts'));
     }
 }

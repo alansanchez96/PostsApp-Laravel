@@ -13,6 +13,8 @@ class CategoryModel extends Model
 
     protected $table = 'categories';
 
+    protected $guarded = [];
+
     /**
      * Relacion Uno a Muchos to PostModel::class
      *

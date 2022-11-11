@@ -40,7 +40,7 @@ class PostModel extends Model
      */
     public function categories()
     {
-        return $this->belongsTo(CategoryModel::class);
+        return $this->belongsTo(CategoryModel::class, 'category_id');
     }
 
     /**

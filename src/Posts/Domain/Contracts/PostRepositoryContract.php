@@ -2,6 +2,8 @@
 
 namespace Src\Posts\Domain\Contracts;
 
+use Src\Posts\Application\GetRelatedPostsUseCase;
+
 interface PostRepositoryContract
 {
     public function getAllPosts();
@@ -9,4 +11,6 @@ interface PostRepositoryContract
     public function getActivePosts($column, $pages);
 
     public function getPost($post);
+
+    public function getRelatedPosts(GetRelatedPostsUseCase $post);
 }
