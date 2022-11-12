@@ -13,4 +13,6 @@ interface PostRepositoryContract
     public function getPost($post);
 
     public function getRelatedPosts(GetRelatedPostsUseCase $post);
+
+    public function getCategoryPost(int $id);
 }

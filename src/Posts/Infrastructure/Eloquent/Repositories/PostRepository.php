@@ -45,4 +45,12 @@ class PostRepository implements PostRepositoryContract
             ->take(4)
             ->get();
     }
+
+    public function getCategoryPost($id)
+    {
+        return $this->model::where('category_id', $id)
+            ->where('status', 2)
+            ->latest('id')
+            ->paginate(6);
+    }
 }
