@@ -8,8 +8,7 @@
 
     <title>Laravel</title>
 
-    <link rel="stylesheet" href="{{ secure_asset('css/app.css') }}">
-    <script src="{{ secure_asset('js/app.js') }}" defer></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
