@@ -51,6 +51,6 @@ class PostRepository implements PostRepositoryContract
         return $this->model::where('category_id', $id)
             ->where('status', 2)
             ->latest('id')
-            ->paginate(6);
+            ->simplePaginate(6);
     }
 }

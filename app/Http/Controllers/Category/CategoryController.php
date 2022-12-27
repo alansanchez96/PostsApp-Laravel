@@ -23,6 +23,9 @@ class CategoryController extends Controller
 
         $posts = $this->controllerPost->getCategoryPost($category->id);
 
-        return view('post.category', compact('category', 'posts'));
+        return view('post.category', [
+            'category' => $category,
+            'posts' => $posts
+        ]);
     }
 }

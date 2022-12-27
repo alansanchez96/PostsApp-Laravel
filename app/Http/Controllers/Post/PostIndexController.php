@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Src\Posts\Infrastructure\GetActivePosts;
 
 
-class IndexController extends Controller
+class PostIndexController extends Controller
 {
     private $controller;
 

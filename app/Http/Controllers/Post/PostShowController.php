@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Src\Posts\Infrastructure\GetPost;
 use Src\Posts\Infrastructure\GetRelatedPosts;
 
-class ShowController extends Controller
+class PostShowController extends Controller
 {
     private $controller;
 
