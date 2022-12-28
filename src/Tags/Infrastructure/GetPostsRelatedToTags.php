@@ -2,6 +2,7 @@
 
 namespace Src\Tags\Infrastructure;
 
+use Src\Tags\Infrastructure\Eloquent\TagModel;
 use Src\Tags\Application\GetPostsRelatedToTagsUseCase;
 
 class GetPostsRelatedToTags
@@ -13,7 +14,7 @@ class GetPostsRelatedToTags
         $this->getPostsRelatedToTags = $getPostsRelatedToTags;
     }
 
-    public function execute($tag)
+    public function execute(TagModel $tag)
     {
         return $this->getPostsRelatedToTags->execute($tag);
     }

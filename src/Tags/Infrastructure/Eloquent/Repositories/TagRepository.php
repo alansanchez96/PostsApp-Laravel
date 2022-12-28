@@ -7,9 +7,9 @@ use Src\Tags\Domain\Contract\TagRepositoryContract;
 class TagRepository implements TagRepositoryContract
 {
     /**
-     * PostModel property
+     * TagModel property
      *
-     * @var PostModel
+     * @var TagModel
      */
     private TagModel $model;
 
@@ -18,8 +18,10 @@ class TagRepository implements TagRepositoryContract
         $this->model = new TagModel();
     }
 
-    public function getPostsRelatedToTags($tag)
+    public function getPostsRelatedToTags(TagModel $tag)
     {
-        return 'hola';
+        $objectModel = $this->model->findOrFail($tag->id);
+
+        return $objectModel->posts()->where('status', 2)->latest('id')->simplePaginate(6);
     }
 }

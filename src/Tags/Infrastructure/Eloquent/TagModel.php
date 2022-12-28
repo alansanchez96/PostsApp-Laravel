@@ -28,7 +28,7 @@ class TagModel extends Model
      */
     public function posts()
     {
-        return $this->morphedByMany(PostModel::class, 'taggable');
+        return $this->morphedByMany(PostModel::class, 'taggable', null, 'tag_id');
     }
 
     /**

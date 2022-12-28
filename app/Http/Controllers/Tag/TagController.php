@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Tag;
 
 use App\Http\Controllers\Controller;
+use Src\Tags\Infrastructure\Eloquent\TagModel;
 use Src\Tags\Infrastructure\GetPostsRelatedToTags;
 
 class TagController extends Controller
@@ -14,10 +15,10 @@ class TagController extends Controller
         $this->controller = $getPostsRelatedToTags;
     }
 
-    public function __invoke($tag)
+    public function __invoke(TagModel $tag)
     {
-        $tags = $this->controller->execute($tag);
-
-        return $tags;
+        $posts = $this->controller->execute($tag);
+        
+        return view('post.tag', compact('posts', 'tag'));
     }
 }
