@@ -1,4 +1,5 @@
 <?php
+
 namespace Src\Tags\Infrastructure;
 
 use Src\Tags\Application\GetAllTagsUseCase;
@@ -12,8 +13,8 @@ class GetAllTags
         $this->getAllTags = $getAllTags;
     }
 
-    public function getAllTags()
+    public function getAllTags(bool $pluck = false, string $column = null, mixed $key = null)
     {
-        return $this->getAllTags->execute();
+        return $this->getAllTags->execute($pluck, $column, $key);
     }
 }

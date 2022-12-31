@@ -1,4 +1,5 @@
 <?php
+
 namespace Src\Tags\Application;
 
 use Src\Tags\Domain\Contract\TagRepositoryContract;
@@ -12,8 +13,8 @@ class GetAllTagsUseCase
         $this->repository = $repository;
     }
 
-    public function execute()
+    public function execute(bool $pluck = false, string $column = null, mixed $key = null)
     {
-        return $this->repository->getAllTags();
+        return $this->repository->getAllTags($pluck, $column, $key);
     }
 }

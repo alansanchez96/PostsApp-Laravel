@@ -28,9 +28,13 @@ class TagRepository implements TagRepositoryContract
         return $objectModel->posts()->where('status', 2)->latest('id')->simplePaginate(6);
     }
 
-    public function getAllTags()
+    public function getAllTags(bool $pluck = false, string $column = null, mixed $key = null)
     {
-        return $this->model->all();
+        if (!$pluck) {
+            return $this->model->all();
+        } else {
+            return $this->model->pluck($column, $key);
+        }
     }
 
     public function getTag($slug)

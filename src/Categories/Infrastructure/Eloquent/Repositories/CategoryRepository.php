@@ -16,9 +16,13 @@ class CategoryRepository implements CategoryRepositoryContract
         $this->model = new CategoryModel;
     }
 
-    public function getAllCategories()
+    public function getAllCategories(bool $pluck = false, string $column = null, mixed $key = null)
     {
-        return $this->model->all();
+        if (!$pluck) {
+            return $this->model->all();
+        } else {
+            return $this->model->pluck($column, $key);
+        }
     }
 
     public function getCategory($slug)

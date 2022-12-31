@@ -23,6 +23,8 @@ class PostModel extends Model
      */
     protected $table = 'posts';
 
+    protected $guarded = [];
+
     /**
      * Relacion Uno a Muchos Inversa to User::class
      *
@@ -70,7 +72,7 @@ class PostModel extends Model
      */
     public function tags()
     {
-        return $this->morphToMany(TagModel::class, 'taggable', null, 'taggable_id', 'tag_id');
+        return $this->morphToMany(TagModel::class, 'taggable', 'taggables', 'taggable_id', 'tag_id');
     }
 
     protected static function newFactory()

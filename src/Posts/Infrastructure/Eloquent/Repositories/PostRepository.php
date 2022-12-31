@@ -2,6 +2,8 @@
 
 namespace Src\Posts\Infrastructure\Eloquent\Repositories;
 
+use Illuminate\Support\Facades\Storage;
+use Src\Posts\Domain\ValueObjects\PostId;
 use Src\Posts\Domain\ValueObjects\PostSlug;
 use Src\Posts\Infrastructure\Eloquent\PostModel;
 use Src\Posts\Domain\Contracts\PostRepositoryContract;
@@ -32,8 +34,13 @@ class PostRepository implements PostRepositoryContract
 
     public function getPost($post)
     {
-        $slug = (new PostSlug($post))->value();
-        return $this->model->firstWhere('slug', $slug);
+        if (!is_int($post)) {
+            $slug = (new PostSlug($post))->value();
+            return $this->model->firstWhere('slug', $slug);
+        } else {
+            $id = (new PostId($post))->value();
+            return $this->model->find($id);
+        }
     }
 
     public function getRelatedPosts($post)
@@ -52,5 +59,81 @@ class PostRepository implements PostRepositoryContract
             ->where('status', 2)
             ->latest('id')
             ->simplePaginate(6);
+    }
+
+    public function save(mixed $req, $url = null, int $id = null)
+    {
+        $objectId = (new PostId($id))->value();
+        $objectModel = $this->model->find($objectId);
+
+        if (is_null($objectModel)) {
+            $post = $this->model->create([
+                'title' => $req['title'],
+                'slug' => $req['slug'],
+                'extract' => $req['extract'],
+                'body' => $req['body'],
+                'status' => $req['status'],
+                'category_id' => $req['category_id']
+            ]);
+
+            $this->saveImage($post, 'url', $url);
+            $this->saveTags($post, $req);
+        } else {
+            $objectModel->update([
+                'title' => $req['title'],
+                'slug' => $req['slug'],
+                'extract' => $req['extract'],
+                'body' => $req['body'],
+                'status' => $req['status'],
+                'category_id' => $req['category_id']
+            ]);
+
+            $this->saveImage($objectModel, 'url', $url, true);
+            $this->saveTags($objectModel, $req);
+        }
+    }
+
+    public function deletePost(int $id)
+    {
+        $objectId = (new PostId($id))->value();
+        $objectModel = $this->model->find($objectId);
+
+        $objectModel->delete();
+        $this->deleteImageRegistered($objectModel);
+    }
+
+    public function saveImage($postModel, string $table, string $url = null, bool $update = false)
+    {
+        if (!$url) {
+            return;
+        }
+        if ($update) {
+            if ($postModel->image) {
+                Storage::delete($postModel->image->url);
+
+                $postModel->image()->update([
+                    $table => $url
+                ]);
+            } else {
+                $postModel->image()->create([
+                    $table => $url
+                ]);
+            }
+        } else {
+            $postModel->image()->create([
+                $table => $url
+            ]);
+        }
+    }
+
+    public function deleteImageRegistered($postModel)
+    {
+        $postModel->image()->delete();
+    }
+
+    public function saveTags($postModel, $req)
+    {
+        $postModel->tags()->detach();
+        $postModel->tags()->attach($req['tags']);
     }
 }

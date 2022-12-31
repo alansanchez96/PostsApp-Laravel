@@ -5,9 +5,15 @@ use App\Http\Controllers\Admin\AdminIndexController;
 use App\Http\Controllers\Admin\Tag\TagEditController;
 use App\Http\Controllers\Admin\Tag\TagIndexController;
 use App\Http\Controllers\Admin\Tag\TagStoreController;
+use App\Http\Controllers\Admin\Post\PostEditController;
 use App\Http\Controllers\Admin\Tag\TagCreateController;
 use App\Http\Controllers\Admin\Tag\TagUpdateController;
+use App\Http\Controllers\Admin\Post\PostIndexController;
+use App\Http\Controllers\Admin\Post\PostStoreController;
 use App\Http\Controllers\Admin\Tag\TagDestroyController;
+use App\Http\Controllers\Admin\Post\PostCreateController;
+use App\Http\Controllers\Admin\Post\PostUpdateController;
+use App\Http\Controllers\Admin\Post\PostDestroyController;
 use App\Http\Controllers\Admin\Category\CategoryEditController;
 use App\Http\Controllers\Admin\Category\CategoryIndexController;
 use App\Http\Controllers\Admin\Category\CategoryStoreController;
@@ -30,3 +36,10 @@ Route::post('/tags/create', [TagStoreController::class, 'store'])->name('admin.t
 Route::get('/tags/update/{tag}', [TagEditController::class, 'edit'])->name('admin.tag.edit');
 Route::put('/tags/update/{id}', [TagUpdateController::class, 'update'])->name('admin.tag.update');
 Route::delete('/tags/{id}', [TagDestroyController::class, 'destroy'])->name('admin.tag.destroy');
+
+Route::get('/posts', [PostIndexController::class, 'index'])->name('admin.post.index');
+Route::get('/posts/create', [PostCreateController::class, 'create'])->name('admin.post.create');
+Route::post('/posts/create', [PostStoreController::class, 'store'])->name('admin.post.store');
+Route::get('/posts/update/{post}', [PostEditController::class, 'edit'])->name('admin.post.edit');
+Route::put('/posts/update/{id}', [PostUpdateController::class, 'update'])->name('admin.post.update');
+Route::delete('/posts/{id}', [PostDestroyController::class, 'destroy'])->name('admin.post.destroy');

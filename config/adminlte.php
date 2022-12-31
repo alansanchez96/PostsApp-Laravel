@@ -321,11 +321,13 @@ return [
             'text' => 'Categorias',
             'route'  => 'admin.category.index',
             'icon' => 'fab fa-fw fa-buffer',
+            'active' => ['admin/categories*']
         ],
         [
             'text' => 'Etiquetas',
             'route'  => 'admin.tag.index',
             'icon' => 'far fa-fw fa-bookmark',
+            'active' => ['admin/tags*']
         ],
         [
             'text'    => 'multilevel',
@@ -365,22 +367,17 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'OPCIONES DE BLOG'],
         [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
+            'text'       => 'Lista de posts',
             'icon_color' => 'cyan',
-            'url'        => '#',
+            'route'        => 'admin.post.index',
         ],
+        [
+            'text'       => 'Crear nuevo post',
+            'icon_color' => 'green',
+            'route'        => 'admin.post.create',
+        ]
     ],
 
     /*
@@ -535,5 +532,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

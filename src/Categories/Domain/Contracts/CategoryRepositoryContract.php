@@ -4,7 +4,7 @@ namespace Src\Categories\Domain\Contracts;
 
 interface CategoryRepositoryContract
 {
-    public function getAllCategories();
+    public function getAllCategories(bool $pluck = false, string $column = null, mixed $key = null);
 
     public function getCategory($slug);
 

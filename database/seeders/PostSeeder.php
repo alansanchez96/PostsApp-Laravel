@@ -17,7 +17,7 @@ class PostSeeder extends Seeder
      */
     public function run()
     {
-        $posts = PostModel::factory(25)->create();
+        $posts = PostModel::factory(50)->create();
         foreach ($posts as $post) {
             ImageModel::factory(1)->create([
                 'url' => 'posts/' . fake()->image('public/storage/posts', 640, 480, null, false),

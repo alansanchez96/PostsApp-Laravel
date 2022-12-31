@@ -18,8 +18,8 @@ return new class extends Migration
 
             $table->string('title');
             $table->string('slug');
-            $table->text('extract');
-            $table->longText('body');
+            $table->text('extract')->nullable();
+            $table->longText('body')->nullable();
             $table->enum('status', [1, 2])->default(1);
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('user_id')->nullable();

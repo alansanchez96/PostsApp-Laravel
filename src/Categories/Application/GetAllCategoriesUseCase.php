@@ -13,8 +13,8 @@ class GetAllCategoriesUseCase
         $this->repository = $repository;
     }
 
-    public function execute()
+    public function execute(bool $pluck = false, string $column = null, mixed $key = null)
     {
-        return $this->repository->getAllCategories();
+        return $this->repository->getAllCategories($pluck, $column, $key);
     }
 }
