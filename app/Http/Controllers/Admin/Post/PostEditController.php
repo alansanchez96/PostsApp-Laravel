@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin\Post;
 
 use App\Http\Controllers\Controller;
-use Src\Categories\Infrastructure\GetAllCategories;
 use Src\Posts\Infrastructure\GetPost;
 use Src\Tags\Infrastructure\GetAllTags;
+use Src\Categories\Infrastructure\GetAllCategories;
 
 class PostEditController extends Controller
 {
@@ -27,6 +27,8 @@ class PostEditController extends Controller
         $post = $this->controllerPost->getPost($slug);
         $categories = $this->controllerCategory->getAllCategories(true, 'name', 'id');
         $tags = $this->controllerTags->getAllTags();
+
+        $this->authorize('author', $post);
 
         return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }

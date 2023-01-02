@@ -18,8 +18,9 @@ class PostShowController extends Controller
     public function __invoke($post)
     {
         $post = $this->controller->getPost($post);
-
         $relatedPosts = (new GetRelatedPosts)->execute($post);
+
+        $this->authorize('published', $post);
 
         return view('post.show', compact('post', 'relatedPosts'));
     }
