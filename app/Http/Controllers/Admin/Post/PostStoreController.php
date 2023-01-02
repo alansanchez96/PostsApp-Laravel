@@ -18,6 +18,8 @@ class PostStoreController extends Controller
 
     public function store(PostRequest $request)
     {
+        $url = null;
+
         if ($request->file('file')) {
             $url = Storage::put('posts', $request->file('file'));
         }
