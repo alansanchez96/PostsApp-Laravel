@@ -26,27 +26,27 @@ use App\Http\Controllers\Admin\Category\CategoryDestroyController;
 
 Route::get('/dashboard', [AdminIndexController::class, 'index'])->name('admin.dashboard');
 
-Route::get('/categories', [CategoryIndexController::class, 'index'])->name('admin.category.index');
-Route::get('/categories/create', [CategoryCreateController::class, 'create'])->name('admin.category.create');
+Route::get('/categories', [CategoryIndexController::class, 'index'])->name('admin.category.index')->middleware('can:admin.category.index');
+Route::get('/categories/create', [CategoryCreateController::class, 'create'])->name('admin.category.create')->middleware('can:admin.category.create');
 Route::post('/categories/create', [CategoryStoreController::class, 'store'])->name('admin.category.store');
-Route::get('/categories/update/{category}', [CategoryEditController::class, 'edit'])->name('admin.category.edit');
+Route::get('/categories/update/{category}', [CategoryEditController::class, 'edit'])->name('admin.category.edit')->middleware('can:admin.category.edit');
 Route::put('/categories/update/{id}', [CategoryUpdateController::class, 'update'])->name('admin.category.update');
-Route::delete('/categories/{id}', [CategoryDestroyController::class, 'destroy'])->name('admin.category.destroy');
+Route::delete('/categories/{id}', [CategoryDestroyController::class, 'destroy'])->name('admin.category.destroy')->middleware('can:admin.category.destroy');
 
-Route::get('/tags', [TagIndexController::class, 'index'])->name('admin.tag.index');
-Route::get('/tags/create', [TagCreateController::class, 'create'])->name('admin.tag.create');
+Route::get('/tags', [TagIndexController::class, 'index'])->name('admin.tag.index')->middleware('can:admin.tag.index');
+Route::get('/tags/create', [TagCreateController::class, 'create'])->name('admin.tag.create')->middleware('can:admin.tag.create');
 Route::post('/tags/create', [TagStoreController::class, 'store'])->name('admin.tag.store');
-Route::get('/tags/update/{tag}', [TagEditController::class, 'edit'])->name('admin.tag.edit');
+Route::get('/tags/update/{tag}', [TagEditController::class, 'edit'])->name('admin.tag.edit')->middleware('can:admin.tag.edit');
 Route::put('/tags/update/{id}', [TagUpdateController::class, 'update'])->name('admin.tag.update');
-Route::delete('/tags/{id}', [TagDestroyController::class, 'destroy'])->name('admin.tag.destroy');
+Route::delete('/tags/{id}', [TagDestroyController::class, 'destroy'])->name('admin.tag.destroy')->middleware('can:admin.tag.destroy');
 
-Route::get('/posts', [PostIndexController::class, 'index'])->name('admin.post.index');
-Route::get('/posts/create', [PostCreateController::class, 'create'])->name('admin.post.create');
+Route::get('/posts', [PostIndexController::class, 'index'])->name('admin.post.index')->middleware('can:admin.post.index');
+Route::get('/posts/create', [PostCreateController::class, 'create'])->name('admin.post.create')->middleware('can:admin.post.create');
 Route::post('/posts/create', [PostStoreController::class, 'store'])->name('admin.post.store');
-Route::get('/posts/update/{post}', [PostEditController::class, 'edit'])->name('admin.post.edit');
+Route::get('/posts/update/{post}', [PostEditController::class, 'edit'])->name('admin.post.edit')->middleware('can:admin.post.edit');
 Route::put('/posts/update/{id}', [PostUpdateController::class, 'update'])->name('admin.post.update');
-Route::delete('/posts/{id}', [PostDestroyController::class, 'destroy'])->name('admin.post.destroy');
+Route::delete('/posts/{id}', [PostDestroyController::class, 'destroy'])->name('admin.post.destroy')->middleware('can:admin.post.destroy');
 
-Route::get('/users', [UserIndexController::class, 'index'])->name('admin.user.index');
-Route::get('/users/update/{user}', [UserEditController::class, 'edit'])->name('admin.user.edit');
-Route::put('/users/update/{user}', [UserUpdateController::class, 'update'])->name('admin.user.update');
+Route::get('/users', [UserIndexController::class, 'index'])->name('admin.user.index')->middleware('can:admin.user.index');
+Route::get('/users/update/{user}', [UserEditController::class, 'edit'])->name('admin.user.edit')->middleware('can:admin.user.edit');
+Route::put('/users/update/{user}', [UserUpdateController::class, 'update'])->name('admin.user.update')->middleware('can:admin.user.update');
