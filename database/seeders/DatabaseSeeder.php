@@ -28,12 +28,12 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('posts');
         Storage::makeDirectory('users');
 
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         ProfileModel::factory(1)->create();
         CategoryModel::factory(5)->create();
         TagModel::factory(8)->create();
         $this->call(PostSeeder::class);
-        RoleModel::factory(3)->create();
         CommentModel::factory(2)->create();
     }
 }

@@ -17,11 +17,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(1)->create([
+        User::create([
             'name' => 'Alan Sanchez',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin')
-        ]);
+        ])->assignRole('admin');
 
         $users = User::factory(20)->create();
         foreach ($users as $user) {
