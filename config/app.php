@@ -194,6 +194,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\PostServiceProvider::class,
+        App\Providers\CategoryServiceProvider::class,
+        App\Providers\TagServiceProvider::class,
 
     ],
 

@@ -4,16 +4,15 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Tag;
-use App\Models\Role;
-use App\Models\Image;
-use App\Models\Comment;
-use App\Models\Profile;
-use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
-use Database\Factories\RoleUserFactory;
+use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\Storage;
+use Src\Tags\Infrastructure\Eloquent\TagModel;
+use Src\Roles\Infrastructure\Eloquent\RoleModel;
+use Src\Comments\Infrastructure\Eloquent\CommentModel;
+use Src\Profiles\Infrastructure\Eloquent\ProfileModel;
+use Src\Categories\Infrastructure\Eloquent\CategoryModel;
 
 class DatabaseSeeder extends Seeder
 {
@@ -25,14 +24,16 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         Storage::deleteDirectory('posts');
+        Storage::deleteDirectory('users');
         Storage::makeDirectory('posts');
+        Storage::makeDirectory('users');
 
+        $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-        Profile::factory(1)->create();
-        Category::factory(5)->create();
-        Tag::factory(8)->create();
+        ProfileModel::factory(1)->create();
+        CategoryModel::factory(5)->create();
+        TagModel::factory(8)->create();
         $this->call(PostSeeder::class);
-        Role::factory(3)->create();
-        Comment::factory(2)->create();
+        CommentModel::factory(2)->create();
     }
 }

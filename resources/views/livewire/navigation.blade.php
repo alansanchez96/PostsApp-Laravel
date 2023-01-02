@@ -39,17 +39,13 @@
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="#"
+                        <a href="{{ route('home') }}"
                             class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
 
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Team</a>
-
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Projects</a>
-
-                        <a href="#"
-                            class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Calendar</a>
+                        @foreach ($categories as $category)
+                            <a href="{{ route('post.category', $category->slug) }}"
+                                class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ $category->name }}</a>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -73,8 +69,11 @@
                         {{-- ModalOptionsProfile --}}
                         <div x-show="btnProfile" x-on:click.away="btnProfile=false"
                             class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <a href="{{ route('dashboard') }}"
-                                class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Dashboard</a>
+                            @can('admin.dashboard')
+                                <a href="{{ route('admin.dashboard') }}"
+                                    class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Dashboard</a>
+                            @endcan
+
                             <a href="{{ route('user.profile') }}"
                                 class="block px-4 hover:text-gray-900 hover:bg-gray-300 py-2 text-sm text-gray-700">Your
                                 Profile</a>
@@ -106,15 +105,12 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a href="{{ route('home') }}"
                 class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Team</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Projects</a>
-
-            <a href="#"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Calendar</a>
+            @foreach ($categories as $category)
+                <a href="#"
+                    class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
+                    {{ $category->name }}
+                </a>
+            @endforeach
         </div>
     </div>
 </nav>

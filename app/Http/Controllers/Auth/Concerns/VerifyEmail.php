@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth\Concerns;
 
+use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
@@ -12,11 +13,11 @@ trait VerifyEmail
     /**
      * Verificada o falla
      *
-     * @param EmailVerificationRequest $request
+     * @param Request $request
      * @param string|null $verified
      * @return void
      */
-    public function verifiedOrFail(EmailVerificationRequest $request, string $verified = null)
+    public function verifiedOrFail(Request $request, string $verified = null)
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(RouteServiceProvider::HOME . $verified);

@@ -54,6 +54,6 @@ class AuthController extends Controller implements IAuth
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('home');
+        return redirect()->route('post.index');
     }
 }
