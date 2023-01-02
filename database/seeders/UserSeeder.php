@@ -18,18 +18,18 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'Alan Sanchez',
+            'name' => 'Administrador Publico',
             'email' => 'admin@admin.com',
             'password' => Hash::make('admin')
         ])->assignRole('admin');
 
-        $users = User::factory(20)->create();
+        /* $users = User::factory(20)->create();
         foreach ($users as $user) {
             ImageModel::factory(1)->create([
                 'url' => 'users/' . fake()->image('public/storage/users', 640, 480, null, false),
                 'imageable_id' => $user->id,
                 'imageable_type' => User::class
             ]);
-        }
+        } */
     }
 }
