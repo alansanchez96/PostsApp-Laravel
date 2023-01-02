@@ -319,6 +319,11 @@ return [
             'can'       => 'admin.user.index'
         ],
         [
+            'text'  =>  'Roles',
+            'route' =>  'admin.role.index',
+            'icon'  =>  'fas fa-users-cog fa-fw',
+        ],
+        [
             'text' => 'Categorias',
             'route'  => 'admin.category.index',
             'icon' => 'fab fa-fw fa-buffer',

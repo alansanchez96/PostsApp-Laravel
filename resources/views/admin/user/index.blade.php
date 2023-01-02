@@ -8,17 +8,9 @@
 @stop
 
 @section('content')
-    @if (session('create'))
-        <div class="alert alert-success">
-            <strong>{{ session('create') }}</strong>
-        </div>
-    @elseif (session('update'))
+    @if (session('update'))
         <div class="alert alert-warning">
             <strong>{{ session('update') }}</strong>
-        </div>
-    @elseif (session('delete'))
-        <div class="alert alert-danger">
-            <strong>{{ session('delete') }}</strong>
         </div>
     @endif
 
