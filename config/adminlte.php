@@ -307,76 +307,46 @@ return [
             'text' => 'search',
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
-        [
             'text'        => 'Dashboard',
             'route'         => 'admin.dashboard',
             'icon'        => 'fas fa-tachometer-alt fa-fw',
+            'can'           => 'admin.dashboard'
         ],
-        ['header' => 'ADMINISTRADOR'],
+        [
+            'text'        => 'Usuarios registrados',
+            'route'         => 'admin.user.index',
+            'icon'        => 'fas fa-users fa-fw',
+            'can'       => 'admin.user.index'
+        ],
         [
             'text' => 'Categorias',
             'route'  => 'admin.category.index',
             'icon' => 'fab fa-fw fa-buffer',
-            'active' => ['admin/categories*']
+            'active' => ['admin/categories*'],
+            'can'       => 'admin.category.index'
         ],
         [
             'text' => 'Etiquetas',
             'route'  => 'admin.tag.index',
             'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/tags*']
+            'active' => ['admin/tags*'],
+            'can'       => 'admin.tag.index'
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'header' => 'OPCIONES DE BLOG',
+            'can' => 'admin.post.index'
         ],
-        ['header' => 'OPCIONES DE BLOG'],
         [
             'text'       => 'Lista de posts',
             'icon_color' => 'cyan',
             'route'        => 'admin.post.index',
+            'can'       => 'admin.post.index'
         ],
         [
             'text'       => 'Crear nuevo post',
             'icon_color' => 'green',
             'route'        => 'admin.post.create',
+            'can'       => 'admin.post.create'
         ]
     ],
 

@@ -23,15 +23,19 @@ class RoleSeeder extends Seeder
 
         Permission::create(['name' => 'admin.dashboard'])->syncRoles([$roleAdmin, $roleBlogger]);
 
+        Permission::create(['name' => 'admin.user.index'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.user.edit'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.user.update'])->syncRoles([$roleAdmin]);
+
         Permission::create(['name' => 'admin.category.index'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.category.create'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.category.edit'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.category.destroy'])->syncRoles([$roleAdmin, $roleBlogger]);
+        Permission::create(['name' => 'admin.category.create'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.category.edit'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.category.destroy'])->syncRoles([$roleAdmin]);
 
         Permission::create(['name' => 'admin.tag.index'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.tag.create'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.tag.edit'])->syncRoles([$roleAdmin, $roleBlogger]);
-        Permission::create(['name' => 'admin.tag.destroy'])->syncRoles([$roleAdmin, $roleBlogger]);
+        Permission::create(['name' => 'admin.tag.create'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.tag.edit'])->syncRoles([$roleAdmin]);
+        Permission::create(['name' => 'admin.tag.destroy'])->syncRoles([$roleAdmin]);
 
         Permission::create(['name' => 'admin.post.index'])->syncRoles([$roleAdmin, $roleBlogger]);
         Permission::create(['name' => 'admin.post.create'])->syncRoles([$roleAdmin, $roleBlogger]);

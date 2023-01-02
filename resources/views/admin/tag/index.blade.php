@@ -23,16 +23,20 @@
     @endif
 
     <div class="card">
-        <div class="card-header">
-            <a href="{{ route('admin.tag.create') }}" class="btn btn-success">Crear nueva etiqueta</a>
-        </div>
+        @can('admin.tag.create')
+            <div class="card-header">
+                <a href="{{ route('admin.tag.create') }}" class="btn btn-success">Crear nueva etiqueta</a>
+            </div>
+        @endcan
         <div class="card-body">
             <table class="table table-striped">
                 <thead>
                     <th>ID</th>
                     <th>Name</th>
                     <th>Color</th>
-                    <th colspan="2">Acciones</th>
+                    @can('admin.tag.edit')
+                        <th colspan="2">Acciones</th>
+                    @endcan
                 </thead>
                 <tbody>
                     @foreach ($tags as $tag)
@@ -40,16 +44,19 @@
                             <td>{{ $tag->id }}</td>
                             <td>{{ $tag->name }}</td>
                             <td>{{ $tag->color }}</td>
-                            <td width="10">
-                                <a href="{{ route('admin.tag.edit', $tag->slug) }}" class="btn btn-warning btn-sm">Editar</a>
-                            </td>
-                            <td width="10">
-                                <form method="post" action="{{ route('admin.tag.destroy', $tag->id) }}">
-                                    @csrf
-                                    @method('delete')
-                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                </form>
-                            </td>
+                            @can('admin.tag.edit')
+                                <td width="10">
+                                    <a href="{{ route('admin.tag.edit', $tag->slug) }}"
+                                        class="btn btn-warning btn-sm">Editar</a>
+                                </td>
+                                <td width="10">
+                                    <form method="post" action="{{ route('admin.tag.destroy', $tag->id) }}">
+                                        @csrf
+                                        @method('delete')
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

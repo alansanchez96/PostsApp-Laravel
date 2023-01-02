@@ -12,7 +12,9 @@
                         <tr>
                             <th>ID</th>
                             <th>Name</th>
-                            <th colspan="2">Acciones</th>
+                            @can('admin.post.index')
+                                <th colspan="2">Acciones</th>
+                            @endcan
                         </tr>
                     </thead>
                     <tbody>
@@ -21,16 +23,20 @@
                                 <td>{{ $post->id }}</td>
                                 <td>{{ $post->title }}</td>
                                 <td>
-                                    <a href="{{ route('admin.post.edit', $post->slug) }}" class="btn btn-warning btn-sm">
-                                        Editar
-                                    </a>
+                                    @can('admin.post.index')
+                                        <a href="{{ route('admin.post.edit', $post->slug) }}" class="btn btn-warning btn-sm">
+                                            Editar
+                                        </a>
+                                    @endcan
                                 </td>
                                 <td>
-                                    <form method="post" action="{{ route('admin.post.destroy', $post->id) }}">
-                                        @csrf
-                                        @method('delete')
-                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                    </form>
+                                    @can('admin.post.index')
+                                        <form method="post" action="{{ route('admin.post.destroy', $post->id) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                        </form>
+                                    @endcan
                                 </td>
                             </tr>
                         @endforeach
