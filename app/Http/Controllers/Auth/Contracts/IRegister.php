@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Contracts;
 
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\RegisterRequest;
 
 interface IRegister
@@ -12,7 +13,7 @@ interface IRegister
      *
      * @param RegisterRequest $request
      * @param Redirector $redirector
-     * @return void
+     * @return Redirector|RedirectResponse
      */
-    public function register(RegisterRequest $request, Redirector $redirector);
+    public function register(RegisterRequest $request, Redirector $redirector): Redirector|RedirectResponse;
 }

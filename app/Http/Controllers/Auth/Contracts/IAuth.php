@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Auth\Contracts;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\Auth\AuthRequest;
 use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
+use App\Http\Requests\Auth\AuthRequest;
 
 interface IAuth
 {
@@ -15,7 +16,7 @@ interface IAuth
      * @param Redirector $redirector
      * @return RedirectResponse
      */
-    public function login(AuthRequest $request, Redirector $redirector);
+    public function login(AuthRequest $request, Redirector $redirector): RedirectResponse;
 
     /**
      * Método para Destruir la sesión del usuario
@@ -23,5 +24,5 @@ interface IAuth
      * @param Request $request
      * @return RedirectResponse
      */
-    public function logout(Request $request);
+    public function logout(Request $request): RedirectResponse;
 }
