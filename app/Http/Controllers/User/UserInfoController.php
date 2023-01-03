@@ -32,7 +32,6 @@ class UserInfoController extends Controller implements IUserInfo
     public function update(UserInfoRequest $request): mixed
     {
         $this->updateInfoUser($request);
-
         return back()->with('status', 'Datos actualizados correctamente');
     }
 }
