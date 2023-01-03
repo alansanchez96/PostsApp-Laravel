@@ -2,24 +2,25 @@
 
 namespace App\Http\Controllers\User\Contracts;
 
-use App\Models\User;
+use Illuminate\View\View;
+use Illuminate\Routing\Redirector;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\User\UserSettingsRequest;
 
 interface IUserSettings
 {
     /**
-     * Retorna la vista del documento
+     * Devuelve la vista del documento
      *
-     * @param User $user
-     * @return void
+     * @return View
      */
-    public function settings();
+    public function settings(): View;
 
     /**
-     * Actualiza la información y configuraciones del usuario autenticado
+     * Actualiza la contraseña del usuario autenticado
      *
-     * @param UserInfoRequest $request
-     * @return mixed
+     * @param UserSettingsRequest $request
+     * @return RedirectResponse|Redirector
      */
-    public function update(UserSettingsRequest $request): mixed;
+    public function update(UserSettingsRequest $request): RedirectResponse|Redirector;
 }

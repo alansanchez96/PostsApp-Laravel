@@ -33,7 +33,14 @@ trait UserAdapter
         }
     }
 
-    public function updateIfEmailExist($user, $request)
+    /**
+     * Actualiza el email del usuario en db y vacía su verificación
+     *
+     * @param $user
+     * @param $request
+     * @return void
+     */
+    public function updateIfEmailExist($user, $request): void
     {
         $user->update([
             'name' => $request->name,
@@ -42,7 +49,14 @@ trait UserAdapter
         ]);
     }
 
-    public function updateIfPhotoExist($user, $request)
+    /**
+     * Actualiza la imagen del usuario autenticado
+     *
+     * @param $user
+     * @param $request
+     * @return void
+     */
+    public function updateIfPhotoExist($user, $request): void
     {
         if ($request->file('photo')) {
             $url = Storage::put('users', $request->file('photo'));

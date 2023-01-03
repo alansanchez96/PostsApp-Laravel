@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\User\Contracts;
 
 use App\Models\User;
+use Illuminate\View\View;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\User\UserInfoRequest;
 
 interface IUserInfo
@@ -11,15 +13,15 @@ interface IUserInfo
      * Retorna la vista y parámetros
      *
      * @param User $user
-     * @return void
+     * @return View
      */
-    public function profile(User $user);
+    public function profile(User $user): View;
 
     /**
-     * Actualiza la información y configuraciones del usuario autenticado
+     * Actualiza la información del usuario autenticado
      *
      * @param UserInfoRequest $request
-     * @return mixed
+     * @return RedirectResponse
      */
-    public function update(UserInfoRequest $request): mixed;
+    public function update(UserInfoRequest $request): RedirectResponse;
 }
