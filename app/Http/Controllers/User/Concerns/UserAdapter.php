@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User\Concerns;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\User\UserInfoRequest;
 use App\Http\Requests\User\UserSettingsRequest;
 
@@ -21,19 +22,45 @@ trait UserAdapter
         $user = $this->getUser();
 
         if ($request->email !== $user->email) {
-            $user->update([
-                'name' => $request->name,
-                'email' => $request->email,
-                'email_verified_at' => null
-            ]);
+            $this->updateIfEmailExist($user, $request);
+            $this->updateIfPhotoExist($user, $request);
             $user->sendEmailVerificationNotification();
         } else {
             $user->update([
                 'name' => $request->name
             ]);
+            $this->updateIfPhotoExist($user, $request);
         }
     }
 
+    public function updateIfEmailExist($user, $request)
+    {
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'email_verified_at' => null
+        ]);
+    }
+
+    public function updateIfPhotoExist($user, $request)
+    {
+        if ($request->file('photo')) {
+            $url = Storage::put('users', $request->file('photo'));
+
+            if ($user->image) {
+                Storage::delete($user->image->url);
+
+                $user->image()->update([
+                    'url' => $url
+                ]);
+            } else {
+                $user->image()->create([
+                    'url' => $url
+                ]);
+            }
+        }
+        return;
+    }
     /**
      * Actualiza la nueva contraseña
      *

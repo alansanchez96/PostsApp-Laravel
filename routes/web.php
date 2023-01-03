@@ -6,13 +6,6 @@ use App\Http\Controllers\Post\PostShowController;
 use App\Http\Controllers\Post\PostIndexController;
 use App\Http\Controllers\Category\CategoryController;
 
-Route::get('/home', [IndexController::class, '__invoke'])->name('home');
-
-Route::get('/dashboard', function () {
-    return view('user.dashboard');
-})->name('dashboard')->middleware(['auth', 'verified']);
-
-
 // Include routes authenticable
 require __DIR__ . '/auth.php';
 
