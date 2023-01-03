@@ -1,6 +1,6 @@
 <x-layouts.layout>
-    <div class="flex justify-center items-center w-screen">
-        <form method="post" class="w-full md:w-1/2 flex flex-col items-center" action="">
+    <div class="flex justify-center h-screen items-center mx-auto">
+        <form method="post" class="w-full md:w-3/4 flex flex-col items-center" action="">
             @csrf
             @method('put')
             <h1 class="text-center text-2xl font-bold text-gray-600 my-10">CONFIGURACION DE LA CUENTA</h1>

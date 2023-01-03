@@ -4,15 +4,16 @@
         @foreach ($posts as $post)
             <article
                 style="background: url('@if ($post->image) {{ Storage::url($post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif')"
-                class="h-80 bg-no-repeat rounded w-full bg-cover bg-center @if ($loop->first) md:col-span-2 @endif">
-                <div class="w-full h-full mx-auto px-10 flex flex-col justify-center align-center">
-                    <div>
+                class="h-96 bg-no-repeat rounded w-full object-cover bg-cover bg-center relative @if ($loop->first) md:col-span-2 @endif">
+                <div class="absolute h-full w-full bg-black/40 pointer-events-none"></div>
+                <div class="w-full h-full mx-auto px-10 flex flex-col z-10 justify-center align-center">
+                    <div class="z-10">
                         @foreach ($post->tags as $tag)
                             <a href="{{ route('posts.tag', $tag) }}"
                                 class="inline-block m-0 mb-2 rounded-full text-gray-200 font-semibold bg-{{ $tag->color }}-600 px-3 py-1">{{ $tag->name }}</a>
                         @endforeach
                     </div>
-                    <h1 class="text-3xl font-bold w-full">
+                    <h1 class="text-3xl font-bold w-full text-gray-200 z-10">
                         <a href="{{ route('post.show', $post->slug) }}">
                             {{ $post->title }}
                         </a>

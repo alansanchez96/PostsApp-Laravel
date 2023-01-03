@@ -39,9 +39,6 @@
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
                         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-                        <a href="{{ route('home') }}"
-                            class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium">Home</a>
-
                         @foreach ($categories as $category)
                             <a href="{{ route('post.category', $category->slug) }}"
                                 class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">{{ $category->name }}</a>
@@ -52,7 +49,7 @@
 
             @auth
                 <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
+                    <span class="text-gray-200 mr-3">{{ auth()->user()->name }}</span>
                     <!-- Profile dropdown -->
                     <div class="relative ml-3" x-data="{ btnProfile: false }">
                         {{-- Button Profile --}}
@@ -60,9 +57,14 @@
                             <button x-on:click="btnProfile=true" type="button"
                                 class="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                                 <span class="sr-only">Open user menu</span>
-                                <img class="h-8 w-8 rounded-full"
-                                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                                    alt="">
+                                @if (auth()->user()->image)
+                                    <img src="{{ Storage::url(auth()->user()->image->url) }}" alt=""
+                                        class="h-8 w-8 rounded-full">
+                                @else
+                                    <img class="h-8 w-8 rounded-full"
+                                        src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
+                                        alt="">
+                                @endif
                             </button>
                         </div>
 
@@ -103,8 +105,6 @@
     <div class="sm:hidden" x-show="mobileMenu" x-on:click.away="mobileMenu=false">
         <div class="space-y-1 px-2 pt-2 pb-3">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-            <a href="{{ route('home') }}"
-                class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
             @foreach ($categories as $category)
                 <a href="#"
                     class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">
