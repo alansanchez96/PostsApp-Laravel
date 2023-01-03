@@ -10,11 +10,12 @@ use App\Http\Controllers\Auth\Concerns\VerifyEmail;
 class EmailVerificationNotificationController extends Controller
 {
     use VerifyEmail;
+    
     /**
      * Envía una nueva verificación de Email
      *
      * @param Request $request
-     * @return mixed
+     * @return RedirectResponse
      */
     public function send(Request $request): RedirectResponse
     {

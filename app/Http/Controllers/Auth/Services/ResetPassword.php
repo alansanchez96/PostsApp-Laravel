@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth\Services;
 
 use Illuminate\Support\Str;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use App\Http\Requests\Auth\NewPasswordRequest;
-use Illuminate\Support\Facades\Password;
 
 class ResetPassword
 {
@@ -26,9 +28,9 @@ class ResetPassword
      * Redireccionar al Usuario con Notificación luego de Guardar su contraseña nueva
      *
      * @param NewPasswordRequest $request
-     * @return mixed
+     * @return RedirectResponse|Redirector
      */
-    public function redirectAndSaveNewPassword(NewPasswordRequest $request): mixed
+    public function redirectAndSaveNewPassword(NewPasswordRequest $request): RedirectResponse|Redirector
     {
         $status = $this->getStatus($request);
 
@@ -41,10 +43,10 @@ class ResetPassword
     /**
      * Resetear la nueva contraseña y retornar el estado
      *
-     * @param $request
+     * @param NewPasswordRequest $request
      * @return mixed
      */
-    public function getStatus($request): mixed
+    public function getStatus(NewPasswordRequest $request): mixed
     {
         $status = Password::reset(
             $request->only(

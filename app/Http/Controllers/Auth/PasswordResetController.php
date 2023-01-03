@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\View\View;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\Auth\PasswordResetRequest;
 
@@ -12,9 +14,9 @@ class PasswordResetController extends Controller
     /**
      * Muestra la vista de Olvide Mi Contraseña
      *
-     * @return void
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
         return view('auth.forgot-password');
     }
@@ -23,9 +25,9 @@ class PasswordResetController extends Controller
      * Manipula el envió de restablecimiento al correo electrónico
      *
      * @param PasswordResetRequest $request
-     * @return mixed
+     * @return RedirectResponse
      */
-    public function send(PasswordResetRequest $request): mixed
+    public function send(PasswordResetRequest $request): RedirectResponse
     {
         $status = Password::sendResetLink(
             $request->only(Str::lower('email'))

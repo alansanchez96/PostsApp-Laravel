@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Auth\Concerns;
 
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Verified;
-use Illuminate\Http\RedirectResponse;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 

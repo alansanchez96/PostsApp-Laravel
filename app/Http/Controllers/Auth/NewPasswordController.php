@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Auth\Services\ResetPassword;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\Auth\NewPasswordRequest;
+use App\Http\Controllers\Auth\Services\ResetPassword;
 
 class NewPasswordController extends Controller
 {
@@ -13,9 +16,9 @@ class NewPasswordController extends Controller
      * Muestra la vista del input New Password Reset
      *
      * @param Request $request
-     * @return void
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         return view('auth.reset-password', compact('request'));
     }
@@ -24,12 +27,10 @@ class NewPasswordController extends Controller
      * Manipula el request de la nueva contraseña
      *
      * @param NewPasswordRequest $request
-     * @return mixed
+     * @return RedirectResponse|Redirector
      */
-    public function reset(NewPasswordRequest $request): mixed
+    public function reset(NewPasswordRequest $request): RedirectResponse|Redirector
     {
-        $resetPassword = new ResetPassword($request->password);
-
-        return $resetPassword->redirectAndSaveNewPassword($request);
+        return (new ResetPassword($request->password))->redirectAndSaveNewPassword($request);
     }
 }

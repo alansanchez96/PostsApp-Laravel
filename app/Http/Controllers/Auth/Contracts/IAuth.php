@@ -8,13 +8,12 @@ use Illuminate\Routing\Redirector;
 
 interface IAuth
 {
-
     /**
      * Método para Autentificar al Usuario
      *
      * @param AuthRequest $request
      * @param Redirector $redirector
-     * @return void
+     * @return RedirectResponse
      */
     public function login(AuthRequest $request, Redirector $redirector);
 
@@ -22,7 +21,7 @@ interface IAuth
      * Método para Destruir la sesión del usuario
      *
      * @param Request $request
-     * @return void
+     * @return RedirectResponse
      */
     public function logout(Request $request);
 }
