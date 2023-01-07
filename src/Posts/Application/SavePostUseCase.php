@@ -6,6 +6,11 @@ use Src\Posts\Domain\Contracts\PostRepositoryContract;
 
 class SavePostUseCase
 {
+    /**
+     * Repository property
+     *
+     * @var PostRepository
+     */
     protected $repository;
 
     public function __construct(PostRepositoryContract $repository)
@@ -13,7 +18,15 @@ class SavePostUseCase
         $this->repository = $repository;
     }
 
-    public function execute(mixed $req, $url, int $id = null)
+    /**
+     * Recibe el request y almacena los registros
+     *
+     * @param mixed $req
+     * @param string $url
+     * @param integer|null $id
+     * @return void
+     */
+    public function execute(mixed $req, ?string $url, int $id = null)
     {
         return $this->repository->save($req, $url, $id);
     }

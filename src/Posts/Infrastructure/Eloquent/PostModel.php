@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use Database\Factories\PostModelFactory;
 use Src\Tags\Infrastructure\Eloquent\TagModel;
 use Src\Images\Infrastructure\Eloquent\ImageModel;
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Src\Comments\Infrastructure\Eloquent\CommentModel;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Src\Categories\Infrastructure\Eloquent\CategoryModel;
 
 
@@ -23,14 +28,19 @@ class PostModel extends Model
      */
     protected $table = 'posts';
 
+    /**
+     * Asignacion masiva
+     *
+     * @var array
+     */
     protected $guarded = [];
 
     /**
      * Relacion Uno a Muchos Inversa to User::class
      *
-     * @return void
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
@@ -38,9 +48,9 @@ class PostModel extends Model
     /**
      * Relacion Uno a Muchos Inversa to CategoryModel::class
      *
-     * @return void
+     * @return BelongsTo
      */
-    public function categories()
+    public function categories(): BelongsTo
     {
         return $this->belongsTo(CategoryModel::class, 'category_id');
     }
@@ -48,9 +58,9 @@ class PostModel extends Model
     /**
      * Relacion Uno a Uno Polimorfica to ImageModel::class
      *
-     * @return void
+     * @return MorphOne
      */
-    public function image()
+    public function image(): MorphOne
     {
         return $this->morphOne(ImageModel::class, 'imageable');
     }
@@ -58,9 +68,9 @@ class PostModel extends Model
     /**
      * Relacion Uno a Muchos Polimorfica to CommentModel::class
      *
-     * @return void
+     * @return MorphMany
      */
-    public function comments()
+    public function comments(): MorphMany
     {
         return $this->morphMany(CommentModel::class, 'commentable');
     }
@@ -68,14 +78,19 @@ class PostModel extends Model
     /**
      * Relacion Muchos a Muchos Polimorfica to TagModel::class
      *
-     * @return void
+     * @return MorphToMany
      */
-    public function tags()
+    public function tags(): MorphToMany
     {
         return $this->morphToMany(TagModel::class, 'taggable', 'taggables', 'taggable_id', 'tag_id');
     }
 
-    protected static function newFactory()
+    /**
+     * Se vincula con el factory
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
     {
         return PostModelFactory::new();
     }

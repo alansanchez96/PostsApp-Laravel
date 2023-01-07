@@ -6,6 +6,11 @@ use Src\Categories\Application\SaveCategoryUseCase;
 
 class SaveCategory
 {
+    /**
+     * Use case SaveCategory
+     *
+     * @var SaveCategoryUseCase
+     */
     protected $saveCategory;
 
     public function __construct(SaveCategoryUseCase $saveCategory)
@@ -13,6 +18,13 @@ class SaveCategory
         $this->saveCategory = $saveCategory;
     }
 
+    /**
+     * Separa por partes el request y envia los registros para ser guardados.
+     *
+     * @param $req
+     * @param integer|null $id
+     * @return void
+     */
     public function saveCategory($req, int $id = null)
     {
         $reqName = $this->getRequestName($req);
@@ -21,12 +33,24 @@ class SaveCategory
         return $this->saveCategory->execute($reqName, $reqSlug, $id);
     }
 
-    public function getRequestName($req)
+    /**
+     * Separa la propiedad name y lo devuelve por separado
+     *
+     * @param $req
+     * @return mixed
+     */
+    public function getRequestName($req): mixed
     {
         return $req->name;
     }
 
-    public function getRequestSlug($req)
+    /**
+     * Separa la propiedad slug y lo devuelve por separado
+     *
+     * @param $req
+     * @return mixed
+     */
+    public function getRequestSlug($req): mixed
     {
         return $req->slug;
     }

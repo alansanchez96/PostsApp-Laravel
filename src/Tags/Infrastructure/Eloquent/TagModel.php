@@ -6,7 +6,9 @@ use Database\Factories\TagModelFactory;
 use Illuminate\Database\Eloquent\Model;
 use Src\Posts\Infrastructure\Eloquent\PostModel;
 use Src\Videos\Infrastructure\Eloquent\VideoModel;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 class TagModel extends Model
 {
@@ -19,14 +21,19 @@ class TagModel extends Model
      */
     protected $table = 'tags';
 
+    /**
+     * Agregacion masiva
+     *
+     * @var array
+     */
     protected $guarded = [];
 
     /**
      * Relacion Muchos a Muchos Polimorfica Inversa to PostModel::class
      *
-     * @return void
+     * @return MorphToMany
      */
-    public function posts()
+    public function posts(): MorphToMany
     {
         return $this->morphedByMany(PostModel::class, 'taggable', null, 'tag_id');
     }
@@ -34,14 +41,19 @@ class TagModel extends Model
     /**
      * Relacion Muchos a Muchos Polimorfica Inversa to VideoModel::class
      *
-     * @return void
+     * @return MorphToMany
      */
-    public function videos()
+    public function videos(): MorphToMany
     {
         return $this->morphedByMany(VideoModel::class, 'taggable');
     }
 
-    protected static function newFactory()
+    /**
+     * Se vincula con el factory
+     *
+     * @return Factory
+     */
+    protected static function newFactory(): Factory
     {
         return TagModelFactory::new();
     }

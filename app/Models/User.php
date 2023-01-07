@@ -7,8 +7,11 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Src\Posts\Infrastructure\Eloquent\PostModel;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Src\Images\Infrastructure\Eloquent\ImageModel;
 use Src\Videos\Infrastructure\Eloquent\VideoModel;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Src\Comments\Infrastructure\Eloquent\CommentModel;
 use Src\Profiles\Infrastructure\Eloquent\ProfileModel;
@@ -52,9 +55,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relacion Uno a Uno to ProfileModel::class
      *
-     * @return void
+     * @return HasOne
      */
-    public function profile()
+    public function profile(): HasOne
     {
         return $this->hasOne(ProfileModel::class);
     }
@@ -62,9 +65,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relacion Uno a Muchos to PostModel::class
      *
-     * @return void
+     * @return HasMany
      */
-    public function posts()
+    public function posts(): HasMany
     {
         return $this->hasMany(PostModel::class);
     }
@@ -72,9 +75,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relacion Uno a Muchos to VideoModel::class
      *
-     * @return void
+     * @return HasMany
      */
-    public function videos()
+    public function videos(): HasMany
     {
         return $this->hasMany(VideoModel::class);
     }
@@ -82,9 +85,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relacion Uno a Uno Polimorfica
      *
-     * @return void
+     * @return MorphOne
      */
-    public function image()
+    public function image(): MorphOne
     {
         return $this->morphOne(ImageModel::class, 'imageable');
     }
@@ -92,9 +95,9 @@ class User extends Authenticatable implements MustVerifyEmail
     /**
      * Relacion Uno a Muchos to CommentModel::class
      *
-     * @return void
+     * @return hasMany
      */
-    public function comment()
+    public function comment(): hasMany
     {
         return $this->hasMany(CommentModel::class);
     }

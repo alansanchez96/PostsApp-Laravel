@@ -2,10 +2,15 @@
 
 namespace Src\Tags\Infrastructure\Eloquent\Repositories;
 
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Model;
 use Src\Tags\Domain\ValueObjects\TagId;
+use Illuminate\Database\Eloquent\Builder;
 use Src\Tags\Domain\ValueObjects\TagSlug;
 use Src\Tags\Infrastructure\Eloquent\TagModel;
 use Src\Tags\Domain\Contract\TagRepositoryContract;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 class TagRepository implements TagRepositoryContract
 {
@@ -21,14 +26,28 @@ class TagRepository implements TagRepositoryContract
         $this->model = new TagModel();
     }
 
-    public function getPostsRelatedToTags(TagModel $tag)
+    /**
+     * Obtiene un paginador con los Posts relacionados al TagModel recibido
+     *
+     * @param TagModel $tag
+     * @return Paginator
+     */
+    public function getPostsRelatedToTags(TagModel $tag): Paginator
     {
         $objectModel = $this->model->findOrFail($tag->id);
 
         return $objectModel->posts()->where('status', 2)->latest('id')->simplePaginate(6);
     }
 
-    public function getAllTags(bool $pluck = false, string $column = null, mixed $key = null)
+    /**
+     * Retorna una coleccion del modelo consultado
+     *
+     * @param boolean $pluck
+     * @param string|null $column
+     * @param mixed $key
+     * @return EloquentCollection|Collection
+     */
+    public function getAllTags(bool $pluck = false, string $column = null, mixed $key = null): EloquentCollection|Collection
     {
         if (!$pluck) {
             return $this->model->all();
@@ -37,16 +56,34 @@ class TagRepository implements TagRepositoryContract
         }
     }
 
-    public function getTag($slug)
+    /**
+     * Obtiene el Model Tag y devuelve el Model consultado
+     *
+     * @param mixed $tag
+     * @return Model|EloquentCollection|Builder
+     */
+    public function getTag(mixed $tag): Model|EloquentCollection|Builder
     {
-        $slug = (new TagSlug($slug))->value();
-        $objectModel = $this->model->firstWhere('slug', $slug);
-        $id = (new TagId($objectModel->id))->value();
-
-        return $this->model->findOrFail($id);
+        if (!is_int($tag)) {
+            $slug = (new TagSlug($tag))->value();
+            return $this->model->firstWhere('slug', $slug);
+        } else {
+            $id = (new TagId($tag))->value();
+            return $this->model->find($id);
+        }
     }
 
-    public function save($reqName, $reqSlug, $reqColor, int $id = null)
+
+    /**
+     * Recibe el request por separado y almacena los registros
+     *
+     * @param mixed $reqName
+     * @param mixed $reqSlug
+     * @param mixed $reqColor
+     * @param integer|null $id
+     * @return void
+     */
+    public function save(mixed $reqName, mixed $reqSlug, mixed $reqColor, ?int $id = null): void
     {
         $objectId = (new TagId($id))->value();
         $objectModel = $this->model->find($objectId);
@@ -66,7 +103,13 @@ class TagRepository implements TagRepositoryContract
         }
     }
 
-    public function deleteTag(int $id)
+    /**
+     * Obtiene el ModelTag y elimina su registro
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function deleteTag(int $id): void
     {
         $objectId = (new TagId($id))->value();
         $objectModel = $this->model->find($objectId);

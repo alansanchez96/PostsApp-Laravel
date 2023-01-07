@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers\Admin\Role;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use Spatie\Permission\Models\Permission;
 
 class RoleCreateController extends Controller
 {
-    public function create()
+    /**
+     * Retorna la vista para crear un RoleModel
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $permissions = Permission::all();
 

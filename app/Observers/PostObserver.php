@@ -8,14 +8,26 @@ use Src\Posts\Infrastructure\Eloquent\PostModel;
 
 class PostObserver
 {
-    public function creating(PostModel $post)
+    /**
+     * Antes de crear un Post verifica que el autor del post sea igual al usuario autenticado
+     *
+     * @param PostModel $post
+     * @return void
+     */
+    public function creating(PostModel $post): void
     {
         if (!App::runningInConsole()) {
             $post->user_id = auth()->user()->id;
         }
     }
 
-    public function deleting(PostModel $post)
+    /**
+     * Antes de eliminar un post, también elimina la imagen vinculada
+     *
+     * @param PostModel $post
+     * @return void
+     */
+    public function deleting(PostModel $post): void
     {
         if ($post->image) {
             Storage::delete($post->image->url);

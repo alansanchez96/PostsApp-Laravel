@@ -2,11 +2,17 @@
 
 namespace Src\Tags\Application;
 
-use Src\Tags\Domain\Contract\TagRepositoryContract;
+use Illuminate\Pagination\Paginator;
 use Src\Tags\Infrastructure\Eloquent\TagModel;
+use Src\Tags\Domain\Contract\TagRepositoryContract;
 
 class GetPostsRelatedToTagsUseCase
 {
+    /**
+     * Repository property
+     *
+     * @var TagRepository
+     */
     private $repository;
 
     public function __construct(TagRepositoryContract $repository)
@@ -14,7 +20,13 @@ class GetPostsRelatedToTagsUseCase
         $this->repository = $repository;
     }
 
-    public function execute(TagModel $tag)
+    /**
+     * Obtiene un paginador con los Posts relacionados al TagModel recibido
+     *
+     * @param TagModel $tag
+     * @return Paginator
+     */
+    public function execute(TagModel $tag): Paginator
     {
         return $this->repository->getPostsRelatedToTags($tag);
     }

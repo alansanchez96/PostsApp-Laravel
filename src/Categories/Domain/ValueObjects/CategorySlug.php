@@ -4,14 +4,24 @@ namespace Src\Categories\Domain\ValueObjects;
 
 class CategorySlug
 {
-    private $slug;
+    /**
+     * Slug Property
+     *
+     * @var string
+     */
+    private string $slug;
 
     public function __construct($slug)
     {
         $this->slug = $slug;
     }
 
-    public function value()
+    /**
+     * Retorna el slug category
+     *
+     * @return string
+     */
+    public function value(): string
     {
         return $this->slug;
     }

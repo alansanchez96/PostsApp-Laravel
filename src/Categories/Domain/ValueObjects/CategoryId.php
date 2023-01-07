@@ -4,14 +4,24 @@ namespace Src\Categories\Domain\ValueObjects;
 
 class CategoryId
 {
-    private $id;
+    /**
+     * Id Property
+     *
+     * @var int
+     */
+    private ?int $id;
 
-    public function __construct($id)
+    public function __construct(?int $id)
     {
         $this->id = $id;
     }
 
-    public function value()
+    /**
+     * Retorna el id
+     *
+     * @return integer
+     */
+    public function value(): ?int
     {
         return $this->id;
     }

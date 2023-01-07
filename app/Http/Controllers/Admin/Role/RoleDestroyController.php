@@ -2,12 +2,21 @@
 
 namespace App\Http\Controllers\Admin\Role;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Redirector;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 
 class RoleDestroyController extends Controller
 {
-    public function destroy(Role $role)
+    /**
+     * Metodo para eliminar un Role.
+     * Redirecciona a la ruta designada luego de eliminarlo.
+     *
+     * @param Role $role
+     * @return Redirector|RedirectResponse
+     */
+    public function destroy(Role $role): Redirector|RedirectResponse
     {
         $role->delete();
 

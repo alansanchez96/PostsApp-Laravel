@@ -2,11 +2,16 @@
 
 namespace Src\Posts\Infrastructure\Eloquent\Repositories;
 
+use Illuminate\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Builder;
 use Src\Posts\Domain\ValueObjects\PostId;
 use Src\Posts\Domain\ValueObjects\PostSlug;
+use Illuminate\Database\Eloquent\Collection;
 use Src\Posts\Infrastructure\Eloquent\PostModel;
 use Src\Posts\Domain\Contracts\PostRepositoryContract;
+use Illuminate\Support\Collection as SupportCollection;
 
 class PostRepository implements PostRepositoryContract
 {
@@ -22,17 +27,42 @@ class PostRepository implements PostRepositoryContract
         $this->model = new PostModel;
     }
 
-    public function getAllPosts()
+    /**
+     * Retorna una coleccion del modelo consultado
+     *
+     * @param boolean $pluck
+     * @param string|null $column
+     * @param mixed $key
+     * @return Collection|SupportCollection
+     */
+    public function getAllPosts(bool $pluck = false, string $column = null, mixed $key = null): Collection|SupportCollection
     {
-        return $this->model->all();
+        if (!$pluck) {
+            return $this->model->all();
+        } else {
+            return $this->model->pluck($column, $key);
+        }
     }
 
-    public function getActivePosts($column, $pages)
+    /**
+     * Retorna un paginador de todos los Posts Activos
+     *
+     * @param string $column
+     * @param integer $pages
+     * @return Paginator|Builder
+     */
+    public function getActivePosts(string $column, int $pages): Paginator|Builder
     {
-        return $this->model->where('status', 2)->latest($column)->paginate($pages);
+        return $this->model->where('status', 2)->latest($column)->simplePaginate($pages);
     }
 
-    public function getPost($post)
+    /**
+     * Obtiene el Model Post y devuelve el Model consultado
+     *
+     * @param mixed $post
+     * @return Model|Collection|Builder
+     */
+    public function getPost(mixed $post): Model|Collection|Builder
     {
         if (!is_int($post)) {
             $slug = (new PostSlug($post))->value();
@@ -43,7 +73,13 @@ class PostRepository implements PostRepositoryContract
         }
     }
 
-    public function getRelatedPosts($post)
+    /**
+     * Obtiene el PostModel relacionado con CategoryModel
+     *
+     * @param mixed $post
+     * @return Model|Builder|Collection
+     */
+    public function getRelatedPosts(mixed $post): Model|Builder|Collection
     {
         return $this->model->where('category_id', $post->category_id)
             ->where('status', 2)
@@ -53,7 +89,13 @@ class PostRepository implements PostRepositoryContract
             ->get();
     }
 
-    public function getCategoryPost($id)
+    /**
+     * Obtiene una paginacion del PostModel consultado relacionado a la categoria_id
+     *
+     * @param integer $id
+     * @return Paginator
+     */
+    public function getCategoryPost(int $id): Paginator
     {
         return $this->model::where('category_id', $id)
             ->where('status', 2)
@@ -61,7 +103,15 @@ class PostRepository implements PostRepositoryContract
             ->simplePaginate(6);
     }
 
-    public function save(mixed $req, $url = null, int $id = null)
+    /**
+     * Recibe el request y almacena los registros
+     *
+     * @param mixed $req
+     * @param string $url
+     * @param integer|null $id
+     * @return void
+     */
+    public function save(mixed $req, ?string $url = null, int $id = null): void
     {
         $objectId = (new PostId($id))->value();
         $objectModel = $this->model->find($objectId);
@@ -93,7 +143,13 @@ class PostRepository implements PostRepositoryContract
         }
     }
 
-    public function deletePost(int $id)
+    /**
+     * Obtiene el Modelo y lo elimina
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function deletePost(int $id): void
     {
         $objectId = (new PostId($id))->value();
         $objectModel = $this->model->find($objectId);
@@ -102,7 +158,16 @@ class PostRepository implements PostRepositoryContract
         $this->deleteImageRegistered($objectModel);
     }
 
-    public function saveImage($postModel, string $table, string $url = null, bool $update = false)
+    /**
+     * Guarda o actualiza la imagen del PostModel
+     *
+     * @param mixed $postModel
+     * @param string $table
+     * @param string|null $url
+     * @param boolean $update
+     * @return void
+     */
+    public function saveImage(mixed $postModel, string $table, string $url = null, bool $update = false): void
     {
         if (!$url) {
             return;
@@ -126,12 +191,25 @@ class PostRepository implements PostRepositoryContract
         }
     }
 
-    public function deleteImageRegistered($postModel)
+    /**
+     * Elimina la imagen del PostModel
+     *
+     * @param mixed $postModel
+     * @return void
+     */
+    public function deleteImageRegistered(mixed $postModel): void
     {
         $postModel->image()->delete();
     }
 
-    public function saveTags($postModel, $req)
+    /**
+     * Guarda los tags recibidos por el Request
+     *
+     * @param mixed $postModel
+     * @param mixed $req
+     * @return void
+     */
+    public function saveTags(mixed $postModel, mixed $req): void
     {
         $postModel->tags()->detach();
         $postModel->tags()->attach($req['tags']);

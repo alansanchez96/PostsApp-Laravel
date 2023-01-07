@@ -4,7 +4,12 @@ namespace Src\Tags\Infrastructure;
 
 class GetColorsTag
 {
-    public function getColorsTag()
+    /**
+     * Return array colors
+     *
+     * @return array
+     */
+    public function getColorsTag(): array
     {
         return [
             'red' => 'Rojo',

@@ -11,14 +11,14 @@ class PostIndex extends Component
 {
     use WithPagination;
 
-    public string $search;
+    public $search;
 
     /**
      * Cambia los estilos de tailwind a bootstrap
      *
      * @var string
      */
-    protected string $paginationTheme = 'bootstrap';
+    protected $paginationTheme = 'bootstrap';
 
     /**
      * Actualiza la pagina cada vez que se renderiza el search

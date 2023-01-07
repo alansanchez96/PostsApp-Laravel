@@ -3,10 +3,16 @@
 namespace App\Http\Controllers\Admin\Tag;
 
 use App\Http\Controllers\Controller;
+use Illuminate\View\View;
 use Src\Tags\Infrastructure\GetColorsTag;
 
 class TagCreateController extends Controller
 {
+    /**
+     * controller property
+     *
+     * @var GetColorTag
+     */
     protected $controller;
 
     public function __construct(GetColorsTag $controller)
@@ -14,8 +20,13 @@ class TagCreateController extends Controller
         $this->controller = $controller;
     }
 
-
-    public function create()
+    /**
+     * Obtiene los colores designado en array y los ingresa en la vista.
+     * Retorna la vista para crear un TagModel
+     *
+     * @return View
+     */
+    public function create(): View
     {
         $colors = $this->controller->getColorsTag();
 

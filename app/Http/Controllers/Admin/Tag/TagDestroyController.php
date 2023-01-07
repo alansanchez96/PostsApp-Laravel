@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Admin\Tag;
 
+use Illuminate\Routing\Redirector;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Src\Tags\Infrastructure\DeleteTag;
 
 class TagDestroyController extends Controller
 {
+    /**
+     * controller property
+     *
+     * @var DeleteTag
+     */
     protected $controller;
 
     public function __construct(DeleteTag $controller)
@@ -14,7 +21,14 @@ class TagDestroyController extends Controller
         $this->controller = $controller;
     }
 
-    public function destroy(int $id)
+    /**
+     * Obtiene el TagModel y elimina su registro.
+     * Redirecciona a la ruta designada.
+     *
+     * @param integer $id
+     * @return Redirector|RedirectResponse
+     */
+    public function destroy(int $id): Redirector|RedirectResponse
     {
         $this->controller->deleteTag($id);
 

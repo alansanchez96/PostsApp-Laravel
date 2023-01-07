@@ -21,5 +21,9 @@
                 </div>
             </article>
         @endforeach
+
+    </div>
+    <div class="my-10 mx-auto w-full">
+        {{ $posts->links() }}
     </div>
 </x-layouts.layout>
