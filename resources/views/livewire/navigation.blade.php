@@ -33,8 +33,8 @@
             </div>
             <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <a href="/" class="flex flex-shrink-0 items-center cursor-pointer">
-                    <p class="block text-white font-bold w-auto lg:hidden hover:text-gray-200">Alansan@PostApp</p>
-                    <p class="hidden w-auto font-bold text-white lg:block hover:text-gray-200">Alansan@PostApp</p>
+                    <p class="block text-white font-bold w-auto lg:hidden hover:text-gray-200">PostApp@Laravel</p>
+                    <p class="hidden w-auto font-bold text-white lg:block hover:text-gray-200">PostApp@Laravel</p>
                 </a>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
