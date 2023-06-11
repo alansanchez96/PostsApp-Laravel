@@ -10,10 +10,11 @@
 │   ├── Exceptions
 │   │   └── FormValidationException.php
 │   ├── Interfaces
-│   │   └── Laravel
-│   │       ├── Controller.php
-│   │       ├── EloquentModel.php
-│   │       └── FormRequest.php
+│   │   ├── Laravel
+│   │   │   ├── Controller.php
+│   │   │   ├── EloquentModel.php
+│   │   │   └── FormRequest.php
+│   │   └── Symfony
 │   ├── Listeners
 │   ├── Notifications
 │   ├── Providers
@@ -29,20 +30,33 @@
 │   ├── Auth
 │   │   ├── Application
 │   │   │   ├── Commands
+│   │   │   │   └── RegisterUserCommand.php
 │   │   │   └── Queries
 │   │   ├── Domain
 │   │   │   ├── Contracts
+│   │   │   │   └── IRegisterRepository.php
 │   │   │   ├── Entities
+│   │   │   │   └── UserEntity.php
 │   │   │   ├── Services
 │   │   │   └── ValueObjects
+│   │   │       ├── UserEmail.php
+│   │   │       ├── UserId.php
+│   │   │       ├── UserName.php
+│   │   │       └── UserPassword.php
 │   │   └── Infrastructure
 │   │       ├── Console
 │   │       ├── Http
-│   │       │   └── Controllers
-│   │       │   └── Request
+│   │       │   ├── Controllers
+│   │       │   │   └── RegisterController.php
+│   │       │   ├── Request
+│   │       │   │   └── RegisterRequest.php
+│   │       │   └── router-auth.php
 │   │       └── Persistence
+│   │           ├── Doctrine
 │   │           └── Eloquent
-│   │               └── Repositories
+│   │               ├── Repositories
+│   │               │   └── RegisterRepository.php
+│   │               └── User.php
 │   └── Blog
 │       ├── Application
 │       │   ├── Commands
@@ -59,6 +73,10 @@
 ├── Presentation
 │   └── Laravel
 │       ├── Http
-│       │   └── Controllers
+│       │   ├── Controllers
+│       │   │   └── RegisterViewController.php
+│       │   └── router-views.php
 │       └── Views
 └── structure.txt
+
+51 directories, 28 files
