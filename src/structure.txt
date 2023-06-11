@@ -1,0 +1,64 @@
+.
+├── Common
+│   ├── BaseRepository.php
+│   ├── Cache
+│   ├── Cronjobs
+│   ├── Domain
+│   │   ├── AggregateRoot.php
+│   │   └── ValueObject.php
+│   ├── Emails
+│   ├── Exceptions
+│   │   └── FormValidationException.php
+│   ├── Interfaces
+│   │   └── Laravel
+│   │       ├── Controller.php
+│   │       ├── EloquentModel.php
+│   │       └── FormRequest.php
+│   ├── Listeners
+│   ├── Notifications
+│   ├── Providers
+│   │   ├── Auth
+│   │   │   └── AuthServiceProvider.php
+│   │   └── RouteServiceProvider.php
+│   └── Traits
+│       ├── Converter.php
+│       ├── Hasher.php
+│       ├── JsonResponse.php
+│       └── Logger.php
+├── Modules
+│   ├── Auth
+│   │   ├── Application
+│   │   │   ├── Commands
+│   │   │   └── Queries
+│   │   ├── Domain
+│   │   │   ├── Contracts
+│   │   │   ├── Entities
+│   │   │   ├── Services
+│   │   │   └── ValueObjects
+│   │   └── Infrastructure
+│   │       ├── Console
+│   │       ├── Http
+│   │       │   └── Controllers
+│   │       │   └── Request
+│   │       └── Persistence
+│   │           └── Eloquent
+│   │               └── Repositories
+│   └── Blog
+│       ├── Application
+│       │   ├── Commands
+│       │   └── Queries
+│       ├── Domain
+│       │   ├── Entities
+│       │   ├── Repositories
+│       │   └── Services
+│       └── Infrastructure
+│           ├── Console
+│           ├── Http
+│           │   └── Controllers
+│           └── Persistence
+├── Presentation
+│   └── Laravel
+│       ├── Http
+│       │   └── Controllers
+│       └── Views
+└── structure.txt

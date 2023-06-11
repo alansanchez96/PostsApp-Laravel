@@ -193,7 +193,11 @@ return [
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        
+        Src\Common\Providers\RouteServiceProvider::class,
+
+        Src\Common\Providers\Auth\AuthServiceProvider::class,
+        
         App\Providers\PostServiceProvider::class,
         App\Providers\CategoryServiceProvider::class,
         App\Providers\TagServiceProvider::class,
