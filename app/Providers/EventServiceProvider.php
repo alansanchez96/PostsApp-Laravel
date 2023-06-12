@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        PostModel::observe(PostObserver::class);
+        //PostModel::observe(PostObserver::class);
     }
 
     /**
