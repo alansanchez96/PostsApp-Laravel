@@ -17,10 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->when(RegisterUserCommand::class)
-            ->needs(IRegisterRepository::class)
-            ->give(RegisterRepository::class);
-        //$this->app->bind(IRegisterRepository::class, RegisterRepository::class);
+        $this->app->bind(IRegisterRepository::class, RegisterRepository::class);
     }
 
     /**

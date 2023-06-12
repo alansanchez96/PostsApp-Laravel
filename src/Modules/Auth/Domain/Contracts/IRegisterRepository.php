@@ -3,7 +3,7 @@
 namespace Src\Modules\Auth\Domain\Contracts;
 
 use Src\Modules\Auth\Domain\Entities\UserEntity;
-use Src\Modules\Auth\Infrastructure\Http\Request\RegisterRequest;
+use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 
 interface IRegisterRepository
 {
@@ -14,4 +14,20 @@ interface IRegisterRepository
      * @return void
      */
     public function registerAndNotify(UserEntity $user): void;
+
+    /**
+     * Obtiene a un usuario por su Codigo
+     *
+     * @param UserEntity $user
+     * @return User|null
+     */
+    public function getUserWithCode(UserEntity $user): ?User;
+
+    /**
+     * Confirma la cuenta del usuario
+     *
+     * @param User $user
+     * @return void
+     */
+    public function confirmUser(User $user): void;
 }

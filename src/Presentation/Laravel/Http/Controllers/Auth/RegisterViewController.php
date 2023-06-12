@@ -1,6 +1,6 @@
 <?php
 
-namespace Src\Presentation\Laravel\Http\Controllers;
+namespace Src\Presentation\Laravel\Http\Controllers\Auth;
 
 use Illuminate\View\View;
 use Src\Common\Interfaces\Laravel\Controller;
