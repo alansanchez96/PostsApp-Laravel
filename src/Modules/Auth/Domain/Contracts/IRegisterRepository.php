@@ -11,9 +11,9 @@ interface IRegisterRepository
      * Registra a un usuario en db
      *
      * @param UserEntity $user
-     * @return void
+     * @return User
      */
-    public function registerAndNotify(UserEntity $user): void;
+    public function registerAndNotify(UserEntity $user): ?User;
 
     /**
      * Obtiene a un usuario por su Codigo

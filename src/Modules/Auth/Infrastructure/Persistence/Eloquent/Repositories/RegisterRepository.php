@@ -3,9 +3,7 @@
 namespace Src\Modules\Auth\Infrastructure\Persistence\Eloquent\Repositories;
 
 use Src\Common\BaseRepository;
-use Illuminate\Support\Facades\Auth;
 use Src\Modules\Auth\Domain\Entities\UserEntity;
-use Src\Modules\Auth\Infrastructure\Jobs\RegisteredUser;
 use Src\Modules\Auth\Domain\Contracts\IRegisterRepository;
 use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 
@@ -15,47 +13,21 @@ class RegisterRepository extends BaseRepository implements IRegisterRepository
      * Registra a un usuario en db
      *
      * @param array $data
-     * @return void
+     * @return User
      */
-    public function registerAndNotify(UserEntity $user): void
+    public function registerAndNotify(UserEntity $user): ?User
     {
         try {
-            $user = User::create([
+            return User::create([
                 'name' => $this->capitalized($user->name->getName()),
                 'email' => $this->lower($user->email->getEmail()),
                 'password' => $this->stringHash($user->password->getPassword()),
                 'email_verified_at' => null,
                 'code' => $this->randomCode(6)
             ]);
-
-            $this->registeredUser($user);
-
-            $this->authenticate($user);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }
-    }
-
-    /**
-     * En segundo plano envía un Email al usuario registrado
-     *
-     * @param User $user
-     * @return void
-     */
-    private function registeredUser(User $user): void
-    {
-        RegisteredUser::dispatch($user);
-    }
-
-    /**
-     * Logea al usuario recientemente registrado
-     *
-     * @param User $user
-     * @return void
-     */
-    private function authenticate(User $user): void
-    {
-        Auth::login($user);
     }
 
     /**

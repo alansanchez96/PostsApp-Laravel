@@ -2,8 +2,11 @@
 
 namespace Src\Modules\Auth\Application\Commands;
 
-use Src\Modules\Auth\Domain\Contracts\IRegisterRepository;
+use Illuminate\Support\Facades\Auth;
 use Src\Modules\Auth\Domain\Entities\UserEntity;
+use Src\Modules\Auth\Infrastructure\Jobs\RegisteredUser;
+use Src\Modules\Auth\Domain\Contracts\IRegisterRepository;
+use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 use Src\Modules\Auth\Domain\ValueObjects\{UserName, UserEmail, UserPassword};
 
 class RegisterUserCommand
@@ -23,6 +26,31 @@ class RegisterUserCommand
      */
     public function registerAUser(array $data)
     {
-        $this->repository->registerAndNotify(new UserEntity($data));
+        $user = $this->repository->registerAndNotify(new UserEntity($data));
+
+        $this->registeredUser($user);
+        $this->authenticate($user);
+    }
+
+    /**
+     * En segundo plano envía un Email al usuario registrado
+     *
+     * @param User $user
+     * @return void
+     */
+    private function registeredUser(User $user): void
+    {
+        RegisteredUser::dispatch($user);
+    }
+
+    /**
+     * Logea al usuario recientemente registrado
+     *
+     * @param User $user
+     * @return void
+     */
+    private function authenticate(User $user): void
+    {
+        Auth::login($user);
     }
 }
