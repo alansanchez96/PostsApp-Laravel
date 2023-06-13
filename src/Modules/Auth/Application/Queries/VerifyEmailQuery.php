@@ -2,15 +2,13 @@
 
 namespace Src\Modules\Auth\Application\Queries;
 
-use Src\Common\Traits\Logger;
+use Src\Common\UseCases;
 use Src\Modules\Auth\Domain\Entities\UserEntity;
 use Src\Modules\Auth\Domain\Contracts\IRegisterRepository;
 use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 
-class VerifyEmailQuery
+class VerifyEmailQuery extends UseCases
 {
-    use Logger;
-
     public function __construct(private readonly IRegisterRepository $repository) { }
 
     public function execute(array $data)
