@@ -2,10 +2,10 @@
 
 namespace Src\Common\Providers\Auth;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Src\Modules\Auth\Domain\Contracts\ILoginRepository;
 use Src\Modules\Auth\Domain\Contracts\IRegisterRepository;
-use Src\Modules\Auth\Application\Commands\RegisterUserCommand;
+use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\Repositories\LoginRepository;
 use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\Repositories\RegisterRepository;
 
 class AuthServiceProvider extends ServiceProvider
@@ -18,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(IRegisterRepository::class, RegisterRepository::class);
+        $this->app->bind(ILoginRepository::class, LoginRepository::class);
     }
 
     /**
