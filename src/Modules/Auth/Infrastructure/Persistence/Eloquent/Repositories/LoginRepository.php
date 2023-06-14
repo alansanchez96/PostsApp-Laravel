@@ -26,4 +26,18 @@ class LoginRepository extends BaseRepository implements ILoginRepository
             $this->catch($e->getMessage());
         }
     }
+
+    /**
+     * Invalida la sesion del usuario
+     *
+     * @return void
+     */
+    public function logout(): void
+    {
+        try {
+            Auth::logout();
+        } catch (\Exception $e) {
+            $this->catch($e->getMessage());
+        }
+    }
 }
