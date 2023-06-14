@@ -13,4 +13,11 @@ interface ILoginRepository
      * @return boolean
      */
     public function attemptLogin(UserEntity $user): bool;
+
+    /**
+     * Invalida la sesion del usuario
+     *
+     * @return void
+     */
+    public function logout(): void;
 }
