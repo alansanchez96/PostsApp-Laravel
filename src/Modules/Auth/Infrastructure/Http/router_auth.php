@@ -13,9 +13,10 @@ Route::middleware('guest')->group(function () {
     Route::post('/login', LoginController::class);
     Route::post('/register', RegisterController::class);
     Route::post('/forgot-password', PasswordResetController::class);
+    Route::post('/reset-password', NewPasswordController::class)->name('password.update');
 });
 
 Route::middleware('auth')->group(function () {
     Route::post('/logout', LogOutController::class);
-    Route::post('/verify-email', VerifyEmailController::class);
+    Route::post('/verify-email', VerifyEmailController::class)->name('verification.verify');
 });
