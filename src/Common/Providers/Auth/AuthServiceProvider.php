@@ -28,7 +28,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadRoutesFrom(base_path('src/Modules/Auth/Infrastructure/Http/router-auth.php'));
-        $this->loadRoutesFrom(base_path('src/Presentation/Laravel/Http/router-views.php'));
+        $this->loadRoutesFrom(base_path('src/Modules/Auth/Infrastructure/Http/router_auth.php'));
+        $this->loadRoutesFrom(base_path('src/Presentation/Laravel/Http/router_views.php'));
     }
 }
