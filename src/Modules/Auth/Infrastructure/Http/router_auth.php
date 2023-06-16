@@ -7,6 +7,7 @@ use Src\Modules\Auth\Infrastructure\Http\Controllers\{
     LoginController,
     LogOutController,
     PasswordResetController,
+    NewPasswordController,
     UpdateProfileController,
     UpdateSettingsController
 };

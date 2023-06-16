@@ -11,7 +11,7 @@ use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 
 class ProfileRepository extends BaseRepository implements IProfileRepository
 {
-    private function __construct(private readonly ImageService $imageService) { }
+    public function __construct(private readonly ImageService $imageService) { }
 
     /**
      * Manipulador de la Actualizacion de Informacion del usuario

@@ -6,12 +6,14 @@ use Illuminate\Support\ServiceProvider;
 use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\Repositories\{
     LoginRepository,
     PasswordRepository,
-    RegisterRepository
+    RegisterRepository,
+    ProfileRepository
 };
 use Src\Modules\Auth\Domain\Contracts\{
     ILoginRepository,
     IPasswordRepository,
-    IRegisterRepository
+    IRegisterRepository,
+    IProfileRepository
 };
 
 class AuthServiceProvider extends ServiceProvider
@@ -26,6 +28,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->app->bind(IRegisterRepository::class, RegisterRepository::class);
         $this->app->bind(ILoginRepository::class, LoginRepository::class);
         $this->app->bind(IPasswordRepository::class, PasswordRepository::class);
+        $this->app->bind(IProfileRepository::class, ProfileRepository::class);
     }
 
     /**
