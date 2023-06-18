@@ -4,12 +4,12 @@ namespace Database\Factories;
 
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Src\Categories\Infrastructure\Eloquent\CategoryModel;
+use Src\Modules\Blog\Infrastructure\Persistence\Category;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Src\Modules\Blog\Infrastructure\Persistence\Category>
  */
-class CategoryModelFactory extends Factory
+class CategoryFactory extends Factory
 {
 
     /**
@@ -17,7 +17,7 @@ class CategoryModelFactory extends Factory
      *
      * @var string
      */
-    protected $model = CategoryModel::class;
+    protected $model = Category::class;
 
     /**
      * Define the model's default state.
@@ -27,6 +27,7 @@ class CategoryModelFactory extends Factory
     public function definition()
     {
         $name = $this->faker->word();
+
         return [
             'name' => $name,
             'slug' => Str::slug($name)
