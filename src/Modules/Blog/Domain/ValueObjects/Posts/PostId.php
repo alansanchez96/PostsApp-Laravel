@@ -7,11 +7,9 @@ final class PostId
     public function __construct(private readonly ?int $id) { }
 
     /**
-     * Get value of id
-     *
-     * @return int|null
-     */
-    public function getId(): ?int
+     * Get the value of id
+     */ 
+    public function getId()
     {
         return $this->id;
     }
@@ -19,10 +17,12 @@ final class PostId
     /**
      * Set the value of id
      *
-     * @return  void
-     */
-    public function setId($id): void
+     * @return  self
+     */ 
+    public function setId($id)
     {
         $this->id = $id;
+
+        return $this;
     }
 }

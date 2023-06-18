@@ -3,11 +3,13 @@
 namespace Src\Modules\Auth\Infrastructure\Persistence\Eloquent;
 
 use Laravel\Sanctum\HasApiTokens;
+use Database\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Src\Modules\Blog\Infrastructure\Persistence\Post;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\{Factory, HasFactory};
 use Illuminate\Database\Eloquent\Relations\{HasOne, HasMany, MorphOne};
 
 class User extends Authenticatable implements MustVerifyEmail
@@ -51,10 +53,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return HasOne
      */
-    public function profile(): HasOne
-    {
-        return $this->hasOne(ProfileModel::class);
-    }
+    // public function profile(): HasOne
+    // {
+    //     return $this->hasOne(ProfileModel::class);
+    // }
 
     /**
      * Relacion Uno a Muchos to PostModel::class
@@ -63,7 +65,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function posts(): HasMany
     {
-        return $this->hasMany(PostModel::class);
+        return $this->hasMany(Post::class);
     }
 
     /**
@@ -71,28 +73,33 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return HasMany
      */
-    public function videos(): HasMany
-    {
-        return $this->hasMany(VideoModel::class);
-    }
+    // public function videos(): HasMany
+    // {
+    //     return $this->hasMany(VideoModel::class);
+    // }
 
     /**
      * Relacion Uno a Uno Polimorfica
      *
      * @return MorphOne
      */
-    public function image(): MorphOne
-    {
-        return $this->morphOne(ImageModel::class, 'imageable');
-    }
+    // public function image(): MorphOne
+    // {
+    //     return $this->morphOne(ImageModel::class, 'imageable');
+    // }
 
     /**
      * Relacion Uno a Muchos to CommentModel::class
      *
      * @return hasMany
      */
-    public function comment(): hasMany
+    // public function comment(): hasMany
+    // {
+    //     return $this->hasMany(CommentModel::class);
+    // }
+
+    protected static function newFactory(): Factory
     {
-        return $this->hasMany(CommentModel::class);
+        return UserFactory::new();
     }
 }
