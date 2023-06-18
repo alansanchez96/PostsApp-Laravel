@@ -196,12 +196,11 @@ return [
         
         Src\Common\Providers\RouteServiceProvider::class,
 
+        /**
+         * BoundedContext Services
+         */
         Src\Common\Providers\Auth\AuthServiceProvider::class,
-        
-        App\Providers\PostServiceProvider::class,
-        App\Providers\CategoryServiceProvider::class,
-        App\Providers\TagServiceProvider::class,
-
+        Src\Common\Providers\Blog\BlogServiceProvider::class,
     ],
 
     /*
