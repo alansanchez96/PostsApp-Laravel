@@ -2,20 +2,20 @@
 
 namespace Database\Factories;
 
-use Src\Tags\Infrastructure\Eloquent\TagModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Src\Modules\Blog\Infrastructure\Persistence\Tag;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tag>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\Src\Modules\Blog\Infrastructure\Persistence\Tag>
  */
-class TagModelFactory extends Factory
+class TagFactory extends Factory
 {
     /**
      * El nombre del Factory correspondiente al Model
      *
      * @var string
      */
-    protected $model = TagModel::class;
+    protected $model = Tag::class;
 
     /**
      * Define the model's default state.

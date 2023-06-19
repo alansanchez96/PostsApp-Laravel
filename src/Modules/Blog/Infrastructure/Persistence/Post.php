@@ -13,6 +13,9 @@ class Post extends EloquentModel
 {
     use HasFactory;
 
+    const INACTIVE = 1;
+    const ACTIVE = 2;
+
     /**
      * Nombre de la tabla entidad
      *
@@ -80,10 +83,10 @@ class Post extends EloquentModel
      *
      * @return MorphToMany
      */
-    // public function tags(): MorphToMany
-    // {
-    //     return $this->morphToMany(TagModel::class, 'taggable', 'taggables', 'taggable_id', 'tag_id');
-    // }
+    public function tags(): MorphToMany
+    {
+        return $this->morphToMany(Tag::class, 'taggable', 'taggables', 'taggable_id', 'tag_id');
+    }
 
     /**
      * Se vincula con el factory
