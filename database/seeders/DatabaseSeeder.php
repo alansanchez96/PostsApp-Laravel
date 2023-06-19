@@ -8,7 +8,6 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\PostSeeder;
 use Database\Seeders\UserSeeder;
 use Illuminate\Support\Facades\Storage;
-use Src\Modules\Blog\Infrastructure\Persistence\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -24,9 +23,12 @@ class DatabaseSeeder extends Seeder
         Storage::makeDirectory('posts');
         Storage::makeDirectory('users');
 
-        $this->call(RoleSeeder::class);
-        $this->call(UserSeeder::class);
-        Category::factory(5)->create();
-        $this->call(PostSeeder::class);
+        $this->call([
+            RoleSeeder::class,
+            UserSeeder::class,
+            TagSeeder::class,
+            CategorySeeder::class,
+            PostSeeder::class,
+        ]);
     }
 }
