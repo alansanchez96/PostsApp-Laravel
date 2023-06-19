@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Log;
 
 trait Logger
 {
-    public function catch(string $string): void
+    public function catch(string $message): void
     {
-        Log::error('error: ' . $string);
+        Log::error('error: ' . $message);
+
+        abort(404);
     }
 }
