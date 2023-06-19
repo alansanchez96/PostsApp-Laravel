@@ -52,20 +52,20 @@ class PostRepository extends BaseRepository implements IPostRepository
         }
     }
 
-    public function getPostsBy(EloquentModel $model, string $relationship, array $columns, int $pages = null): Collection|LengthAwarePaginator
+    public function getPostsBy(EloquentModel $model, array $relationship, array $columns, int $pages = null): Collection|LengthAwarePaginator
     {
         try {
             return is_null($pages)   
             ?   $this->post->select($columns)
-                    ->whereHas($relationship, function ($query) use ($model) {
-                        $query->where('id', $model->id);
+                    ->whereHas($relationship['type'], function ($query) use ($relationship, $model) {
+                        $query->where($relationship['key'], $model->id);
                     })
                     ->where('status', $this->post::ACTIVE)
                     ->latest('id')
                     ->get()
             :   $this->post->select($columns)
-                    ->whereHas($relationship, function ($query) use ($model) {
-                        $query->where('id', $model->id);
+                    ->whereHas($relationship['type'], function ($query) use ($relationship, $model) {
+                        $query->where($relationship['key'], $model->id);
                     })
                     ->where('status', $this->post::ACTIVE)
                     ->latest('id')

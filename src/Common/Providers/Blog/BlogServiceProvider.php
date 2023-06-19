@@ -3,8 +3,8 @@
 namespace Src\Common\Providers\Blog;
 
 use Illuminate\Support\ServiceProvider;
-use Src\Modules\Blog\Domain\Contracts\{ICategoryRepository, IPostRepository};
-use Src\Modules\Blog\Infrastructure\Persistence\Eloquent\{CategoryRepository, PostRepository};
+use Src\Modules\Blog\Domain\Contracts\{ICategoryRepository, IPostRepository, ITagRepository};
+use Src\Modules\Blog\Infrastructure\Persistence\Eloquent\{CategoryRepository, PostRepository, TagRepository};
 
 class BlogServiceProvider extends ServiceProvider 
 {
@@ -12,6 +12,7 @@ class BlogServiceProvider extends ServiceProvider
     {
         $this->app->bind(IPostRepository::class, PostRepository::class);
         $this->app->bind(ICategoryRepository::class, CategoryRepository::class);
+        $this->app->bind(ITagRepository::class, TagRepository::class);
     }
 
     public function boot()

@@ -18,9 +18,14 @@ class CategoryController extends Controller
     {
         $columns = array('id', 'title', 'slug', 'extract');
 
+        $relationship = [
+            'type' => 'categories',
+            'key' => 'categories.id'
+        ];
+
         $category = $this->handler->getCategory($category);
 
-        $posts = $this->query->getPostsBy($category, 'categories', $columns, 5);
+        $posts = $this->query->getPostsBy($category, $relationship, $columns, 5);
 
         return view('post.category', [
             'category' => $category,

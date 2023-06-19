@@ -4,6 +4,7 @@ namespace Src\Modules\Blog\Infrastructure\Persistence;
 
 use Database\Factories\PostFactory;
 use Src\Common\Interfaces\Laravel\EloquentModel;
+use Src\Modules\Blog\Infrastructure\Persistence\Tag;
 use Src\Modules\Blog\Infrastructure\Persistence\Category;
 use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
 use Illuminate\Database\Eloquent\Factories\{Factory, HasFactory};
