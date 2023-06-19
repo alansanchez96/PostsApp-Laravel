@@ -15,26 +15,15 @@ class GetPostsHandler extends UseCases
     public function getActivePosts(int $pages = null)
     {
         try {
-            $posts = $this->repository->getActivePosts($pages);
-
-            return !is_null($posts)
-                ?   $posts
-                :   $this->entityNotfound();
-        } catch (EntityNotFoundException $e) {
+            return $this->repository->getActivePosts($pages);
+        } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }
     }
 
     public function getPost(mixed $post)
     {
-        $columns = [
-            'id',
-            'title',
-            'body',
-            'extract',
-            'category_id',
-            'status'
-        ];
+        $columns = array('id', 'title', 'body', 'extract', 'category_id', 'status');
 
         $data = ['slug' => $post];
 
@@ -50,7 +39,7 @@ class GetPostsHandler extends UseCases
 
             return !is_null($post)
                 ?   $post
-                :   $this->entityNotfound();
+                :   $this->entityNotFound();
         } catch (EntityNotFoundException $e) {
             $this->catch($e->getMessage());
         }
@@ -58,10 +47,8 @@ class GetPostsHandler extends UseCases
 
     public function getRelatedPosts(Post $post)
     {
-        $columns = [
-            'title',
-            'slug'
-        ];
+        $columns = array('title', 'slug');
+
         try {
             $relatedPosts = $this->repository->getRelatedPosts(
                 new PostEntity([
@@ -74,14 +61,9 @@ class GetPostsHandler extends UseCases
 
             return !is_null($relatedPosts)
                 ?   $relatedPosts
-                :   $this->entityNotfound();
+                :   $this->entityNotFound();
         } catch (EntityNotFoundException $e) {
             $this->catch($e->getMessage());
         }
-    }
-
-    private function entityNotfound()
-    {
-        throw new EntityNotFoundException('Entidad no encontrada');
     }
 }

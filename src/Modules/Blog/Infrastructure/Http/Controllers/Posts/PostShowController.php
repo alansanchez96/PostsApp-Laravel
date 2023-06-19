@@ -18,15 +18,15 @@ class PostShowController extends Controller
      * @param mixed|int|string $slug
      * @return View
      */
-    public function __invoke(mixed $post): View
+    public function __invoke(mixed $post)
     {
         $post = $this->handler->getPost($post);
 
-        $relatedPost = $this->handler->getRelatedPosts($post);
+        $relatedPosts = $this->handler->getRelatedPosts($post);
 
         return view('post.show', [
             'post' => $post,
-            'relatedPost' => $relatedPost,
+            'relatedPosts' => $relatedPosts,
         ]);
     }
 }
