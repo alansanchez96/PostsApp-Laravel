@@ -4,8 +4,9 @@ namespace Src\Modules\Blog\Infrastructure\Persistence;
 
 use Database\Factories\TagFactory;
 use Src\Common\Interfaces\Laravel\EloquentModel;
-use Illuminate\Database\Eloquent\Factories\{Factory, HasFactory};
+use Src\Modules\Blog\Infrastructure\Persistence\Post;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Illuminate\Database\Eloquent\Factories\{Factory, HasFactory};
 
 class Tag extends EloquentModel
 {
