@@ -8,7 +8,7 @@
 
     <title>PostsApp@Laravel</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['src/Presentation/Laravel/assets/css/app.css', 'src/Presentation/Laravel/assets/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
