@@ -28,14 +28,14 @@ class RegisterController extends Controller
      */
     public function __invoke(RegisterRequest $request, Redirector $redirector): Redirector|RedirectResponse
     {
-        $data = array();
-
-        $data['name'] = $request->name;
-        $data['email'] = $request->email;
-        $data['password'] = $request->password;
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+        ];
 
         $this->command->registerAUser($data);
 
-        return $redirector->intended(RouteServiceProvider::HOME);
+        return $redirector->intended(route('verification.verify'));
     }
 }

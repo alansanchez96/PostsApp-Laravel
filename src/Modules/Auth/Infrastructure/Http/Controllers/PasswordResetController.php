@@ -14,15 +14,12 @@ class PasswordResetController extends Controller
 
     public function __invoke(PasswordResetRequest $request): RedirectResponse
     {
-        $data = array();
+        $data = [
+            'email' => $request->email
+        ];
 
-        $data['email'] = $request->email;
+        $this->passwordReset->execute($data);
 
-        $status = $this->passwordReset->execute($data);
-
-        return $status == Password::RESET_LINK_SENT
-                ?   back()->with('status', __($status))
-                :   back()->withInput($request->only('email'))
-                        ->withErrors(['email' => __($status)]);
+        return back()->with('status', __('passwords.sent'));
     }
 }

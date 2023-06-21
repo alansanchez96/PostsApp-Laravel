@@ -15,12 +15,12 @@ class NewPasswordController extends Controller
     {
         $data = $this->getData($request);
 
-        $status = $this->newPassword->execute($data);
+        $response = $this->newPassword->execute($data);
 
-        return $status == Password::PASSWORD_RESET
-            ?   redirect()->route('login')->with('status', __($status))
+        return !is_null($response)
+            ?   redirect()->route('login')->with('status', 'Tu contraseña ha sido restablecida')
             :   back()->withInput($request->only('email'))
-                    ->withErrors(['email' => __($status)]);
+                    ->withErrors(['email' => 'Revisa bien los datos ingresados']);
     }
 
     private function getData($request): array
@@ -28,8 +28,7 @@ class NewPasswordController extends Controller
         return [
             'email' => $request->email,
             'password' => $request->password,
-            'password_confirmation' => $request->password_confirmation,
-            'token' => $request->token
+            'token' => $_COOKIE['token']
         ];
     }
 }

@@ -3,7 +3,7 @@
 namespace Src\Modules\Auth\Domain\Entities;
 
 use Src\Common\Domain\AggregateRoot;
-use Src\Modules\Auth\Domain\ValueObjects\{UserId, UserName, UserEmail, UserPassword, UserCode};
+use Src\Modules\Auth\Domain\ValueObjects\{UserId, UserName, UserEmail, UserPassword, UserCode, UserToken};
 
 class UserEntity extends AggregateRoot
 {
@@ -12,6 +12,7 @@ class UserEntity extends AggregateRoot
     public ?UserEmail $email;
     public ?UserPassword $password;
     public ?UserCode $code;
+    public ?UserToken $token;
 
     public function __construct(array $arguments)
     {
@@ -20,6 +21,7 @@ class UserEntity extends AggregateRoot
         $this->email = new UserEmail($arguments['email'] ?? '');
         $this->password = new UserPassword($arguments['password'] ?? '');
         $this->code = new UserCode($arguments['code'] ?? '');
+        $this->token = new UserToken($arguments['token'] ?? '');
     }
 
     public function toArray(): array
@@ -29,6 +31,7 @@ class UserEntity extends AggregateRoot
             'name' => $this->name,
             'email' => $this->email,
             'password' => $this->password,
+            'token' => $this->token,
         ];
     }
 }
