@@ -10,6 +10,9 @@
 
     @vite(['src/Presentation/Laravel/assets/css/app.css', 'src/Presentation/Laravel/assets/js/app.js'])
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    {{-- Flowbite Tailwind --}}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
 
 </head>
 

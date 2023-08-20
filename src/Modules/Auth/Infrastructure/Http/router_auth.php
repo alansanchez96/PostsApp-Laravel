@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use Src\Modules\Auth\Infrastructure\Http\Controllers\{
     RegisterController,
-    VerifyEmailController,
+    VerifyCodeController,
+    SendEmailCodeController,
     LoginController,
     LogOutController,
     PasswordResetController,
@@ -21,8 +22,9 @@ Route::middleware('web')->group(function () {
     });
 
     Route::middleware('auth')->group(function () {
-        Route::post('/logout', LogOutController::class);
-        Route::post('/verify-email', VerifyEmailController::class)->name('verification.verify');
+        Route::post('/logout', LogOutController::class)->name('logout');
+        Route::post('/verify-code', VerifyCodeController::class)->name('verification.code');
+        Route::post('/verify-email', SendEmailCodeController::class)->name('verification.send');
         Route::middleware('verified')->group(function () {
             Route::put('/user/profile', UpdateProfileController::class)->name('user.updateProfile');
             Route::put('/user/settings', UpdateSettingsController::class)->name('user.updateSettings');

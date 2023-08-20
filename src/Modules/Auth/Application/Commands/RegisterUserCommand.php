@@ -26,10 +26,17 @@ class RegisterUserCommand
      */
     public function registerAUser(array $data)
     {
-        $user = $this->repository->registerAndNotify(new UserEntity($data));
+        $user = $this->repository->save(new UserEntity($data));
 
-        $this->registeredUser($user);
+        $this->notifyUserRegistered($user);
         $this->authenticate($user);
+    }
+    
+    public function sendEmail()
+    {
+        $user = auth()->user();
+
+        $this->notifyUserRegistered($user);
     }
 
     /**
@@ -38,7 +45,7 @@ class RegisterUserCommand
      * @param User $user
      * @return void
      */
-    private function registeredUser(User $user): void
+    private function notifyUserRegistered(User $user): void
     {
         RegisteredUser::dispatch($user);
     }

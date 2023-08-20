@@ -7,7 +7,7 @@ use Src\Common\Providers\RouteServiceProvider;
 use Src\Modules\Auth\Application\Queries\VerifyEmailQuery;
 use Src\Modules\Auth\Infrastructure\Http\Request\CodeRequest;
 
-class VerifyEmailController extends Controller
+class VerifyCodeController extends Controller
 {
     public function __construct(private readonly VerifyEmailQuery $query) { }
 
@@ -19,12 +19,16 @@ class VerifyEmailController extends Controller
 
         $response = $this->query->execute($data);
 
-        return !is_null($response)
-            ? redirect()
-                ->intended(RouteServiceProvider::HOME)
-                ->with('success', 'Haz verificado tu email correctamente')
-            : redirect()
-                ->route('verify.email')
-                ->with('error', 'Verifica que el código sea correcto');
+        switch ($response) {
+            case '1':
+                return redirect()->back()->with('error', 'El codigo no es correcto');
+                break;
+            case '2':
+                return redirect()->back()->with('error', 'Tu cuenta ya está activa');
+                break;
+            case '3':
+                return redirect('/')->with('verified', 'Tu cuenta ha sido activada');
+                break;
+        }
     }
 }

@@ -15,7 +15,7 @@ class RegisterRepository extends BaseRepository implements IRegisterRepository
      * @param array $data
      * @return User
      */
-    public function registerAndNotify(UserEntity $user): ?User
+    public function save(UserEntity $user): ?User
     {
         try {
             return User::create([
@@ -39,7 +39,7 @@ class RegisterRepository extends BaseRepository implements IRegisterRepository
     public function getUserWithCode(UserEntity $user): ?User
     {
         try {
-            return User::firstWhere('code', $user->code->getCode());
+            return User::where('code', $user->code->getCode())->first();
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }
@@ -56,7 +56,7 @@ class RegisterRepository extends BaseRepository implements IRegisterRepository
         try {
             $user->update([
                 'email_verified_at' => now(),
-                'code' => null
+                'code'              => null
             ]);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());

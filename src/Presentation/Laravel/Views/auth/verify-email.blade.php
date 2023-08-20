@@ -2,7 +2,6 @@
     <div class="flex justify-center h-screen items-center mx-auto">
         <form method="post" action="{{ route('verification.send') }}" class="w-3/4 md:w-7/12 flex flex-col items-center">
             @csrf
-
             <h1 class="text-center text-2xl font-bold text-gray-600 mb-6">VERIFY EMAIL</h1>
 
             @if ($errors->any())
@@ -14,8 +13,7 @@
 
 
             <div class="w-3/4 mb-6">
-                <p class="text-center text-gray-600 w-full">Porfavor verifica tu cuenta atraves de la verificacion que te
-                    enviamos por email a tu direccion de correo electronico</p>
+                <p class="text-center text-gray-600 w-full">Aqui podras obtener el codigo de verificacion para activar tu cuenta</p>
                 <p class="text-center text-gray-600 w-full">Si no has recibido nuestro email, puedes volver a mandar la
                     verificacion atraves del siguiente boton</p>
             </div>

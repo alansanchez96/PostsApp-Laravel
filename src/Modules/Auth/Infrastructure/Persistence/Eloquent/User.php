@@ -3,6 +3,7 @@
 namespace Src\Modules\Auth\Infrastructure\Persistence\Eloquent;
 
 use Laravel\Sanctum\HasApiTokens;
+use Src\Shared\Models\ImageShared;
 use Database\Factories\UserFactory;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
@@ -85,10 +86,10 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @return MorphOne
      */
-    // public function image(): MorphOne
-    // {
-    //     return $this->morphOne(ImageModel::class, 'imageable');
-    // }
+    public function image(): MorphOne
+    {
+        return $this->morphOne(ImageShared::class, 'imageable');
+    }
 
     /**
      * Relacion Uno a Muchos to CommentModel::class

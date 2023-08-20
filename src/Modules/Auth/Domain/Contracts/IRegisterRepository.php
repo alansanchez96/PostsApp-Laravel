@@ -13,7 +13,7 @@ interface IRegisterRepository
      * @param UserEntity $user
      * @return User
      */
-    public function registerAndNotify(UserEntity $user): ?User;
+    public function save(UserEntity $user): ?User;
 
     /**
      * Obtiene a un usuario por su Codigo
