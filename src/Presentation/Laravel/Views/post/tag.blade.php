@@ -8,8 +8,7 @@
             <x-layouts.card-post :post="$post" />
         @endforeach
 
-        <div class="mt-6">
-
+        <div class="my-10 mx-auto w-full">
             {{ $posts->links() }}
         </div>
     </div>
