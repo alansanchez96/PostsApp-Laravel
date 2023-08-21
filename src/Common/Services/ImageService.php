@@ -13,7 +13,7 @@ class ImageService
         $imageData = ['url' => $url];
 
         if ($model->image) {
-            $model->image->update($imageData);
+            $model->image()->update($imageData);
         } else {
             $model->image()->create($imageData);
         }
