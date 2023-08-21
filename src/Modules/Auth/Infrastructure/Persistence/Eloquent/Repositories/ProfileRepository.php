@@ -2,7 +2,6 @@
 
 namespace Src\Modules\Auth\Infrastructure\Persistence\Eloquent\Repositories;
 
-use InvalidPasswordException;
 use Src\Common\BaseRepository;
 use Src\Common\Services\ImageService;
 use Src\Modules\Auth\Domain\Entities\UserEntity;
@@ -45,30 +44,16 @@ class ProfileRepository extends BaseRepository implements IProfileRepository
      * @param array $data
      * @return void
      */
-    public function updateSettings(array $data): void
+    public function updateSettings(User $user, array $data): void
     {
         try {
-            $this->verifiedPasswords($this->getUser(), $data);
-
             $this->updatePassword(
-                $this->getUser(),
+                $user,
                 (new UserEntity($data))->password->getPassword()
             );
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
-        } catch (InvalidPasswordException $e) {
-            $this->catch($e->getMessage());
         }
-    }
-
-    /**
-     * Retorna el usuario autenticado
-     *
-     * @return User
-     */
-    private function getUser(): User
-    {
-        return auth()->user();
     }
 
     /**
@@ -108,23 +93,12 @@ class ProfileRepository extends BaseRepository implements IProfileRepository
     }
 
     /**
-     * Validador de contraseñas
+     * Retorna el usuario autenticado
      *
-     * @param User $user
-     * @param array $data
-     * @return void
+     * @return User
      */
-    private function verifiedPasswords(User $user, array $data)
+    public function getUser(): User
     {
-        if (!password_verify($data['password_current'], $user->password))
-            $this->invalidPasswords();
-
-        if ($data['password_current'] === $data['password_confirmation'])
-            $this->invalidPasswords();
-    }
-
-    private function invalidPasswords()
-    {
-        throw new InvalidPasswordException('Verifica bien los campos de contraseña');
+        return auth()->user();
     }
 }

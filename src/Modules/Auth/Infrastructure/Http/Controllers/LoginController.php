@@ -22,15 +22,17 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request, Redirector $redirector): Redirector|RedirectResponse
     {
-        $data = array();
+        $data = [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
 
-        $data['email'] = $request->email;
-        $data['password'] = $request->password;
+        if (!$this->query->login($data)) return $redirector->back()->withErrors(['login' => 'Invalid Credentials']);
 
-        ! $this->query->login($data) ?: $request->session()->regenerate();
+        $request->session()->regenerate();
 
         return $redirector
             ->intended(RouteServiceProvider::HOME)
-            ->with('status', 'You are logged in');
+            ->with('success', 'Bienvenido nuevamente');
     }
 }

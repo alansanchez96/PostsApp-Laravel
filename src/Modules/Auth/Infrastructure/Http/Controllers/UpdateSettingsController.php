@@ -19,10 +19,10 @@ class UpdateSettingsController extends Controller
             'password_confirmation' => $request->password_confirmation,
         ];
 
-        $this->command->handle($data);
-
-        return redirect()
-            ->intended(RouteServiceProvider::HOME)
-            ->with('status', 'La contraseña fue cambiada');
+        $response = $this->command->handle($data);
+        
+        return !is_bool($response)
+            ?   redirect()->back()->withErrors(['password' => $response])
+            :   redirect()->back()->with('success', 'La contraseña fue cambiada');
     }
 }

@@ -7,7 +7,7 @@
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <p class="text-center font-bold text-red-700 last:mb-10">
+                    <p class="text-center font-bold text-red-700 last-of-type:mb-10">
                         {{ $error }}</p>
                 @endforeach
             @endif

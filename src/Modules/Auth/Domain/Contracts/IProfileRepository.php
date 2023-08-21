@@ -2,6 +2,8 @@
 
 namespace Src\Modules\Auth\Domain\Contracts;
 
+use Src\Modules\Auth\Infrastructure\Persistence\Eloquent\User;
+
 interface IProfileRepository
 {
     /**
@@ -18,5 +20,12 @@ interface IProfileRepository
      * @param array $data
      * @return void
      */
-    public function updateSettings(array $data): void;
+    public function updateSettings(User $user, array $data): void;
+
+    /**
+     * Retorna el usuario autenticado
+     *
+     * @return User
+     */
+    public function getUser(): User;
 }

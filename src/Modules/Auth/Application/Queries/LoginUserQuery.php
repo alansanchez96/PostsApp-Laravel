@@ -20,12 +20,14 @@ class LoginUserQuery extends UseCases
     {
         try {
             $response = $this->repository->attemptLogin(new UserEntity($data));
-    
+
             return $response
                 ?   $response
                 :   throw new \InvalidArgumentException('Invalid credentials', 401);
         } catch (\InvalidArgumentException $e) {
             $this->catch($e->getMessage());
+
+            return false;
         }
     }
 }

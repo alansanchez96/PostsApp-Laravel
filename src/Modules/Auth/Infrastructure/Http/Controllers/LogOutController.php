@@ -14,6 +14,6 @@ class LogOutController extends Controller
     {
         $this->logout->execute();
 
-        return redirect()->route('post.index');
+        return redirect()->route('post.index')->with('success', 'Haz cerrado sesión');
     }
 }

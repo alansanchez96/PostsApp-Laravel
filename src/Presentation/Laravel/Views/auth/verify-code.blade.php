@@ -7,20 +7,14 @@
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <p class="text-center font-bold text-red-700 last:mb-10">
+                    <p class="text-center font-bold text-red-700 last-of-type:mb-10">
                         {{ $error }}</p>
                 @endforeach
             @endif
 
-            @if (session('error'))
-                <p class="text-center font-bold text-red-700 mb-10">
-                    {{ session('error') }}
-                </p>
-            @endif
-
-            @if (session('status'))
+            @if (session('success'))
                 <p class="text-center font-bold text-green-600 mb-10">
-                    {{ session('status') }}
+                    {{ session('success') }}
                 </p>
             @endif
 

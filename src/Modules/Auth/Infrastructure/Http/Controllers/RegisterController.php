@@ -36,6 +36,6 @@ class RegisterController extends Controller
 
         $this->command->registerAUser($data);
 
-        return $redirector->intended(route('verification.verify'));
+        return $redirector->route('verify.email');
     }
 }

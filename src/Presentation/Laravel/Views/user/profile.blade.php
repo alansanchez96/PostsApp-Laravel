@@ -8,14 +8,12 @@
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <p class="text-center font-bold text-red-700 first:mt-5 last:mb-10">{{ $error }}</p>
+                    <p class="text-center font-bold text-red-700 first:mt-5 last-of-type:mb-10">{{ $error }}</p>
                 @endforeach
             @endif
 
-            @if (session('status'))
-                <p class="text-center font-bold text-green-600 last:mb-10">
-                    {{ session('status') }}
-                </p>
+            @if (session()->has('success'))
+                <x-toast-success :text="session('success')" />
             @endif
 
             <div class="w-3/4 mb-6">

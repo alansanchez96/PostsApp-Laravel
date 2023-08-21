@@ -15,6 +15,6 @@ class SendEmailCodeController extends Controller
 
         $value = 'El email ha sido enviado. Verifica tu casilla de correo electronico';
 
-        return redirect()->route('verify.code')->with('status', $value);
+        return redirect()->route('verify.code')->with('success', $value);
     }
 }

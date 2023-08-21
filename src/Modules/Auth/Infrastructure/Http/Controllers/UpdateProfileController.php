@@ -21,6 +21,6 @@ class UpdateProfileController extends Controller
 
         $this->command->handle($data);
 
-        return back()->with('status', 'Datos actualizados correctamente');
+        return back()->with('success', 'Datos actualizados correctamente');
     }
 }

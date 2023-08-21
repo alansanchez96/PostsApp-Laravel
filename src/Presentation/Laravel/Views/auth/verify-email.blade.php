@@ -6,11 +6,10 @@
 
             @if ($errors->any())
                 @foreach ($errors->all() as $error)
-                    <p class="text-center font-bold text-red-700 last:mb-10">
+                    <p class="text-center font-bold text-red-700 last-of-type:mb-10">
                         {{ $error }}</p>
                 @endforeach
             @endif
-
 
             <div class="w-3/4 mb-6">
                 <p class="text-center text-gray-600 w-full">Aqui podras obtener el codigo de verificacion para activar tu cuenta</p>

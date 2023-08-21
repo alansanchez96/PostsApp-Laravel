@@ -8,13 +8,13 @@
             @auth
                 <div class="flex items-center md:order-2">
                     <button type="button"
-                        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
+                        class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-2 focus:ring-gray-500"
                         id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                         data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         @if (auth()->user()->image)
-                            <img src="{{ Storage::url(auth()->user()->image->url) }}" alt=""
-                                class="h-8 w-8 rounded-full">
+                            <img src="{{ asset('storage/' . auth()->user()->image->url) }}" alt=""
+                                class="h-10 w-10 rounded-full">
                         @else
                             <img class="h-8 w-8 rounded-full"
                                 src="https://www.pngitem.com/pimgs/m/150-1503945_transparent-user-png-default-user-image-png-png.png"
@@ -44,7 +44,7 @@
                                 <form action="{{ route('logout') }}" method="post">
                                     @csrf
                                     <a onclick="this.closest('form').submit()"
-                                        class="cursor-pointer block px-4 py-2 text-sm text-gray-300 hover:bg-gray-300 hover:text-gray-800 rounded">
+                                        class="cursor-pointer block px-4 py-2 text-sm text-gray-300 hover:bg-gray-300 hover:text-red-600 rounded">
                                         Cerrar sesion
                                     </a>
                                 </form>
