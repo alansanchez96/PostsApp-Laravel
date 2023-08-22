@@ -4,8 +4,8 @@ namespace Src\Modules\Auth\Infrastructure\Http\Controllers;
 
 use Src\Common\Interfaces\Laravel\Controller;
 use Src\Common\Providers\RouteServiceProvider;
-use App\Http\Requests\User\UserSettingsRequest;
 use Src\Modules\Auth\Application\Commands\UpdateSettingsCommand;
+use Src\Modules\Auth\Infrastructure\Http\Request\UserSettingsRequest;
 
 class UpdateSettingsController extends Controller
 {

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Providers;
+namespace Src\Common\Providers;
 
 // use Illuminate\Support\Facades\Gate;
 
-use App\Policies\PostPolicy;
+use Src\Common\Policies\PostPolicy;
+use Src\Modules\Blog\Infrastructure\Persistence\Post;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Src\Posts\Infrastructure\Eloquent\PostModel;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -17,7 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
-        PostModel::class => PostPolicy::class,
+        Post::class => PostPolicy::class,
     ];
 
     /**
@@ -28,7 +28,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
     }
 }
