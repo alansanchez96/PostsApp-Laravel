@@ -17,25 +17,25 @@ class PostEditController extends Controller
     ) { }
 
     /**
-     * Obtiene el post, las colecciones de CategoryModel y TagModel y las devuelve a la vista.
-     * Retorna la vista
+     * Obtiene el post y las colecciones de Category y Tag. Las dirige a la vista.
      *
      * @param mixed $post
      * @return View
      */
     public function __invoke(mixed $post): View
     {
-        $columns = ['id', 'name'];
+        $columns        = array('id', 'name');
+        $columnsPosts   = array('id', 'title', 'body', 'extract', 'category_id', 'status', 'user_id');
 
-        $post = $this->post->getPost($post);
+        $post           = $this->post->getPost($post, $columnsPosts);
 
-        $categories = $this->category->getAllCategories($columns);
+        $categories     = $this->category->getAllCategories($columns);
 
-        $categories = $this->category->converterToPluck($categories, 'name', 'id');
+        $categories     = $this->category->converterToPluck($categories, 'name', 'id');
 
-        $tags = $this->tag->getAllTags($columns);
+        $tags           = $this->tag->getAllTags($columns);
 
-        // $this->authorize('author', $post);
+        $this->authorize('author', $post);
 
         return view('admin.post.edit', compact('post', 'categories', 'tags'));
     }

@@ -13,14 +13,20 @@ class TagRepository extends BaseRepository implements ITagRepository
 {
     public function __construct(private readonly Tag $tag) { }
 
-    public function getTag(TagEntity $entity, mixed $tag, array $columns): ?Tag
+    public function getTag(array $data, array $columns = null): ?Tag
     {
+        $entity = new TagEntity($data);
+
         try {
-            return (is_int($tag))
-                ?   $this->tag->select($columns)->find($entity->id->getId())
-                :   $this->tag->select($columns)->firstWhere('slug', $entity->slug->getSlug());
-        } catch (\Exception $e) {
-            $this->catch($e->getMessage());
+            $query = $this->tag->query();
+
+            if (!is_null($columns)) $query->select($columns);
+
+            return ! is_null($entity->id->getId())
+                ?   $query->findOrFail($entity->id->getId())
+                :   $query->where('slug', $entity->slug->getSlug())->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $this->catch($e->getMessage(), true);
         }
     }
 
@@ -68,7 +74,7 @@ class TagRepository extends BaseRepository implements ITagRepository
                 'color' =>  $entity->color->getColor(),
             ]);
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 
@@ -79,7 +85,7 @@ class TagRepository extends BaseRepository implements ITagRepository
         try {
             $this->tag->findOrFail($entity->id->getId())->delete();
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 }

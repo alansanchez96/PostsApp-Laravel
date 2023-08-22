@@ -11,21 +11,17 @@ class CategoryController extends Controller
     public function __construct(
         private readonly GetCategoriesHandler $handler,
         private readonly SearchPostsQuery $query
-    ) {
-    }
+    ) { }
 
     public function __invoke(mixed $category)
     {
-        $columns = array('id', 'title', 'slug', 'extract');
+        $columnsCategory    = array('id', 'name');
+        $columnsPost        = array('id', 'title', 'slug', 'extract');
+        $relationship       = array('type' => 'categories', 'key' => 'categories.id');
 
-        $relationship = [
-            'type' => 'categories',
-            'key' => 'categories.id'
-        ];
+        $category = $this->handler->getCategory($category, $columnsCategory);
 
-        $category = $this->handler->getCategory($category);
-
-        $posts = $this->query->getPostsBy($category, $relationship, $columns, 5);
+        $posts = $this->query->getPostsBy($category, $relationship, $columnsPost, 5);
 
         return view('post.category', [
             'category' => $category,

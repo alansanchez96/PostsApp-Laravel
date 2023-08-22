@@ -16,20 +16,17 @@ class TagController extends Controller
 
     public function __invoke(mixed $tag)
     {
-        $columns = array('id', 'title', 'slug', 'extract');
+        $columnsTags    = array('id', 'name', 'slug', 'color');
+        $columnsPosts   = array('id', 'title', 'slug', 'extract');
+        $relationship   = array('type' => 'tags', 'key' => 'tags.id');
 
-        $relationship = [
-            'type' => 'tags',
-            'key' => 'tags.id'
-        ];
+        $tag = $this->handler->getTag($tag, $columnsTags);
 
-        $tag = $this->handler->getTag($tag);
-
-        $posts = $this->query->getPostsBy($tag, $relationship, $columns, 5);
+        $posts = $this->query->getPostsBy($tag, $relationship, $columnsPosts, 5);
 
         return view('post.tag', [
-            'tag' => $tag,
-            'posts' => $posts
+            'tag'       => $tag,
+            'posts'     => $posts
         ]);
     }
 }

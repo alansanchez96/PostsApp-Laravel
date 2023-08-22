@@ -14,15 +14,17 @@ class CategoryDestroyController extends Controller
     /**
      * Elimina el registro del Model Category consultado
      *
-     * @param integer $category
+     * @param mixed $category
      * @return RedirectResponse|Redirector
      */
-    public function __invoke(int $category): RedirectResponse|Redirector
+    public function __invoke(mixed $category): RedirectResponse|Redirector
     {
-        $data = ['id' => !is_int($category) ? (int) $category : (string) $category];
+        $data       = ['id' => !is_int($category) ? (int) $category : (string) $category];
 
-        $this->command->deleteCategory($data);
+        $response   = $this->command->deleteCategory($data);
 
-        return redirect()->route('admin.category.index')->with('delete', 'La categoria se ha eliminado');
+        return $response
+            ?   redirect()->route('admin.category.index')->with('delete', 'La categoria se ha eliminado')
+            :   redirect()->route('admin.category.index')->with('info', 'La categoria no puede ser eliminada');
     }
 }

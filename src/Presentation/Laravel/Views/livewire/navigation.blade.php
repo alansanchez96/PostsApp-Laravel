@@ -76,7 +76,7 @@
                 class="flex flex-col font-medium p-4 lg:p-0 mt-4 lg:mt-0 rounded-lg bg-gray-700 lg:bg-transparent lg:flex-row lg:space-x-8">
                 @foreach ($categories as $category)
                     <li>
-                        <a href="{{ route('post.category', $category) }}"
+                        <a href="{{ route('post.category', $category->slug) }}"
                             class="text-gray-300 w-full block text-center uppercase hover:bg-gray-300 hover:text-gray-800 px-3 py-2 rounded-md text-sm font-medium"
                             aria-current="page">{{ $category->name }}</a>
                     </li>

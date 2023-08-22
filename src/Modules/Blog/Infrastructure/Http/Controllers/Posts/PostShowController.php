@@ -8,25 +8,25 @@ use Src\Modules\Blog\Application\Queries\GetPostsHandler;
 
 class PostShowController extends Controller
 {
-    public function __construct(private readonly GetPostsHandler $handler)
-    {
-    }
+    public function __construct(private readonly GetPostsHandler $handler) { }
 
     /**
      * Retorna el Post Indicado
      *
-     * @param mixed|int|string $slug
+     * @param mixed|int|string $post
      * @return View
      */
     public function __invoke(mixed $post)
     {
-        $post = $this->handler->getPost($post);
+        $columns        = array('title', 'slug');
 
-        $relatedPosts = $this->handler->getRelatedPosts($post);
+        $post           = $this->handler->getPost($post);
+
+        $relatedPosts   = $this->handler->getRelatedPosts($post->toArray(), $columns);
 
         return view('post.show', [
-            'post' => $post,
-            'relatedPosts' => $relatedPosts,
+            'post'          => $post,
+            'relatedPosts'  => $relatedPosts,
         ]);
     }
 }

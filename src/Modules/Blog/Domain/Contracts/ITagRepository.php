@@ -3,12 +3,11 @@
 namespace Src\Modules\Blog\Domain\Contracts;
 
 use Illuminate\Database\Eloquent\Collection;
-use Src\Modules\Blog\Domain\Entities\TagEntity;
 use Src\Modules\Blog\Infrastructure\Persistence\Tag;
 
 interface ITagRepository
 {
-    public function getTag(TagEntity $entity, mixed $tag, array $columns): ?Tag;
+    public function getTag(array $data, array $columns = null): ?Tag;
 
     public function getAllTags(array $columns = null): ?Collection;
 

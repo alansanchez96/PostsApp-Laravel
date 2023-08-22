@@ -13,7 +13,7 @@
                 <div class="w-full h-full mx-auto px-10 flex flex-col z-10 justify-center align-center">
                     <div class="z-10">
                         @foreach ($post->tags as $tag)
-                            <a href="{{ route('posts.tag', $tag) }}"
+                            <a href="{{ route('posts.tag', $tag->slug) }}"
                                 class="inline-block m-0 mb-2 rounded-full text-gray-200 font-semibold bg-{{ $tag->color }}-600 px-3 py-1">{{ $tag->name }}</a>
                         @endforeach
                     </div>

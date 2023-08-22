@@ -2,7 +2,7 @@
 
 namespace Src\Shared\Models;
 
-use Database\Factories\ImageModelFactory;
+use Database\Factories\ImageSharedFactory;
 use Src\Common\Interfaces\Laravel\EloquentModel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -34,8 +34,8 @@ class ImageShared extends EloquentModel
         return $this->morphTo();
     }
 
-    // protected static function newFactory()
-    // {
-    //     return ImageModelFactory::new();
-    // }
+    protected static function newFactory()
+    {
+        return ImageSharedFactory::new();
+    }
 }

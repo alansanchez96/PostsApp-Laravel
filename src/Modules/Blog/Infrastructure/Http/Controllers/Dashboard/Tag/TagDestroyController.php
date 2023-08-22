@@ -15,10 +15,10 @@ class TagDestroyController extends Controller
      * Obtiene el TagModel y elimina su registro.
      * Redirecciona a la ruta designada.
      *
-     * @param integer $id
+     * @param mixed $tag
      * @return Redirector|RedirectResponse
      */
-    public function __invoke(int $tag): Redirector|RedirectResponse
+    public function __invoke(mixed $tag): Redirector|RedirectResponse
     {
         $data = ['id' => !is_int($tag) ? (int) $tag : (string) $tag];
 

@@ -14,10 +14,10 @@ class PostDestroyController extends Controller
     /**
      * Obtiene el Post y elimina su registro
      *
-     * @param int $post
+     * @param mixed $post
      * @return Redirector|RedirectResponse
      */
-    public function __invoke(int $post): Redirector|RedirectResponse
+    public function __invoke(mixed $post): Redirector|RedirectResponse
     {
         $data = ['id' => !is_int($post) ? (int) $post : (string) $post];
 

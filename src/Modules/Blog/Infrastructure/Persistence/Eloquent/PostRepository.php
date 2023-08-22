@@ -19,31 +19,44 @@ class PostRepository extends BaseRepository implements IPostRepository
     public function getActivePosts(int $pages = null): Collection|LengthAwarePaginator
     {
         try {
+            $query = $this->post->query();
+
             return is_null($pages)
-                ?   $this->post->query()->where('status', $this->post::ACTIVE)->latest('id')->get()
-                :   $this->post->query()->where('status', $this->post::ACTIVE)->latest('id')->paginate($pages);
+                ?   $query->where('status', $this->post::ACTIVE)->latest('id')->get()
+                :   $query->where('status', $this->post::ACTIVE)->latest('id')->paginate($pages);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }
     }
 
-    public function getPost(PostEntity $entity, mixed $post, array $columns): ?Post
+    public function getPost(array $data, array $columns = null): ?Post
     {
+        $entity = new PostEntity($data);
+
         try {
-            return (is_int($post))
-                ?   $this->post->select($columns)->find($entity->id->getId())
-                :   $this->post->select($columns)->firstWhere('slug', $entity->slug->getSlug());
-        } catch (\Exception $e) {
-            $this->catch($e->getMessage());
+            $query = $this->post->query();
+
+            if (!is_null($columns)) $query->select($columns);
+
+            return !is_null($entity->id->getId())
+                ?   $query->findOrFail($entity->id->getId())
+                :   $query->where('slug', $entity->slug->getSlug())->firstOrFail();
+
+        } catch (ModelNotFoundException $e) {
+            $this->catch($e->getMessage(), true);
         }
     }
 
-    public function getRelatedPosts(PostEntity $entity, array $columns): ?Collection
+    public function getRelatedPosts(array $data, array $columns = null): ?Collection
     {
+        $entity = new PostEntity($data);
+
         try {
-            return $this->post
-                ->select($columns)
-                ->where('category_id', $entity->category_id->getId())
+            $query = $this->post->query();
+
+            if (!is_null($columns)) $query->select($columns);
+
+            return $query->where('category_id', $entity->category_id->getId())
                 ->where('status', $this->post::ACTIVE)
                 ->where('id', '!=', $entity->id->getId())
                 ->latest('id')
@@ -59,17 +72,14 @@ class PostRepository extends BaseRepository implements IPostRepository
         try {
             $query = $this->post
                 ->whereHas($relationship['type'], fn ($query) => $query->where($relationship['key'], $model->id))
-                ->where('status', $this->post::ACTIVE)->latest('id');
+                ->where('status', $this->post::ACTIVE)
+                ->latest('id');
 
-            if (!is_null($columns)) {
-                $query->select($columns);
-            }
+            if (!is_null($columns)) $query->select($columns);
 
-            if (is_null($pages)) {
-                return $query->get();
-            }
-
-            return $query->paginate($pages);
+            return is_null($pages)
+                ?   $query->get()
+                :   $query->paginate($pages);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }
@@ -125,7 +135,7 @@ class PostRepository extends BaseRepository implements IPostRepository
 
             $this->saveTags($post, $entity->tags->getTags());
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 
@@ -136,7 +146,7 @@ class PostRepository extends BaseRepository implements IPostRepository
         try {
             $this->post->query()->findOrFail($entity->id->getId())->delete();
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 

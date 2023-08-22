@@ -14,14 +14,20 @@ class CategoryRepository extends BaseRepository implements ICategoryRepository
 {
     public function __construct(private readonly Category $category) { }
 
-    public function getCategory(CategoryEntity $entity, mixed $category, array $columns): ?Category
+    public function getCategory(array $data, array $columns = null): ?Category
     {
+        $entity = new CategoryEntity($data);
+
         try {
-            return (is_int($category))
-                ?   $this->category->select($columns)->find($entity->id->getId())
-                :   $this->category->select($columns)->firstWhere('slug', $entity->slug->getSlug());
-        } catch (\Exception $e) {
-            $this->catch($e->getMessage());
+            $query = $this->category->query();
+
+            if (!is_null($columns)) $query->select($columns);
+
+            return !is_null($entity->id->getId())
+                ?   $query->findOrFail($entity->id->getId())
+                :   $query->where('slug', $entity->slug->getSlug())->firstOrFail();
+        } catch (ModelNotFoundException $e) {
+            $this->catch($e->getMessage(), true);
         }
     }
 
@@ -67,18 +73,16 @@ class CategoryRepository extends BaseRepository implements ICategoryRepository
                 'slug'  =>  $this->toSlug($entity->name->getName()),
             ]);
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 
     public function delete(array $data): void
     {
-        $entity = new CategoryEntity($data);
-
         try {
-            $this->category->findOrFail($entity->id->getId())->delete();
+            $this->getCategory($data)->delete();
         } catch (ModelNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }   
     }
 }

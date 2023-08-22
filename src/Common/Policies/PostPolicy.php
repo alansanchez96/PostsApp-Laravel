@@ -16,14 +16,14 @@ class PostPolicy
      * Caso contrario responde con http 403
      *
      * @param User $user
-     * @param PostModel $post
+     * @param Post $post
      * @return Response
      */
     public function author(User $user, Post $post): Response
     {
-        return $post->user_id == $user->id ?
-            Response::allow() :
-            Response::deny('No autorizado');
+        return $post->user_id == $user->id
+            ?   Response::allow() 
+            :   Response::deny('No autorizado');
     }
 
     /**
@@ -36,8 +36,8 @@ class PostPolicy
      */
     public function published(?User $user, Post $post): Response
     {
-        return $post->status === '2' ?
-            Response::allow() :
-            Response::deny('Publicación no disponible');
+        return $post->status === '2'
+            ?   Response::allow()
+            :   Response::deny('Publicación no disponible');
     }
 }

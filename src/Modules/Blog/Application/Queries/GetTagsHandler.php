@@ -11,33 +11,35 @@ class GetTagsHandler extends UseCases
 {
     public function __construct(private readonly ITagRepository $repository) { }
 
-    public function getTag(mixed $tag)
+    public function getTag(mixed $tag, array $columns = null)
     {
-        $columns = array('id', 'name', 'slug', 'color');
-
         $data = ['slug' => $tag];
 
         if (ctype_digit($tag))
             $data = ['id' => (int) $tag];
 
         try {
-            $tag = $this->repository->getTag(
-                new TagEntity($data),
-                $data[key($data)],
-                $columns
-            );
+            $tag = $this->repository->getTag($data, $columns);
 
             return !is_null($tag)
                 ?   $tag
                 :   $this->entityNotFound();
         } catch (EntityNotFoundException $e) {
-            $this->catch($e->getMessage());
+            $this->catch($e->getMessage(), true);
         }
     }
 
     public function getAllTags(array $columns = null)
     {
-        return $this->repository->getAllTags($columns);
+        try {
+            $tags = $this->repository->getAllTags($columns);
+
+            return ! is_null($tags)
+                ?   $tags
+                :   $this->entityNotFound();
+        } catch (EntityNotFoundException $e) {
+            $this->catch($e->getMessage(), true);
+        }
     }
 
     public function getColorsTag(): array

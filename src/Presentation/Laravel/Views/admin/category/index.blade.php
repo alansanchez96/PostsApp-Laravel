@@ -20,6 +20,10 @@
         <div class="alert alert-danger">
             <strong>{{ session('delete') }}</strong>
         </div>
+    @elseif (session('info'))
+        <div class="alert alert-info">
+            <strong>{{ session('info') }}</strong>
+        </div>
     @endif
 
     <div class="card">
