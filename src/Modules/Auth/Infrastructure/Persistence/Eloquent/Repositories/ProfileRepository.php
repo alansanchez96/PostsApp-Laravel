@@ -32,7 +32,7 @@ class ProfileRepository extends BaseRepository implements IProfileRepository
                 $this->updateEmail($user, $entity->email->getEmail());
 
             if ($data['photo'])
-                $this->imageService->update($user, 'users', $data['photo']);
+                $this->imageService->save($user, 'users', $data['photo']);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());
         }

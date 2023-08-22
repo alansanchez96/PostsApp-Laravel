@@ -34,4 +34,22 @@ class GetTagsHandler extends UseCases
             $this->catch($e->getMessage());
         }
     }
+
+    public function getAllTags(array $columns = null)
+    {
+        return $this->repository->getAllTags($columns);
+    }
+
+    public function getColorsTag(): array
+    {
+        return [
+            'red'       =>  'Rojo',
+            'blue'      =>  'Azul',
+            'yellow'    =>  'Amarillo',
+            'green'     =>  'Verde',
+            'indigo'    =>  'Indigo',
+            'purple'    =>  'Purpura',
+            'pink'      =>  'Rosa',
+        ];
+    }
 }

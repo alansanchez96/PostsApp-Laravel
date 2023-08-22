@@ -2,7 +2,7 @@
 
 namespace Src\Modules\Auth\Infrastructure\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Src\Common\Interfaces\Laravel\Controller;
 use Src\Modules\Auth\Application\Commands\RegisterUserCommand;
 
 class SendEmailCodeController extends Controller

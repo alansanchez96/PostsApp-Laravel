@@ -17,8 +17,6 @@
                 'files' => true,
             ]) !!}
 
-            {!! Form::hidden('user_id', auth()->user()->id) !!}
-
             @include('admin.post.partials.form')
 
             {!! Form::submit('Guardar post', ['class' => 'btn btn-success']) !!}

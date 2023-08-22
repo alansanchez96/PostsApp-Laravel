@@ -2,7 +2,7 @@
 
 namespace Src\Presentation\Laravel\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use Src\Common\Interfaces\Laravel\Controller;
 
 class UserSettingsViewController extends Controller
 {

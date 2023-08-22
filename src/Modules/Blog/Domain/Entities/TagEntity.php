@@ -16,7 +16,7 @@ class TagEntity extends AggregateRoot
     public ?TagName $name;
     public ?TagSlug $slug;
     public ?TagColor $color;
-
+    
     public function __construct(array $arguments)
     {
         $this->id = new TagId($arguments['id'] ?? null);

@@ -16,6 +16,8 @@
     @enderror
 </div>
 
+{!! Form::hidden('user_id', auth()->user()->id) !!}
+
 <div class="form-group">
     {!! Form::label('category_id', 'Categorias') !!}
     {!! Form::select('category_id', $categories, null, ['class' => 'form-control']) !!}
@@ -57,7 +59,7 @@
     <div class="col">
         <div class="img-wrapper">
             @isset($post->image)
-                <img src="{{ Storage::url($post->image->url) }}" alt="">
+                <img src="{{ asset('storage/' . $post->image->url) }}" alt="">
             @else
                 <img id="picture" src="https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg"
                     alt="">

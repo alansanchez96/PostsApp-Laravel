@@ -1,7 +1,7 @@
 @props(['post'])
 <article class="mb-8 bg-stone-200 overflow-hidden shadow-lg rounded-xl">
     <img class="w-full h-96 bg-no-repeat object-cover bg-cover bg-center"
-        src="@if ($post->image) {{ Storage::url($post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif">
+        src="@if ($post->image) {{ asset('storage/' . $post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif">
 
     <div class="px-6 py-4">
         <h2 class="font-bold text-xl mb-2">

@@ -2,6 +2,7 @@
 
 namespace Src\Modules\Blog\Infrastructure\Persistence;
 
+use Src\Shared\Models\ImageShared;
 use Database\Factories\PostFactory;
 use Src\Common\Interfaces\Laravel\EloquentModel;
 use Src\Modules\Blog\Infrastructure\Persistence\Tag;
@@ -64,10 +65,10 @@ class Post extends EloquentModel
      *
      * @return MorphOne
      */
-    // public function image(): MorphOne
-    // {
-    //     return $this->morphOne(ImageModel::class, 'imageable');
-    // }
+    public function image(): MorphOne
+    {
+        return $this->morphOne(ImageShared::class, 'imageable');
+    }
 
     /**
      * Relacion Uno a Muchos Polimorfica to CommentModel::class

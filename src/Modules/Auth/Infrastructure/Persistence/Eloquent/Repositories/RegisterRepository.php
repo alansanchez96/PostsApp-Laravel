@@ -19,11 +19,11 @@ class RegisterRepository extends BaseRepository implements IRegisterRepository
     {
         try {
             return User::create([
-                'name' => $this->capitalized($user->name->getName()),
-                'email' => $this->lower($user->email->getEmail()),
-                'password' => $this->stringHash($user->password->getPassword()),
+                'name'              => $this->capitalized($user->name->getName()),
+                'email'             => $this->lower($user->email->getEmail()),
+                'password'          => $this->stringHash($user->password->getPassword()),
                 'email_verified_at' => null,
-                'code' => $this->randomCode(6)
+                'code'              => $this->randomCode(6)
             ]);
         } catch (\Exception $e) {
             $this->catch($e->getMessage());

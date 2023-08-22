@@ -34,4 +34,9 @@ class GetCategoriesHandler extends UseCases
             $this->catch($e->getMessage());
         }
     }
+
+    public function getAllCategories(array $columns = null)
+    {
+        return $this->repository->getAllCategories($columns);
+    }
 }

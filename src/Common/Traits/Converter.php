@@ -20,4 +20,13 @@ trait Converter
     {
         return ucfirst(strtolower($string));
     }
+
+    public function toSlug(string $string)
+    {
+        $slug = str_replace(' ', '-', $string);
+
+        $slug = $this->lower($slug);
+
+        return preg_replace('/[^a-zA-Z0-9-]/', '', $slug);
+    }
 }

@@ -17,4 +17,8 @@ interface IPostRepository
     public function getRelatedPosts(PostEntity $entity, array $columns): ?Collection;
 
     public function getPostsBy(EloquentModel $model, array $relationship, array $columns = null, int $pages = null): Collection|LengthAwarePaginator;
+
+    public function save(array $data, bool $update = false): void;
+
+    public function delete(array $data): void;
 }

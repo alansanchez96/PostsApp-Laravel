@@ -201,6 +201,7 @@ return [
          */
         Src\Common\Providers\Auth\AuthServiceProvider::class,
         Src\Common\Providers\Blog\BlogServiceProvider::class,
+        Src\Common\Providers\Dashboard\DashboardServiceProvider::class,
     ],
 
     /*

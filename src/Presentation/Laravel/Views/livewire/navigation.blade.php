@@ -29,7 +29,7 @@
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
-                                <a href="{{-- {{ route('admin.dashboard') }} --}}"
+                                <a href="{{ route('admin.dashboard') }}"
                                     class="block px-4 py-2 text-sm text-gray-300 hover:bg-gray-300 hover:text-gray-800 rounded">Dashboard</a>
                             </li>
                             <li>

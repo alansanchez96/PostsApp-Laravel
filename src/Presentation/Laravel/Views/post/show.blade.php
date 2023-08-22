@@ -8,7 +8,7 @@
         <div class="lg:col-span-2">
             <figure>
                 <img class="w-full h-80 object-cover object-center my-5"
-                    src="@if ($post->image) {{ Storage::url($post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif">
+                    src="@if ($post->image) {{ asset('storage/' . $post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif">
             </figure>
 
             <p class="text-base text-gray-700">{!! $post->body !!}</p>
