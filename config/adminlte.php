@@ -303,51 +303,51 @@ return [
 
         // Sidebar items:
         [
-            'text'        => 'Dashboard',
+            'text'          => 'Dashboard',
             'route'         => 'admin.dashboard',
-            'icon'        => 'fas fa-tachometer-alt fa-fw',
+            'icon'          => 'fas fa-tachometer-alt fa-fw',
             'can'           => 'admin.dashboard'
         ],
         [
-            'text'        => 'Usuarios registrados',
+            'text'          => 'Usuarios registrados',
             'route'         => 'admin.user.index',
-            'icon'        => 'fas fa-users fa-fw',
-            'can'       => 'admin.user.index'
+            'icon'          => 'fas fa-users fa-fw',
+            'can'           => 'admin.user.index'
         ],
         [
-            'text'  =>  'Roles',
-            'route' =>  'admin.role.index',
-            'icon'  =>  'fas fa-users-cog fa-fw',
+            'text'          =>  'Roles',
+            'route'         =>  'admin.role.index',
+            'icon'          =>  'fas fa-users-cog fa-fw',
         ],
         [
-            'text' => 'Categorias',
-            'route'  => 'admin.category.index',
-            'icon' => 'fab fa-fw fa-buffer',
-            'active' => ['admin/categories*'],
-            'can'       => 'admin.category.index'
+            'text'          => 'Categorias',
+            'route'         => 'admin.category.index',
+            'icon'          => 'fab fa-fw fa-buffer',
+            'active'        => ['admin/categories*'],
+            'can'           => 'admin.category.index'
         ],
         [
-            'text' => 'Etiquetas',
-            'route'  => 'admin.tag.index',
-            'icon' => 'far fa-fw fa-bookmark',
-            'active' => ['admin/tags*'],
-            'can'       => 'admin.tag.index'
+            'text'          => 'Etiquetas',
+            'route'         => 'admin.tag.index',
+            'icon'          => 'far fa-fw fa-bookmark',
+            'active'        => ['admin/tags*'],
+            'can'           => 'admin.tag.index'
         ],
         [
-            'header' => 'OPCIONES DE BLOG',
-            'can' => 'admin.post.index'
+            'header'        => 'OPCIONES DE BLOG',
+            'can'           => 'admin.post.index'
         ],
         [
-            'text'       => 'Lista de posts',
-            'icon_color' => 'cyan',
-            'route'        => 'admin.post.index',
-            'can'       => 'admin.post.index'
+            'text'          => 'Lista de posts',
+            'icon_color'    => 'cyan',
+            'route'         => 'admin.post.index',
+            'can'           => 'admin.post.index'
         ],
         [
-            'text'       => 'Crear nuevo post',
-            'icon_color' => 'green',
-            'route'        => 'admin.post.create',
-            'can'       => 'admin.post.create'
+            'text'          => 'Crear nuevo post',
+            'icon_color'    => 'green',
+            'route'         => 'admin.post.create',
+            'can'           => 'admin.post.create'
         ]
     ],
 

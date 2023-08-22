@@ -14,7 +14,8 @@ return [
     */
 
     'paths' => [
-        resource_path('views'),
+        base_path('src/Presentation/Laravel/Views')
+        // resource_path('views'),
     ],
 
     /*

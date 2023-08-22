@@ -1,0 +1,82 @@
+.
+├── Common
+│   ├── BaseRepository.php
+│   ├── Cache
+│   ├── Cronjobs
+│   ├── Domain
+│   │   ├── AggregateRoot.php
+│   │   └── ValueObject.php
+│   ├── Emails
+│   ├── Exceptions
+│   │   └── FormValidationException.php
+│   ├── Interfaces
+│   │   ├── Laravel
+│   │   │   ├── Controller.php
+│   │   │   ├── EloquentModel.php
+│   │   │   └── FormRequest.php
+│   │   └── Symfony
+│   ├── Listeners
+│   ├── Notifications
+│   ├── Providers
+│   │   ├── Auth
+│   │   │   └── AuthServiceProvider.php
+│   │   └── RouteServiceProvider.php
+│   └── Traits
+│       ├── Converter.php
+│       ├── Hasher.php
+│       ├── JsonResponse.php
+│       └── Logger.php
+├── Modules
+│   ├── Auth
+│   │   ├── Application
+│   │   │   ├── Commands
+│   │   │   │   └── RegisterUserCommand.php
+│   │   │   └── Queries
+│   │   ├── Domain
+│   │   │   ├── Contracts
+│   │   │   │   └── IRegisterRepository.php
+│   │   │   ├── Entities
+│   │   │   │   └── UserEntity.php
+│   │   │   ├── Services
+│   │   │   └── ValueObjects
+│   │   │       ├── UserEmail.php
+│   │   │       ├── UserId.php
+│   │   │       ├── UserName.php
+│   │   │       └── UserPassword.php
+│   │   └── Infrastructure
+│   │       ├── Console
+│   │       ├── Http
+│   │       │   ├── Controllers
+│   │       │   │   └── RegisterController.php
+│   │       │   ├── Request
+│   │       │   │   └── RegisterRequest.php
+│   │       │   └── router-auth.php
+│   │       └── Persistence
+│   │           ├── Doctrine
+│   │           └── Eloquent
+│   │               ├── Repositories
+│   │               │   └── RegisterRepository.php
+│   │               └── User.php
+│   └── Blog
+│       ├── Application
+│       │   ├── Commands
+│       │   └── Queries
+│       ├── Domain
+│       │   ├── Entities
+│       │   ├── Repositories
+│       │   └── Services
+│       └── Infrastructure
+│           ├── Console
+│           ├── Http
+│           │   └── Controllers
+│           └── Persistence
+├── Presentation
+│   └── Laravel
+│       ├── Http
+│       │   ├── Controllers
+│       │   │   └── RegisterViewController.php
+│       │   └── router-views.php
+│       └── Views
+└── structure.txt
+
+51 directories, 28 files

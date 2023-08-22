@@ -1,0 +1,14 @@
+<?php
+
+namespace Src\Modules\Blog\Infrastructure\Http\Controllers\Dashboard\Post;
+
+use Illuminate\View\View;
+use Src\Common\Interfaces\Laravel\Controller;
+
+class PostIndexController extends Controller
+{
+    public function __invoke(): View
+    {
+        return view('admin.post.index');
+    }
+}
