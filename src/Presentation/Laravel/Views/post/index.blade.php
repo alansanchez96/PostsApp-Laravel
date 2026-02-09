@@ -7,8 +7,16 @@
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-10">
         @foreach ($posts as $post)
             <article
-                style="background: url('@if ($post->image) {{ asset('storage/' . $post->image->url) }} @else https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg @endif')"
-                class="h-96 bg-no-repeat rounded w-full object-cover bg-cover bg-center relative @if ($loop->first) md:col-span-2 @endif">
+                style="
+                    background-image: url('{{ $post->image 
+                        ? asset('storage/' . $post->image->url) 
+                        : 'https://cdn.pixabay.com/photo/2022/01/08/14/53/town-6924142_960_720.jpg' }}');
+                    background-position: center center;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                "
+                class="h-96 rounded w-full relative @if ($loop->first) md:col-span-2 @endif"
+            >
                 <div class="absolute h-full w-full bg-black/40 pointer-events-none"></div>
                 <div class="w-full h-full mx-auto px-10 flex flex-col z-10 justify-center align-center">
                     <div class="z-10">

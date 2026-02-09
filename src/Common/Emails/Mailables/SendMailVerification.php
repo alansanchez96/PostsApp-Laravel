@@ -34,6 +34,9 @@ class SendMailVerification extends Mailable
     {
         return new Content(
             markdown: 'mail.mail-verification',
+            with: [
+                'user' => $this->user,
+            ]
         );
     }
 
